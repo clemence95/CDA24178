@@ -46,7 +46,7 @@
 |---------------------------|--------------|----------------------------------------------|
 | Nombre_de_partant         | COUNTER      | PRIMARY KEY                                  |
 | Couleur_du_proprietaire   | VARCHAR(50)  |                                              |
-| Nom_du_pere_et_mere_du_cheval | VARCHAR(50)  |                                              |
+| Nom_du_pere_et_mere_du_cheval | VARCHAR(50)  |                                          |
 | Place_a_la_corde          | VARCHAR(50)  |                                              |
 | Handicap                  | VARCHAR(50)  |                                              |
 | Gains                     | DECIMAL(15,2)|                                              |
