@@ -1,112 +1,124 @@
-# Dictionnaire de Données
+### Table `Responsable`
+| Colonne    | Type        | Description                            |
+|------------|-------------|----------------------------------------|
+| responsable | VARCHAR(50) | Identifiant du responsable             |
+| Nom        | VARCHAR(50) | Nom du responsable                     |
 
-## Responsable
-- **reponsable**: VARCHAR(50) (Clé primaire)
-- **Nom**: VARCHAR(50)
+### Table `Manche`
+| Colonne      | Type          | Description                            |
+|--------------|---------------|----------------------------------------|
+| Numero_manche | COUNTER       | Identifiant de la manche               |
+| temps        | DECIMAL(15,2) | Temps de la manche                     |
+| Nb_point     | DECIMAL(15,2) | Nombre de points de la manche          |
+| place        | VARCHAR(50)   | Place obtenue dans la manche           |
+| medaille     | VARCHAR(50)   | Médaille obtenue dans la manche        |
 
-## Manche
-- **Numero_manche**: COUNTER (Clé primaire)
-- **temps**: DECIMAL(15,2)
-- **Nb_point**: DECIMAL(15,2)
-- **place**: VARCHAR(50)
-- **medaille**: VARCHAR(50)
+### Table `Responsable_de_discipline`
+| Colonne                     | Type          | Description                            |
+|-----------------------------|---------------|----------------------------------------|
+| Id_Responsable_de_discipline | COUNTER       | Identifiant du responsable de discipline |
+| Nom                         | VARCHAR(50)   | Nom du responsable de discipline       |
 
-## Responsable_de_discipline
-- **Id_Responsable_de_discipline**: COUNTER (Clé primaire)
-- **Nom**: VARCHAR(50)
+### Table `Personne_de_base`
+| Colonne           | Type          | Description                            |
+|-------------------|---------------|----------------------------------------|
+| Id_Personne_de_base | COUNTER       | Identifiant de la personne de base     |
+| Nom               | VARCHAR(50)   | Nom de la personne de base             |
 
-## Personne_de_base
-- **Id_Personne_de_base**: COUNTER (Clé primaire)
-- **Nom**: VARCHAR(50)
+### Table `Epreuve`
+| Colonne     | Type          | Description                            |
+|-------------|---------------|----------------------------------------|
+| Id_Epreuve  | COUNTER       | Identifiant de l'épreuve               |
+| Nom         | VARCHAR(50)   | Nom de l'épreuve                       |
+| Code_alphabétique | LOGICAL | Code alphabétique de l'épreuve      |
+| H_F         | VARCHAR(1)    | Genre de l'épreuve (Homme/Femme)       |
+| Numero_manche | INT          | Numéro de la manche associée à l'épreuve |
 
-## Epreuve
-- **Id_Epreuve**: COUNTER (Clé primaire)
-- **Nom**: VARCHAR(50)
-- **Code_alphabétique**: LOGICAL
-- **H_F**: VARCHAR(1)
-- **Numero_manche**: INT (Clé étrangère référençant Manche(Numero_manche))
+### Table `Station`
+| Colonne    | Type          | Description                            |
+|------------|---------------|----------------------------------------|
+| Id_Station | COUNTER       | Identifiant de la station              |
+| Nom        | VARCHAR(50)   | Nom de la station                      |
+| Altitude   | VARCHAR(50)   | Altitude de la station                 |
+| Id_Epreuve | INT           | Identifiant de l'épreuve associée à la station |
 
-## Station
-- **Id_Station**: COUNTER (Clé primaire)
-- **Nom**: VARCHAR(50)
-- **Altitude**: VARCHAR(50)
-- **Id_Epreuve**: INT (Unique) (Clé étrangère référençant Epreuve(Id_Epreuve))
+### Table `type_epreuve`
+| Colonne       | Type          | Description                            |
+|---------------|---------------|----------------------------------------|
+| Id_type_epreuve | COUNTER     | Identifiant du type d'épreuve          |
+| Nom           | VARCHAR(50)   | Nom du type d'épreuve                  |
+| Id_Station    | INT           | Identifiant de la station associée au type d'épreuve |
+| Id_Epreuve    | INT           | Identifiant de l'épreuve associée au type d'épreuve |
 
-## type_epreuve
-- **Id_type_epreuve**: COUNTER (Clé primaire)
-- **Nom**: VARCHAR(50)
-- **Id_Station**: INT (Unique) (Clé étrangère référençant Station(Id_Station))
-- **Id_Epreuve**: INT (Unique) (Clé étrangère référençant Epreuve(Id_Epreuve))
+### Table `Discipline`
+| Colonne       | Type          | Description                            |
+|---------------|---------------|----------------------------------------|
+| Id_Discipline | COUNTER       | Identifiant de la discipline           |
+| Nom           | VARCHAR(50)   | Nom de la discipline                   |
+| Id_Epreuve    | INT           | Identifiant de l'épreuve associée à la discipline |
 
-## Discipline
-- **Id_Discipline**: COUNTER (Clé primaire)
-- **Nom**: VARCHAR(50)
-- **Id_Epreuve**: INT (Unique) (Clé étrangère référençant Epreuve(Id_Epreuve))
+### Table `Conccurent`
+| Colonne            | Type          | Description                            |
+|--------------------|---------------|----------------------------------------|
+| numeros_inscription | VARCHAR(50)  | Numéro d'inscription du concurrent     |
+| Nom                | VARCHAR(50)   | Nom du concurrent                      |
+| H_F                | VARCHAR(1)    | Genre du concurrent (Homme/Femme)      |
+| code_postal        | DECIMAL(15,2) | Code postal du concurrent              |
+| adresse            | VARCHAR(50)   | Adresse du concurrent                  |
+| telephone          | DECIMAL(15,2) | Numéro de téléphone du concurrent      |
+| Id_Discipline      | INT           | Identifiant de la discipline associée au concurrent |
 
-## Conccurent
-- **numeros_inscription**: VARCHAR(50) (Clé primaire)
-- **Nom**: VARCHAR(50)
-- **H_F**: VARCHAR(1)
-- **code_postal**: DECIMAL(15,2)
-- **adresse**: VARCHAR(50)
-- **telephone**: DECIMAL(15,2)
-- **Id_Discipline**: INT (Clé étrangère référençant Discipline(Id_Discipline))
+### Table `Pays`
+| Colonne           | Type          | Description                            |
+|-------------------|---------------|----------------------------------------|
+| Id_Pays           | COUNTER       | Identifiant du pays                    |
+| Nom_codifie      | VARCHAR(50)   | Nom codifié du pays                    |
+| numeros_inscription | VARCHAR(50) | Numéro d'inscription du pays           |
 
-## Pays
-- **Id_Pays**: COUNTER (Clé primaire)
-- **Nom**: VARCHAR(50)
-- **numeros_inscription**: VARCHAR(50) (Unique) (Clé étrangère référençant Conccurent(numeros_inscription))
+### Table `Dossart`
+| Colonne           | Type          | Description                            |
+|-------------------|---------------|----------------------------------------|
+| numero_de_dossart | VARCHAR(50)   | Numéro du dossard                      |
+| Id_Epreuve        | INT           | Identifiant de l'épreuve associée au dossard |
+| Numero_manche     | INT           | Numéro de la manche associée au dossard |
 
-## Dossart
-- **numero_de_dossart**: VARCHAR(50) (Clé primaire)
-- **Id_Epreuve**: INT (Unique)
-- **Numero_manche**: INT
-- (Clés étrangères: Id_Epreuve référençant Epreuve(Id_Epreuve), Numero_manche référençant Manche(Numero_manche))
+### Table `responsable_general`
+| Colonne                    | Type          | Description                            |
+|----------------------------|---------------|----------------------------------------|
+| Id_responsable_general     | COUNTER       | Identifiant du responsable général     |
+| Nom                        | VARCHAR(50)   | Nom du responsable général             |
+| Id_Responsable_de_discipline | INT         | Identifiant du responsable de discipline associé au responsable général |
 
-## responsable_general
-- **Id_responsable_general**: COUNTER (Clé primaire)
-- **Nom**: VARCHAR(50)
-- **Id_Responsable_de_discipline**: INT (Clé étrangère référençant Responsable_de_discipline(Id_Responsable_de_discipline))
+### Table `Organise`
+| Colonne                    | Type          | Description                            |
+|----------------------------|---------------|----------------------------------------|
+| Id_responsable_general     | INT           | Identifiant du responsable général     |
+| numero_matricule           | VARCHAR(50)   | Numéro matricule de l'organisateur     |
+| Nom_                       | VARCHAR(50)   | Nom de l'organisateur                  |
+| role                       | VARCHAR(50)   | Rôle de l'organisateur                 |
+| telephone                  | VARCHAR(50)   | Numéro de téléphone de l'organisateur  |
+| reponsable                 | VARCHAR(50)   | Identifiant du responsable             |
+| Id_Epreuve                 | INT           | Identifiant de l'épreuve               |
+| Id_Responsable_de_discipline | INT         | Identifiant du responsable de discipline |
+| Id_Personne_de_base        | INT           | Identifiant de la personne de base     |
 
-## Organise
-- **reponsable**: VARCHAR(50)
-- **Id_Epreuve**: INT
-- **Id_responsable_general**: INT
-- **Id_Responsable_de_discipline**: INT
-- **Id_Personne_de_base**: INT
-- **numero_matricule**: VARCHAR(50) (Unique)
-- **Nom_**: VARCHAR(50)
-- **role**: VARCHAR(50)
-- **telephone**: VARCHAR(50)
-- (Clés primaires: responsable, Id_Epreuve, Id_responsable_general, Id_Responsable_de_discipline, Id_Personne_de_base)
-- (Clés étrangères: 
-  - responsable référençant Responsable(reponsable),
-  - Id_Epreuve référençant Epreuve(Id_Epreuve),
-  - Id_responsable_general référençant responsable_general(Id_responsable_general),
-  - Id_Responsable_de_discipline référençant Responsable_de_discipline(Id_Responsable_de_discipline),
-  - Id_Personne_de_base référençant Personne_de_base(Id_Personne_de_base))
+### Table `Participe`
+| Colonne             | Type          | Description                            |
+|---------------------|---------------|----------------------------------------|
+| Id_Epreuve          | INT           | Identifiant de l'épreuve               |
+| numeros_inscription | VARCHAR(50)   | Numéro d'inscription du concurrent     |
 
-## Participe
-- **Id_Epreuve**: INT
-- **numeros_inscription**: VARCHAR(50)
-- (Clés primaires: Id_Epreuve, numeros_inscription)
-- (Clés étrangères: Id_Epreuve référençant Epreuve(Id_Epreuve), numeros_inscription référençant Conccurent(numeros_inscription))
+### Table `supervise`
+| Colonne                    | Type          | Description                            |
+|----------------------------|---------------|----------------------------------------|
+| reponsable                 | VARCHAR(50)   | Identifiant du responsable             |
+| Id_Responsable_de_discipline | INT         | Identifiant du responsable de discipline |
 
-## supervise
-- **reponsable**: VARCHAR(50)
-- **Id_Responsable_de_discipline**: INT
-- (Clé primaire: responsable, Id_Responsable_de_discipline)
-- (Clés étrangères: 
-  - responsable référençant Responsable(reponsable),
-  - Id_Responsable_de_discipline référençant Responsable_de_discipline(Id_Responsable_de_discipline))
-
-## affiliation
-- **reponsable**: VARCHAR(50)
-- **Id_Personne_de_base**: INT
-- (Clé primaire: responsable, Id_Personne_de_base)
-- (Clés étrangères: 
-  - responsable référençant Responsable(reponsable),
-  - Id_Personne_de_base référençant Personne_de_base(Id_Personne_de_base))
+### Table `affiliation`
+| Colonne                    | Type          | Description                            |
+|----------------------------|---------------|----------------------------------------|
+| reponsable                 | VARCHAR(50)   | Identifiant du responsable             |
+| Id_Personne_de_base        | INT           | Identifiant de la personne de base     |
 
 
 CREATE TABLE Responsable(
@@ -152,7 +164,6 @@ CREATE TABLE Station(
    Altitude VARCHAR(50),
    Id_Epreuve INT,
    PRIMARY KEY(Id_Station),
-   UNIQUE(Id_Epreuve),
    FOREIGN KEY(Id_Epreuve) REFERENCES Epreuve(Id_Epreuve)
 );
 
@@ -162,7 +173,6 @@ CREATE TABLE type_epreuve(
    Id_Station INT,
    Id_Epreuve INT,
    PRIMARY KEY(Id_type_epreuve),
-   UNIQUE(Id_Station),
    UNIQUE(Id_Epreuve),
    FOREIGN KEY(Id_Station) REFERENCES Station(Id_Station),
    FOREIGN KEY(Id_Epreuve) REFERENCES Epreuve(Id_Epreuve)
