@@ -13,6 +13,12 @@
 | place        | VARCHAR(50)   | Place obtenue dans la manche           |
 | medaille     | VARCHAR(50)   | Médaille obtenue dans la manche        |
 
+### Table `Pays`
+| Colonne    | Type        | Description                            |
+|------------|-------------|----------------------------------------|
+| Id_Pays    | COUNTER     | Identifiant du pays                    |
+| Nom_codifie | VARCHAR(50) | Nom codifié du pays                    |
+
 ### Table `Responsable_de_discipline`
 | Colonne                     | Type          | Description                            |
 |-----------------------------|---------------|----------------------------------------|
@@ -67,13 +73,7 @@
 | adresse            | VARCHAR(50)   | Adresse du concurrent                  |
 | telephone          | DECIMAL(15,2) | Numéro de téléphone du concurrent      |
 | Id_Discipline      | INT           | Identifiant de la discipline associée au concurrent |
-
-### Table `Pays`
-| Colonne           | Type          | Description                            |
-|-------------------|---------------|----------------------------------------|
-| Id_Pays           | COUNTER       | Identifiant du pays                    |
-| Nom_codifie      | VARCHAR(50)   | Nom codifié du pays                    |
-| numeros_inscription | VARCHAR(50) | Numéro d'inscription du pays           |
+| Id_Pays            | INT           | Identifiant du pays associé au concurrent |
 
 ### Table `Dossart`
 | Colonne           | Type          | Description                            |
@@ -103,22 +103,22 @@
 | Id_Personne_de_base        | INT           | Identifiant de la personne de base     |
 
 ### Table `Participe`
-| Colonne             | Type          | Description                            |
-|---------------------|---------------|----------------------------------------|
-| Id_Epreuve          | INT           | Identifiant de l'épreuve               |
+| Colonne            | Type          | Description                            |
+|--------------------|---------------|----------------------------------------|
+| Id_Epreuve         | INT           | Identifiant de l'épreuve               |
 | numeros_inscription | VARCHAR(50)   | Numéro d'inscription du concurrent     |
 
 ### Table `supervise`
-| Colonne                    | Type          | Description                            |
-|----------------------------|---------------|----------------------------------------|
-| reponsable                 | VARCHAR(50)   | Identifiant du responsable             |
-| Id_Responsable_de_discipline | INT         | Identifiant du responsable de discipline |
+| Colonne                     | Type          | Description                            |
+|-----------------------------|---------------|----------------------------------------|
+| reponsable                  | VARCHAR(50)   | Identifiant du responsable             |
+| Id_Responsable_de_discipline | INT           | Identifiant du responsable de discipline associé au superviseur |
 
 ### Table `affiliation`
-| Colonne                    | Type          | Description                            |
-|----------------------------|---------------|----------------------------------------|
-| reponsable                 | VARCHAR(50)   | Identifiant du responsable             |
-| Id_Personne_de_base        | INT           | Identifiant de la personne de base     |
+| Colonne               | Type          | Description                            |
+|-----------------------|---------------|----------------------------------------|
+| reponsable            | VARCHAR(50)   | Identifiant du responsable             |
+| Id_Personne_de_base   | INT           | Identifiant de la personne de base associée à l'affiliation |
 
 
 CREATE TABLE Responsable(
@@ -134,6 +134,12 @@ CREATE TABLE Manche(
    place VARCHAR(50),
    medaille VARCHAR(50),
    PRIMARY KEY(Numero_manche)
+);
+
+CREATE TABLE Pays(
+   Id_Pays COUNTER,
+   Nom_codifie VARCHAR(50),
+   PRIMARY KEY(Id_Pays)
 );
 
 CREATE TABLE Responsable_de_discipline(
@@ -195,17 +201,10 @@ CREATE TABLE Conccurent(
    adresse VARCHAR(50),
    telephone DECIMAL(15,2),
    Id_Discipline INT,
+   Id_Pays INT,
    PRIMARY KEY(numeros_inscription),
-   FOREIGN KEY(Id_Discipline) REFERENCES Discipline(Id_Discipline)
-);
-
-CREATE TABLE Pays(
-   Id_Pays COUNTER,
-   Nom_codifie VARCHAR(50),
-   numeros_inscription VARCHAR(50),
-   PRIMARY KEY(Id_Pays),
-   UNIQUE(numeros_inscription),
-   FOREIGN KEY(numeros_inscription) REFERENCES Conccurent(numeros_inscription)
+   FOREIGN KEY(Id_Discipline) REFERENCES Discipline(Id_Discipline),
+   FOREIGN KEY(Id_Pays) REFERENCES Pays(Id_Pays)
 );
 
 CREATE TABLE Dossart(
@@ -268,3 +267,4 @@ CREATE TABLE affiliation(
    FOREIGN KEY(reponsable) REFERENCES Responsable(reponsable),
    FOREIGN KEY(Id_Personne_de_base) REFERENCES Personne_de_base(Id_Personne_de_base)
 );
+
