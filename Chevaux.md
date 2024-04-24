@@ -1,32 +1,49 @@
-| Table        | Attribut               | Type de données | Description                                      |
-|--------------|------------------------|-----------------|--------------------------------------------------|
-| Cheval       | Numero_enregistrement  | VARCHAR(9) (PK) | Numéro d'enregistrement du cheval                |
-|              | Date_de_naissance      | DATE            | Date de naissance du cheval                      |
-|              | Identifiant_de_la_mere | VARCHAR(10)     | Identifiant de la mère du cheval                 |
-|              | Race                   | VARCHAR(50)     | Race du cheval                                   |
-|              | Couleur                | VARCHAR(50)     | Couleur du cheval                                |
-|              | Sexe                   | VARCHAR(1)      | Sexe du cheval                                   |
-|              | lieu_de_naissance      | VARCHAR(50)     | Lieu de naissance du cheval                      |
-| Veterinaire  | Id_Veterinaire         | COUNTER (PK)    | Identifiant du vétérinaire                       |
-| Proprietaire | Numero_du_proprietaire | VARCHAR(9) (PK) | Numéro du propriétaire                           |
-|              | adresse                | VARCHAR(100)    | Adresse du propriétaire                          |
-|              | code_postal            | VARCHAR(50)     | Code postal du propriétaire                      |
-|              | Ville                  | VARCHAR(50)     | Ville du propriétaire                            |
-| Entraineur   | Numero_entraineur_     | VARCHAR(9) (PK) | Numéro d'identification de l'entraîneur          |
-|              | adresse                | VARCHAR(50)     | Adresse de l'entraîneur                          |
-|              | code_postal            | VARCHAR(50)     | Code postal de l'entraîneur                      |
-|              | ville                  | VARCHAR(50)     | Ville de l'entraîneur                            |
-| Suivi        | Numero_enregistrement  | VARCHAR(9) (FK) | Numéro d'enregistrement du cheval (FK)           |
-|              | Id_Veterinaire         | INT (FK)        | Identifiant du vétérinaire (FK)                  |
-|              | Date_vaccination       | DATE            | Date de vaccination du cheval                    |
-| Appartient   | Numero_du_proprietaire | VARCHAR(9) (FK) | Numéro du propriétaire (FK)                      |
-|              | Numero_enregistrement  | VARCHAR(9) (FK) | Numéro d'enregistrement du cheval (FK)           |
-| Entrainement | Numero_enregistrement  | VARCHAR(9) (FK) | Numéro d'enregistrement du cheval (FK)           |
-|              | Numero_entraineur_     | VARCHAR(9) (FK) | Numéro d'identification de l'entraîneur (FK)     |
-|              | Date_d_entrainement    | DATE            | Date d'entraînement du cheval                    |
-| Peu_devenir  | Numero_du_proprietaire | VARCHAR(9) (FK) | Numéro du propriétaire (FK)                      |
-|              | Numero_entraineur_     | VARCHAR(9) (FK) | Numéro d'identification de l'entraîneur (FK)     |
-|              | Date_donnee            | DATE            | Date de devenir propriétaire de l'entraîneur     |
+### Table : Cheval
+- **Numero_enregistrement** : Identifiant unique du cheval.
+- **Date_de_naissance** : Date de naissance du cheval.
+- **Identifiant_de_la_mere** : Identifiant de la mère du cheval.
+- **Race** : Race du cheval.
+- **Couleur** : Couleur du cheval.
+- **Sexe** : Sexe du cheval.
+- **lieu_de_naissance** : Lieu de naissance du cheval.
+- **PRIMARY KEY(Numero_enregistrement)** : Clé primaire de la table Cheval.
+
+### Table : Veterinaire
+- **Id_Veterinaire** : Identifiant unique du vétérinaire.
+- **PRIMARY KEY(Id_Veterinaire)** : Clé primaire de la table Veterinaire.
+
+### Table : Proprietaire
+- **Numero_du_proprietaire** : Numéro d'identification unique du propriétaire.
+- **adresse** : Adresse du propriétaire.
+- **code_postal** : Code postal du propriétaire.
+- **Ville** : Ville du propriétaire.
+- **Numero_du_proprietaire_1** : Numéro d'identification du propriétaire (référence à lui-même).
+- **PRIMARY KEY(Numero_du_proprietaire)** : Clé primaire de la table Proprietaire.
+- **FOREIGN KEY(Numero_du_proprietaire_1) REFERENCES Proprietaire(Numero_du_proprietaire)** : Clé étrangère faisant référence à elle-même.
+
+### Table : Entraineur
+- **Numero_entraineur_** : Numéro d'identification unique de l'entraîneur.
+- **adresse** : Adresse de l'entraîneur.
+- **code_postal** : Code postal de l'entraîneur.
+- **ville** : Ville de l'entraîneur.
+- **PRIMARY KEY(Numero_entraineur_)** : Clé primaire de la table Entraineur.
+
+### Table : Suivi
+- **Numero_enregistrement** : Identifiant du cheval suivi.
+- **Id_Veterinaire** : Identifiant du vétérinaire impliqué dans le suivi.
+- **Date_vaccination** : Date de la vaccination du cheval.
+- **PRIMARY KEY(Numero_enregistrement, Id_Veterinaire)** : Clé primaire de la table Suivi.
+- **FOREIGN KEY(Numero_enregistrement) REFERENCES Cheval(Numero_enregistrement)** : Clé étrangère faisant référence à la table Cheval.
+- **FOREIGN KEY(Id_Veterinaire) REFERENCES Veterinaire(Id_Veterinaire)** : Clé étrangère faisant référence à la table Veterinaire.
+
+### Table : Appartient
+- **Numero_du_proprietaire** : Numéro d'identification du propriétaire.
+- **Numero_enregistrement** : Identifiant du cheval.
+- **PRIMARY KEY(Numero_du_proprietaire)** : Clé primaire de la table Appartient.
+- **FOREIGN KEY(Numero_du_proprietaire) REFERENCES Proprietaire(Numero_du_proprietaire)** : Clé étrangère faisant référence à la table Proprietaire.
+- **FOREIGN KEY(Numero_enregistrement) REFERENCES Cheval(Numero_enregistrement)** : Clé étrangère faisant référence à la table Cheval.
+
+
 
 CREATE TABLE Cheval(
    Numero_enregistrement VARCHAR(9),
@@ -49,7 +66,9 @@ CREATE TABLE Proprietaire(
    adresse VARCHAR(100),
    code_postal VARCHAR(50),
    Ville VARCHAR(50),
-   PRIMARY KEY(Numero_du_proprietaire)
+   Numero_du_proprietaire_1 VARCHAR(9),
+   PRIMARY KEY(Numero_du_proprietaire),
+   FOREIGN KEY(Numero_du_proprietaire_1) REFERENCES Proprietaire(Numero_du_proprietaire)
 );
 
 CREATE TABLE Entraineur(
@@ -88,10 +107,11 @@ CREATE TABLE Entrainement(
 
 CREATE TABLE Peu_devenir(
    Numero_du_proprietaire VARCHAR(9),
-   Numero_entraineur_ VARCHAR(9),
    Date_donnee DATE,
-   PRIMARY KEY(Numero_du_proprietaire, Numero_entraineur_),
+   Numero_entraineur_ VARCHAR(9) NOT NULL,
+   PRIMARY KEY(Numero_du_proprietaire),
    FOREIGN KEY(Numero_du_proprietaire) REFERENCES Proprietaire(Numero_du_proprietaire),
    FOREIGN KEY(Numero_entraineur_) REFERENCES Entraineur(Numero_entraineur_)
 );
+
 
