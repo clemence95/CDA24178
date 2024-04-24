@@ -76,6 +76,13 @@
 - Foreign Key: Id_Epreuve (references Epreuve(Id_Epreuve))
 - Foreign Key: numeros_inscription (references Conccurent(numeros_inscription))
 
+### gere
+- **Id_Discipline**: Int
+- **matricule**: Int
+- Primary Key: (Id_Discipline, matricule)
+- Foreign Key: Id_Discipline (references Discipline(Id_Discipline))
+- Foreign Key: matricule (references Responsable(matricule))
+
 CREATE TABLE Manche(
    Numero_manche COUNTER,
    temps DECIMAL(15,2),
@@ -182,6 +189,14 @@ CREATE TABLE Participe(
    PRIMARY KEY(Id_Epreuve, numeros_inscription),
    FOREIGN KEY(Id_Epreuve) REFERENCES Epreuve(Id_Epreuve),
    FOREIGN KEY(numeros_inscription) REFERENCES Conccurent(numeros_inscription)
+);
+
+CREATE TABLE gere(
+   Id_Discipline INT,
+   matricule INT,
+   PRIMARY KEY(Id_Discipline, matricule),
+   FOREIGN KEY(Id_Discipline) REFERENCES Discipline(Id_Discipline),
+   FOREIGN KEY(matricule) REFERENCES Responsable(matricule)
 );
 
 
