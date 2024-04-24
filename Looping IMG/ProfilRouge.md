@@ -1,121 +1,109 @@
-### Table : Fournisseur
-- Id_Fournisseur : INT (Clé primaire)
-- Nom : VARCHAR(50)
-- Contact : VARCHAR(50)
-- Telephone : VARCHAR(50)
+### Fournisseur
+- **Id_Fournisseur** : INT (Identifiant unique du fournisseur - clé primaire)
+- **Nom** : VARCHAR(50) (Nom du fournisseur)
+- **Contact** : VARCHAR(50) (Nom du contact du fournisseur)
+- **Telephone** : VARCHAR(50) (Numéro de téléphone du fournisseur)
 
-### Table : Produit
-- Id_Produit : INT (Clé primaire)
-- Rubrique : VARCHAR(50)
-- SousRubrique : VARCHAR(50)
-- Libelle_court : VARCHAR(100)
-- Libelle_long : TEXT
-- Reference_fournisseur : VARCHAR(50)
-- Prix_achat_HT : DECIMAL(15,2)
-- Photo : VARCHAR(255)
+### Produit
+- **Id_Produit** : INT (Identifiant unique du produit - clé primaire)
+- **Rubrique** : VARCHAR(50) (Rubrique à laquelle appartient le produit)
+- **SousRubrique** : VARCHAR(50) (Sous-rubrique à laquelle appartient le produit)
+- **Libelle_court** : VARCHAR(100) (Libellé court du produit)
+- **Libelle_long** : TEXT (Description détaillée du produit)
+- **Reference_fournisseur** : VARCHAR(50) (Référence du produit chez le fournisseur)
+- **Prix_achat_HT** : DECIMAL(15,2) (Prix d'achat hors taxes du produit)
+- **Photo** : VARCHAR(255) (Chemin de la photo du produit)
 
-### Table : Client
-- Id_Client : INT (Clé primaire)
-- Nom : VARCHAR(50)
-- Type : ENUM('Particulier', 'Professionnel')
-- Adresse_livraison : VARCHAR(255)
-- Adresse_facturation : VARCHAR(255)
-- Coefficient : DECIMAL(15,2)
-- Reduction : DECIMAL(15,2)
-- Reference : VARCHAR(50)
+### Client
+- **Id_Client** : INT (Identifiant unique du client - clé primaire)
+- **Nom** : VARCHAR(50) (Nom du client)
+- **Type** : VARCHAR(50) (Type de client - particulier ou professionnel)
+- **Adresse_livraison** : VARCHAR(255) (Adresse de livraison du client)
+- **Adresse_facturation** : VARCHAR(255) (Adresse de facturation du client)
+- **Coefficient** : DECIMAL(15,2) (Coefficient de prix pour le client)
+- **Reduction** : DECIMAL(15,2) (Réduction applicable au client)
+- **Reference** : VARCHAR(50) (Référence du client)
 
-### Table : Commercial
-- Id_Commercial : INT (Clé primaire)
-- Nom : VARCHAR(50)
+### Commercial
+- **Id_Commercial** : INT (Identifiant unique du commercial - clé primaire)
+- **Nom** : VARCHAR(50) (Nom du commercial)
 
-### Table : Commande
-- Id_Commande : INT (Clé primaire)
-- Id_Client : INT (Clé étrangère vers Client)
-- Statut : VARCHAR(50)
-- Mode_paiement : VARCHAR(50)
-- Total_HT : DECIMAL(15,2)
-- Total_TTC : DECIMAL(15,2)
-- Date_heure_commande : DATETIME
+### Commande
+- **Id_Commande** : INT (Identifiant unique de la commande - clé primaire)
+- **Statut** : VARCHAR(50) (Statut de la commande)
+- **Mode_paiement** : VARCHAR(50) (Mode de paiement de la commande)
+- **Reduction_pro** : DECIMAL(15,2) (Réduction spécifique pour les clients professionnels)
+- **Total_HT** : DECIMAL(15,2) (Total hors taxes de la commande)
+- **Total_TTC** : DECIMAL(15,2) (Total toutes taxes comprises de la commande)
+- **Date_heure_commande** : DATETIME (Date et heure de la commande)
+- **Mode_paiement_pro** : VARCHAR(50) (Mode de paiement spécifique pour les clients professionnels)
 
-### Table : BonLivraison
-- Id_BonLivraison : INT (Clé primaire)
-- Id_Commande : INT (Clé étrangère vers Commande)
-- Date_livraison : DATE
-- Statut : VARCHAR(50)
+### BonLivraison
+- **Id_BonLivraison** : INT (Identifiant unique du bon de livraison - clé primaire)
+- **Date_livraison** : DATE (Date de livraison du bon de livraison)
+- **Statut** : VARCHAR(50) (Statut du bon de livraison)
 
-### Table : Facture
-- Id_Facture : INT (Clé primaire)
-- Id_Commande : INT (Clé étrangère vers Commande)
-- Date_facturation : DATE
-- Statut : VARCHAR(50)
+### Facture
+- **Id_Facture** : INT (Identifiant unique de la facture - clé primaire)
+- **Date_facturation** : DATE (Date de facturation de la facture)
+- **Statut** : VARCHAR(50) (Statut de la facture)
 
-### Table : Document
-- Id_Document : INT (Clé primaire)
-- Type : VARCHAR(50)
-- Contenu : LONGBLOB
-- Date_creation : DATETIME
+### Document
+- **Id_Document** : INT (Identifiant unique du document - clé primaire)
+- **Type** : VARCHAR(50) (Type de document)
+- **Contenu** : LONGBINARY (Contenu du document)
+- **Date_creation** : DATETIME (Date de création du document)
 
-### Table : Stock
-- Id_Stock : INT (Clé primaire)
-- Id_Produit : INT (Clé étrangère vers Produit)
-- Quantite : INT
-- Derniere_mise_a_jour : DATETIME
+### Stock
+- **Id_Stock** : INT (Identifiant unique du stock - clé primaire)
+- **Quantite** : INT (Quantité en stock)
+- **Derniere_mise_a_jour** : DATETIME (Date de la dernière mise à jour du stock)
 
-### Table : PrixClient
-- Id_PrixClient : INT (Clé primaire)
-- Id_Client : INT (Clé étrangère vers Client)
-- Id_Produit : INT (Clé étrangère vers Produit)
-- Coefficient : DECIMAL(15,2)
-- Reduction : DECIMAL(15,2)
+### Catalogue
+- **Id_Catalogue** : INT (Identifiant unique du catalogue - clé primaire)
+- **Statut** : VARCHAR(50) (Statut du catalogue)
+- **Date_ajout** : DATE (Date d'ajout du catalogue)
+- **Date_desactivation** : DATE (Date de désactivation du catalogue)
 
-### Table : Catalogue
-- Id_Catalogue : INT (Clé primaire)
-- Id_Produit : INT (Clé étrangère vers Produit)
-- Statut : VARCHAR(50)
-- Date_ajout : DATE
-- Date_desactivation : DATE
+### HistoriqueDocument
+- **Id_HistoriqueDocument** : INT (Identifiant unique de l'historique du document - clé primaire)
+- **Date_Historique** : DATETIME (Date de l'événement dans l'historique du document)
+- **Description** : VARCHAR(255) (Description de l'événement dans l'historique du document)
 
-### Table : HistoriqueDocument
-- Id_HistoriqueDocument : INT (Clé primaire)
-- Id_Document : INT (Clé étrangère vers Document)
-- Date_Historique : DATETIME
-- Description : VARCHAR(255)
+### Approvisionne
+- **Id_Fournisseur** : INT (Identifiant unique du fournisseur - clé étrangère)
+- **Id_Produit** : INT (Identifiant unique du produit - clé étrangère)
+- **Id_Stock** : INT (Identifiant unique du stock - clé étrangère)
 
-### Table : Approvisionne
-- Id_Fournisseur : INT (Clé étrangère vers Fournisseur)
-- Id_Produit : INT (Clé étrangère vers Produit)
-- Id_Stock : INT (Clé étrangère vers Stock) (Clé primaire composite)
+### Occupe
+- **Id_Client** : INT (Identifiant unique du client - clé étrangère)
+- **Id_Commercial** : INT (Identifiant unique du commercial - clé étrangère)
 
-### Table : Occupe
-- Id_Client : INT (Clé étrangère vers Client)
-- Id_Commercial : INT (Clé étrangère vers Commercial) (Clé primaire composite)
+### Concerne
+- **Id_Client** : INT (Identifiant unique du client - clé étrangère)
+- **Id_Commande** : INT (Identifiant unique de la commande - clé étrangère)
 
-### Table : Concerne
-- Id_Client : INT (Clé étrangère vers Client)
-- Id_Commande : INT (Clé étrangère vers Commande) (Clé primaire composite)
+### Associe
+- **Id_Commande** : INT (Identifiant unique de la commande - clé étrangère)
+- **Id_BonLivraison** : INT (Identifiant unique du bon de livraison - clé étrangère)
+- **Id_Facture** : INT (Identifiant unique de la facture - clé étrangère)
+- **Id_Document** : INT (Identifiant unique du document - clé étrangère)
 
-### Table : Associe
-- Id_Commande : INT (Clé étrangère vers Commande)
-- Id_BonLivraison : INT (Clé étrangère vers BonLivraison)
-- Id_Facture : INT (Clé étrangère vers Facture)
-- Id_Document : INT (Clé étrangère vers Document) (Clé primaire composite)
+### lie
+- **Id_Produit** : INT (Identifiant unique du produit - clé étrangère)
+- **Id_Client** : INT (Identifiant unique du client - clé étrangère)
+- **Id_Catalogue** : INT (Identifiant unique du catalogue - clé étrangère)
 
-### Table : lie
-- Id_Produit : INT (Clé étrangère vers Produit)
-- Id_Client : INT (Clé étrangère vers Client)
-- Id_PrixClient : INT (Clé étrangère vers PrixClient)
-- Id_Catalogue : INT (Clé étrangère vers Catalogue) (Clé primaire composite)
-
-### Table : Archivage
-- Id_Document : INT (Clé étrangère vers Document)
-- Id_HistoriqueDocument : INT (Clé étrangère vers HistoriqueDocument) (Clé primaire composite)
+### Archivage
+- **Id_Document** : INT (Identifiant unique du document - clé étrangère)
+- **Id_HistoriqueDocument** : INT (Identifiant unique de l'historique du document - clé étrangère)
 
 
 CREATE TABLE Fournisseur(
    Id_Fournisseur INT,
    Nom VARCHAR(50),
    Contact VARCHAR(50),
-   Telephone VARCHAR(50),
+   telephone VARCHAR(50),
    PRIMARY KEY(Id_Fournisseur)
 );
 
@@ -134,7 +122,7 @@ CREATE TABLE Produit(
 CREATE TABLE Client(
    Id_Client INT,
    Nom VARCHAR(50),
-   Type ENUM('Particulier', 'Professionnel'),
+   Type VARCHAR(50),
    Adresse_livraison VARCHAR(255),
    Adresse_facturation VARCHAR(255),
    Coefficient DECIMAL(15,2),
@@ -151,79 +139,58 @@ CREATE TABLE Commercial(
 
 CREATE TABLE Commande(
    Id_Commande INT,
-   Id_Client INT,
    Statut VARCHAR(50),
    Mode_paiement VARCHAR(50),
+   Reduction_pro DECIMAL(15,2),
    Total_HT DECIMAL(15,2),
    Total_TTC DECIMAL(15,2),
    Date_heure_commande DATETIME,
-   PRIMARY KEY(Id_Commande),
-   FOREIGN KEY(Id_Client) REFERENCES Client(Id_Client)
+   Mode_paiement_pro VARCHAR(50),
+   PRIMARY KEY(Id_Commande)
 );
 
 CREATE TABLE BonLivraison(
    Id_BonLivraison INT,
-   Id_Commande INT,
    Date_livraison DATE,
    Statut VARCHAR(50),
-   PRIMARY KEY(Id_BonLivraison),
-   FOREIGN KEY(Id_Commande) REFERENCES Commande(Id_Commande)
+   PRIMARY KEY(Id_BonLivraison)
 );
 
 CREATE TABLE Facture(
    Id_Facture INT,
-   Id_Commande INT,
    Date_facturation DATE,
    Statut VARCHAR(50),
-   PRIMARY KEY(Id_Facture),
-   FOREIGN KEY(Id_Commande) REFERENCES Commande(Id_Commande)
+   PRIMARY KEY(Id_Facture)
 );
 
 CREATE TABLE Document(
    Id_Document INT,
    Type VARCHAR(50),
-   Contenu LONGBLOB,
+   Contenu LONGBINARY,
    Date_creation DATETIME,
    PRIMARY KEY(Id_Document)
 );
 
 CREATE TABLE Stock(
    Id_Stock INT,
-   Id_Produit INT,
    Quantite INT,
    Derniere_mise_a_jour DATETIME,
-   PRIMARY KEY(Id_Stock),
-   FOREIGN KEY(Id_Produit) REFERENCES Produit(Id_Produit)
-);
-
-CREATE TABLE PrixClient(
-   Id_PrixClient INT,
-   Id_Client INT,
-   Id_Produit INT,
-   Coefficient DECIMAL(15,2),
-   Reduction DECIMAL(15,2),
-   PRIMARY KEY(Id_PrixClient),
-   FOREIGN KEY(Id_Client) REFERENCES Client(Id_Client),
-   FOREIGN KEY(Id_Produit) REFERENCES Produit(Id_Produit)
+   PRIMARY KEY(Id_Stock)
 );
 
 CREATE TABLE Catalogue(
    Id_Catalogue INT,
-   Id_Produit INT,
    Statut VARCHAR(50),
    Date_ajout DATE,
    Date_desactivation DATE,
-   PRIMARY KEY(Id_Catalogue),
-   FOREIGN KEY(Id_Produit) REFERENCES Produit(Id_Produit)
+   PRIMARY KEY(Id_Catalogue)
 );
 
 CREATE TABLE HistoriqueDocument(
    Id_HistoriqueDocument INT,
-   Id_Document INT,
    Date_Historique DATETIME,
    Description VARCHAR(255),
-   PRIMARY KEY(Id_HistoriqueDocument),
-   FOREIGN KEY(Id_Document) REFERENCES Document(Id_Document)
+   PRIMARY KEY(Id_HistoriqueDocument)
 );
 
 CREATE TABLE Approvisionne(
@@ -267,12 +234,10 @@ CREATE TABLE Associe(
 CREATE TABLE lie(
    Id_Produit INT,
    Id_Client INT,
-   Id_PrixClient INT,
    Id_Catalogue INT,
-   PRIMARY KEY(Id_Produit, Id_Client, Id_PrixClient, Id_Catalogue),
+   PRIMARY KEY(Id_Produit, Id_Client, Id_Catalogue),
    FOREIGN KEY(Id_Produit) REFERENCES Produit(Id_Produit),
    FOREIGN KEY(Id_Client) REFERENCES Client(Id_Client),
-   FOREIGN KEY(Id_PrixClient) REFERENCES PrixClient(Id_PrixClient),
    FOREIGN KEY(Id_Catalogue) REFERENCES Catalogue(Id_Catalogue)
 );
 
