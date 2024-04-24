@@ -1,23 +1,40 @@
-| Table        | Attribut               | Type de données | Description                                      |
-|--------------|------------------------|-----------------|--------------------------------------------------|
-| Proprietaire | Nom_du_proprietaire    | VARCHAR(30)     | Nom du propriétaire du chien                     |
-|              | adresse                | VARCHAR(100)    | Adresse du propriétaire du chien                 |
-| Chien        | Numero_matricule       | VARCHAR(6)      | Numéro de matricule unique du chien              |
-|              | Date_deces_du_chien    | DATE            | Date de décès du chien (le cas échéant)          |
-|              | Date_naissance_du_chien| DATE            | Date de naissance du chien                       |
-|              | Nom                    | VARCHAR(20)     | Nom du chien                                     |
-|              | Sexe_du_chien          | VARCHAR(1)      | Sexe du chien (M/F)                              |
-|              | Race                   | VARCHAR(20)     | Race du chien                                    |
-| Concours     | Id_Concours            | COUNTER         | Identifiant unique du concours                   |
-|              | Type_de_concours       | VARCHAR(30)     | Type de concours (ex: agility, obéissance)       |
-|              | Date_de_concours       | DATE            | Date du concours                                 |
-|              | Ville_de_concours      | VARCHAR(30)     | Ville où se déroule le concours                  |
-| Participation| Numero_matricule       | VARCHAR(6)      | Numéro de matricule du chien participant         |
-|              | Id_Concours            | INT             | Identifiant du concours auquel le chien participe|
-|              | Resultat_du_concours   | DECIMAL(2,0)    | Résultat du concours du chien (classement)       |
-| Appartient   | Nom_du_proprietaire    | VARCHAR(30)     | Nom du propriétaire du chien                     |
-|              | Numero_matricule       | VARCHAR(6)      | Numéro de matricule du chien                     |
-|              | Date_d_achat           | DATE            | Date d'achat du chien par le propriétaire        |
+### Table : Proprietaire
+- **Nom_du_proprietaire** : VARCHAR(30) - Nom du propriétaire du chien.
+- **adresse** : VARCHAR(100) - Adresse du propriétaire.
+- **PRIMARY KEY(Nom_du_proprietaire)** : Clé primaire de la table Proprietaire.
+
+### Table : Chien
+- **Numero_matricule** : VARCHAR(6) - Numéro de matricule unique du chien.
+- **Date_deces_du_chien** : DATE - Date de décès du chien.
+- **Date_naissance_du_chien** : DATE - Date de naissance du chien.
+- **Nom** : VARCHAR(20) - Nom du chien.
+- **Sexe_du_chien** : VARCHAR(1) - Sexe du chien.
+- **Race** : VARCHAR(20) - Race du chien.
+- **PRIMARY KEY(Numero_matricule)** : Clé primaire de la table Chien.
+
+### Table : Concours
+- **Id_Concours** : COUNTER - Identifiant unique du concours.
+- **Type_de_concours** : VARCHAR(30) - Type de concours.
+- **Date_de_concours** : DATE - Date du concours.
+- **Ville_de_concours** : VARCHAR(30) - Ville où se déroule le concours.
+- **PRIMARY KEY(Id_Concours)** : Clé primaire de la table Concours.
+
+### Table : Participation
+- **Numero_matricule** : VARCHAR(6) - Numéro de matricule du chien participant.
+- **Id_Concours** : INT - Identifiant du concours auquel le chien participe.
+- **Resultat_du_concours** : DECIMAL(2,0) - Résultat obtenu par le chien lors du concours.
+- **PRIMARY KEY(Numero_matricule, Id_Concours)** : Clé primaire de la table Participation.
+- **FOREIGN KEY(Numero_matricule) REFERENCES Chien(Numero_matricule)** : Clé étrangère faisant référence à la table Chien.
+- **FOREIGN KEY(Id_Concours) REFERENCES Concours(Id_Concours)** : Clé étrangère faisant référence à la table Concours.
+
+### Table : Appartient
+- **Nom_du_proprietaire** : VARCHAR(30) - Nom du propriétaire du chien.
+- **Numero_matricule** : VARCHAR(6) - Numéro de matricule du chien.
+- **Date_d_achat** : DATE - Date à laquelle le chien a été acheté par le propriétaire.
+- **PRIMARY KEY(Nom_du_proprietaire, Numero_matricule)** : Clé primaire de la table Appartient.
+- **FOREIGN KEY(Nom_du_proprietaire) REFERENCES Proprietaire(Nom_du_proprietaire)** : Clé étrangère faisant référence à la table Proprietaire.
+- **FOREIGN KEY(Numero_matricule) REFERENCES Chien(Numero_matricule)** : Clé étrangère faisant référence à la table Chien.
+
 
 CREATE TABLE Proprietaire(
    Nom_du_proprietaire VARCHAR(30),
