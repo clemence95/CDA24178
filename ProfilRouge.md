@@ -2,7 +2,7 @@
 - **Id_Fournisseur** : INT (Identifiant unique du fournisseur - clé primaire)
 - **Nom** : VARCHAR(50) (Nom du fournisseur)
 - **Contact** : VARCHAR(50) (Nom du contact du fournisseur)
-- **Telephone** : VARCHAR(50) (Numéro de téléphone du fournisseur)
+- **telephone** : VARCHAR(50) (Numéro de téléphone du fournisseur)
 
 ### Produit
 - **Id_Produit** : INT (Identifiant unique du produit - clé primaire)
@@ -36,7 +36,7 @@
 - **Total_HT** : DECIMAL(15,2) (Total hors taxes de la commande)
 - **Total_TTC** : DECIMAL(15,2) (Total toutes taxes comprises de la commande)
 - **Date_heure_commande** : DATETIME (Date et heure de la commande)
-- **Mode_paiement_pro** : VARCHAR(50) (Mode de paiement spécifique pour les clients professionnels)
+- **Mode_differe** : VARCHAR(50) (Mode de paiement spécifique pour les clients professionnels)
 
 ### BonLivraison
 - **Id_BonLivraison** : INT (Identifiant unique du bon de livraison - clé primaire)
@@ -145,7 +145,7 @@ CREATE TABLE Commande(
    Total_HT DECIMAL(15,2),
    Total_TTC DECIMAL(15,2),
    Date_heure_commande DATETIME,
-   Mode_paiement_pro VARCHAR(50),
+   Mode_differe VARCHAR(50),
    PRIMARY KEY(Id_Commande)
 );
 
