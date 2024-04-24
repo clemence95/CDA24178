@@ -1,14 +1,64 @@
-| Table          | Attributs                                                | Type de données                                    |
-|----------------|----------------------------------------------------------|----------------------------------------------------|
-| Eleve          | Nom (PK), Prenom                                         | VARCHAR(20)                                        |
-| Salle_de_cours | Numero_de_salle (PK)                                     | DECIMAL(2,2)                                       |
-| Professeur     | Id_Professeur (PK), Nom, Prenom, Numero_de_salle (FK)    | COUNTER, VARCHAR(30), DECIMAL(2,2)                 |
-| Matiere        | Matiere_enseignee (PK)                                   | VARCHAR(30)                                        |
-| Classe         | Nom_de_la_classe (PK), Numero_de_salle (FK)              | VARCHAR(30), DECIMAL(2,2)                          |
-| assiste        | Nom_de_la_classe (FK), Nom (FK), Prenom (FK)             | VARCHAR(30), VARCHAR(20), VARCHAR(20)              |
-| enseignement   | Id_Professeur (FK), Matiere_enseignee (FK)               | INT, VARCHAR(30)                                   |
-| reçoit         | Nom_de_la_classe (FK), Matiere_enseignee (FK), Nb_d_heure| VARCHAR(30), VARCHAR(30), DECIMAL(2,0)             |
-| obtient        | Nom (FK), Prenom (FK), Matiere_enseignee (FK), Note      | VARCHAR(20), VARCHAR(20), VARCHAR(30), DECIMAL(2,2)|
+### Table : Eleve
+- **Nom** : Nom de l'élève.
+- **Prenom** : Prénom de l'élève.
+- **PRIMARY KEY(Nom, Prenom)** : Clé primaire de la table Eleve.
+
+### Table : Salle_de_cours
+- **Numero_de_salle** : Numéro de la salle de cours.
+- **PRIMARY KEY(Numero_de_salle)** : Clé primaire de la table Salle_de_cours.
+
+### Table : Professeur
+- **Id_Professeur** : Identifiant unique du professeur.
+- **Nom** : Nom du professeur.
+- **Numero_de_salle** : Numéro de la salle de cours attribuée au professeur.
+- **PRIMARY KEY(Id_Professeur)** : Clé primaire de la table Professeur.
+- **FOREIGN KEY(Numero_de_salle) REFERENCES Salle_de_cours(Numero_de_salle)** : Clé étrangère faisant référence à la table Salle_de_cours.
+
+### Table : Matiere
+- **Matiere_enseignee** : Matière enseignée.
+- **nom** : Nom de la matière.
+- **PRIMARY KEY(Matiere_enseignee)** : Clé primaire de la table Matiere.
+
+### Table : Classe
+- **Nom_de_la_classe** : Nom de la classe.
+- **Numero_de_salle** : Numéro de la salle de cours attribuée à la classe.
+- **PRIMARY KEY(Nom_de_la_classe)** : Clé primaire de la table Classe.
+- **UNIQUE(Numero_de_salle)** : Contrainte d'unicité pour le numéro de salle.
+- **FOREIGN KEY(Numero_de_salle) REFERENCES Salle_de_cours(Numero_de_salle)** : Clé étrangère faisant référence à la table Salle_de_cours.
+
+### Table : assiste
+- **Nom_de_la_classe** : Nom de la classe.
+- **Nom** : Nom de l'élève.
+- **Prenom** : Prénom de l'élève.
+- **PRIMARY KEY(Nom_de_la_classe, Nom, Prenom)** : Clé primaire de la table assiste.
+- **FOREIGN KEY(Nom_de_la_classe) REFERENCES Classe(Nom_de_la_classe)** : Clé étrangère faisant référence à la table Classe.
+- **FOREIGN KEY(Nom, Prenom) REFERENCES Eleve(Nom, Prenom)** : Clé étrangère faisant référence à la table Eleve.
+
+### Table : enseignement
+- **Id_Professeur** : Identifiant du professeur.
+- **Matiere_enseignee** : Matière enseignée.
+- **PRIMARY KEY(Id_Professeur, Matiere_enseignee)** : Clé primaire de la table enseignement.
+- **FOREIGN KEY(Id_Professeur) REFERENCES Professeur(Id_Professeur)** : Clé étrangère faisant référence à la table Professeur.
+- **FOREIGN KEY(Matiere_enseignee) REFERENCES Matiere(Matiere_enseignee)** : Clé étrangère faisant référence à la table Matiere.
+
+### Table : reçoit
+- **Nom_de_la_classe** : Nom de la classe.
+- **Matiere_enseignee** : Matière enseignée.
+- **Nb_d_heure** : Nombre d'heures attribuées à cette matière pour cette classe.
+- **PRIMARY KEY(Nom_de_la_classe, Matiere_enseignee)** : Clé primaire de la table reçoit.
+- **FOREIGN KEY(Nom_de_la_classe) REFERENCES Classe(Nom_de_la_classe)** : Clé étrangère faisant référence à la table Classe.
+- **FOREIGN KEY(Matiere_enseignee) REFERENCES Matiere(Matiere_enseignee)** : Clé étrangère faisant référence à la table Matiere.
+
+### Table : obtient
+- **Nom** : Nom de l'élève.
+- **Prenom** : Prénom de l'élève.
+- **Matiere_enseignee** : Matière enseignée.
+- **Note** : Note obtenue par l'élève pour cette matière.
+- **PRIMARY KEY(Nom, Prenom, Matiere_enseignee)** : Clé primaire de la table obtient.
+- **FOREIGN KEY(Nom, Prenom) REFERENCES Eleve(Nom, Prenom)** : Clé étrangère faisant référence à la table Eleve.
+- **FOREIGN KEY(Matiere_enseignee) REFERENCES Matiere(Matiere_enseignee)** : Clé étrangère faisant référence à la table Matiere.
+
+
 
 CREATE TABLE Eleve(
    Nom VARCHAR(20),
@@ -31,6 +81,7 @@ CREATE TABLE Professeur(
 
 CREATE TABLE Matiere(
    Matiere_enseignee VARCHAR(30),
+   nom VARCHAR(50),
    PRIMARY KEY(Matiere_enseignee)
 );
 
