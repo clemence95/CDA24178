@@ -1,97 +1,132 @@
-### Fournisseur
-- **Id_Fournisseur** (INT) : Identifiant unique du fournisseur (clé primaire).
-- **Nom** (VARCHAR(50)) : Nom du fournisseur.
-- **Contact** (VARCHAR(50)) : Nom du contact chez le fournisseur.
-- **telephone** (VARCHAR(50)) : Numéro de téléphone du fournisseur.
+## Dictionnaire de données
 
-### Produit
-- **Id_Produit** (INT) : Identifiant unique du produit (clé primaire).
-- **Rubrique** (VARCHAR(50)) : Catégorie principale du produit.
-- **SousRubrique** (VARCHAR(50)) : Sous-catégorie du produit.
-- **Libelle_court** (VARCHAR(100)) : Nom court ou libellé du produit.
-- **Libelle_long** (TEXT) : Description détaillée ou longue du produit.
-- **Reference_fournisseur** (VARCHAR(50)) : Référence du produit chez le fournisseur.
-- **Prix_achat_HT** (DECIMAL(15,2)) : Prix d'achat hors taxes du produit.
-- **Photo** (BLOB) : Image du produit.
+### Table `Fournisseur` :
+- **Id_Fournisseur** : INT (Clé primaire)
+- **Nom** : VARCHAR(50) - Nom du fournisseur
+- **Contact** : VARCHAR(50) - Contact du fournisseur
+- **telephone** : VARCHAR(50) - Numéro de téléphone du fournisseur
 
-### Client
-- **Id_Client** (INT) : Identifiant unique du client (clé primaire).
-- **Nom** (VARCHAR(50)) : Nom du client.
-- **Type** (VARCHAR(50)) : Type de client (particulier, professionnel, etc.).
-- **Adresse_livraison** (VARCHAR(255)) : Adresse de livraison du client.
-- **Adresse_facturation** (VARCHAR(255)) : Adresse de facturation du client.
-- **Coefficient** (DECIMAL(15,2)) : Coefficient de prix du client.
-- **Reduction** (DECIMAL(15,2)) : Réduction accordée au client.
-- **Reference** (VARCHAR(50)) : Référence du client.
+(Description: Stocke les informations sur les fournisseurs.)
 
-### Commercial
-- **Id_Commercial** (INT) : Identifiant unique du commercial (clé primaire).
-- **Nom** (VARCHAR(50)) : Nom du commercial.
-- **Id_Client** (INT) : Identifiant du client associé (clé étrangère vers la table Client).
+### Table `Produit` :
+- **Id_Produit** : INT (Clé primaire)
+- **Rubrique** : VARCHAR(50) - Rubrique du produit
+- **SousRubrique** : VARCHAR(50) - Sous-rubrique du produit
+- **Libelle_court** : VARCHAR(100) - Libellé court du produit
+- **Libelle_long** : TEXT - Libellé long du produit
+- **Reference_fournisseur** : VARCHAR(50) - Référence du fournisseur pour le produit
+- **Prix_achat_HT** : DECIMAL(15,2) - Prix d'achat hors taxes du produit
+- **Photo** : BLOB - Image du produit
 
-### Commande
-- **Id_Commande** (INT) : Identifiant unique de la commande (clé primaire).
-- **Statut** (VARCHAR(50)) : Statut de la commande.
-- **Mode_paiement** (VARCHAR(50)) : Mode de paiement de la commande.
-- **Reduction_pro** (DECIMAL(15,2)) : Réduction appliquée à la commande.
-- **Total_HT** (DECIMAL(15,2)) : Total hors taxes de la commande.
-- **Total_TTC** (DECIMAL(15,2)) : Total toutes taxes comprises de la commande.
-- **Date_heure_commande** (DATETIME) : Date et heure de la commande.
-- **Mode_differe** (VARCHAR(50)) : Mode de paiement différé de la commande.
+(Description: Stocke les informations sur les produits vendus.)
 
-### BonLivraison
-- **Id_BonLivraison** (INT) : Identifiant unique du bon de livraison (clé primaire).
-- **Date_livraison** (DATE) : Date de livraison du bon de livraison.
-- **Statut** (VARCHAR(50)) : Statut du bon de livraison.
+### Table `Client` :
+- **Id_Client** : INT (Clé primaire)
+- **Nom** : VARCHAR(50) - Nom du client
+- **Type** : VARCHAR(50) - Type de client
+- **Adresse_livraison** : VARCHAR(255) - Adresse de livraison du client
+- **Adresse_facturation** : VARCHAR(255) - Adresse de facturation du client
+- **Coefficient** : DECIMAL(15,2) - Coefficient du client
+- **Reduction** : DECIMAL(15,2) - Réduction appliquée au client
+- **Reference** : VARCHAR(50) - Référence du client
 
-### Facture
-- **Id_Facture** (INT) : Identifiant unique de la facture (clé primaire).
-- **Date_facturation** (DATE) : Date de facturation de la facture.
-- **Statut** (VARCHAR(50)) : Statut de la facture.
-- **Id_Commande** (INT) : Identifiant de la commande associée (clé étrangère vers la table Commande).
-- **Id_BonLivraison** (INT) : Identifiant du bon de livraison associé (clé étrangère vers la table BonLivraison).
+(Description: Stocke les informations sur les clients.)
 
-### Document
-- **Id_Document** (INT) : Identifiant unique du document (clé primaire).
-- **Type** (VARCHAR(50)) : Type de document.
-- **Contenu** (BLOB) : Contenu du document.
-- **Date_creation** (DATETIME) : Date de création du document.
-- **Id_Facture** (INT) : Identifiant de la facture associée (clé étrangère vers la table Facture).
+### Table `Commercial` :
+- **Id_Commercial** : INT (Clé primaire)
+- **Nom** : VARCHAR(50) - Nom du commercial
+- **Id_Client** : INT (Clé étrangère) - Identifiant du client lié au commercial
 
-### Stock
-- **Id_Stock** (INT) : Identifiant unique du stock (clé primaire).
-- **Quantite** (INT) : Quantité de produits en stock.
-- **Derniere_mise_a_jour** (DATETIME) : Date et heure de la dernière mise à jour du stock.
+(Description: Stocke les informations sur les commerciaux.)
 
-### Catalogue
-- **Id_Catalogue** (INT) : Identifiant unique du catalogue (clé primaire).
-- **Statut** (VARCHAR(50)) : Statut du catalogue.
-- **Date_ajout** (DATE) : Date d'ajout du catalogue.
-- **Date_desactivation** (DATE) : Date de désactivation du catalogue.
+### Table `Commande` :
+- **Id_Commande** : INT (Clé primaire)
+- **Statut** : VARCHAR(50) - Statut de la commande
+- **Mode_paiement** : VARCHAR(50) - Mode de paiement de la commande
+- **Reduction_pro** : DECIMAL(15,2) - Réduction appliquée à la commande
+- **Total_HT** : DECIMAL(15,2) - Total hors taxes de la commande
+- **Total_TTC** : DECIMAL(15,2) - Total toutes taxes comprises de la commande
+- **Date_heure_commande** : DATETIME - Date et heure de la commande
+- **Mode_differe** : VARCHAR(50) - Mode de paiement différé de la commande
 
-### HistoriqueDocument
-- **Id_HistoriqueDocument** (INT) : Identifiant unique de l'historique du document (clé primaire).
-- **Date_Historique** (DATETIME) : Date et heure de l'historique du document.
-- **Description** (VARCHAR(255)) : Description de l'historique du document.
+(Description: Stocke les informations sur les commandes.)
 
-### Approvisionne
-- **Id_Fournisseur** (INT) : Identifiant du fournisseur (clé étrangère vers la table Fournisseur).
-- **Id_Produit** (INT) : Identifiant du produit (clé étrangère vers la table Produit).
-- **Id_Stock** (INT) : Identifiant du stock (clé étrangère vers la table Stock).
+### Table `BonLivraison` :
+- **Id_BonLivraison** : INT (Clé primaire)
+- **Date_livraison** : DATE - Date de livraison du bon de livraison
+- **Statut** : VARCHAR(50) - Statut du bon de livraison
 
-### Concerne
-- **Id_Client** (INT) : Identifiant du client (clé étrangère vers la table Client).
-- **Id_Commande** (INT) : Identifiant de la commande (clé étrangère vers la table Commande).
+(Description: Stocke les informations sur les bons de livraison.)
 
-### lie
-- **Id_Produit** (INT) : Identifiant du produit (clé étrangère vers la table Produit).
-- **Id_Client** (INT) : Identifiant du client (clé étrangère vers la table Client).
-- **Id_Catalogue** (INT) : Identifiant du catalogue (clé étrangère vers la table Catalogue).
+### Table `Facture` :
+- **Id_Facture** : INT (Clé primaire)
+- **Date_facturation** : DATE - Date de facturation de la facture
+- **Statut** : VARCHAR(50) - Statut de la facture
+- **Id_Commande** : INT (Clé étrangère) - Identifiant de la commande liée à la facture
+- **Id_BonLivraison** : INT (Clé étrangère) - Identifiant du bon de livraison lié à la facture
 
-### Archivage
-- **Id_Document** (INT) : Identifiant du document (clé étrangère vers la table Document).
-- **Id_HistoriqueDocument** (INT) : Identifiant de l'historique du document (clé étrangère vers la table HistoriqueDocument).
+(Description: Stocke les informations sur les factures.)
 
+### Table `Document` :
+- **Id_Document** : INT (Clé primaire)
+- **Type** : VARCHAR(50) - Type de document
+- **Contenu** : BLOB - Contenu du document
+- **Date_creation** : DATETIME - Date de création du document
+- **Id_Facture** : INT (Clé étrangère) - Identifiant de la facture liée au document
+
+(Description: Stocke les informations sur les documents associés aux factures.)
+
+### Table `Stock` :
+- **Id_Stock** : INT (Clé primaire)
+- **Quantite** : INT - Quantité en stock
+- **Derniere_mise_a_jour** : DATETIME - Date de la dernière mise à jour du stock
+
+(Description: Stocke les informations sur les stocks des produits.)
+
+### Table `Catalogue` :
+- **Id_Catalogue** : INT (Clé primaire)
+- **Statut** : VARCHAR(50) - Statut du catalogue
+- **Date_ajout** : DATE - Date d'ajout du catalogue
+- **Date_desactivation** : DATE - Date de désactivation du catalogue
+
+(Description: Stocke les informations sur les catalogues.)
+
+### Table `HistoriqueDocument` :
+- **Id_HistoriqueDocument** : INT (Clé primaire)
+- **Date_Historique** : DATETIME - Date de l'historique du document
+- **Description** : VARCHAR(255) - Description de l'historique du document
+
+(Description: Stocke les informations sur l'historique des documents.)
+
+### Table `Approvisionne` :
+- **Id_Fournisseur** : INT (Clé étrangère) - Identifiant du fournisseur
+- **Id_Produit** : INT (Clé étrangère) - Identifiant du produit
+- **Id_Stock** : INT (Clé étrangère) - Identifiant du stock
+- **PRIMARY KEY** : (Id_Fournisseur, Id_Produit, Id_Stock)
+
+(Description: Stocke les informations sur les produits approvisionnés.)
+
+### Table `Concerne` :
+- **Id_Client** : INT (Clé étrangère) - Identifiant du client
+- **Id_Commande** : INT (Clé étrangère) - Identifiant de la commande
+- **PRIMARY KEY** : (Id_Client, Id_Commande)
+
+(Description: Stocke les informations sur les commandes concernant les clients.)
+
+### Table `lie` :
+- **Id_Produit** : INT (Clé étrangère) - Identifiant du produit
+- **Id_Client** : INT (Clé étrangère) - Identifiant du client
+- **Id_Catalogue** : INT (Clé étrangère) - Identifiant du catalogue
+- **PRIMARY KEY** : (Id_Produit, Id_Client, Id_Catalogue)
+
+(Description: Stocke les informations sur les liaisons entre produits, clients et catalogues.)
+
+### Table `Archivage` :
+- **Id_Document** : INT (Clé étrangère) - Identifiant du document
+- **Id_HistoriqueDocument** : INT (Clé étrangère) - Identifiant de l'historique du document
+- **PRIMARY KEY** : (Id_Document, Id_HistoriqueDocument)
+
+(Description: Stocke les informations sur l'archivage des documents.)
 
 CREATE TABLE Fournisseur(
    Id_Fournisseur INT,
