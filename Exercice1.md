@@ -16,16 +16,16 @@ gro num : COUNTER (clé primaire) PK
 gro_libelle : VARCHAR(50) (NOT NULL)
 
 
--- Table Personne
+-- Table Personne    1
 CREATE TABLE Personne (
-    per_num COUNTER PRIMARY KEY,
+    per_num INT PRIMARY KEY,
     per_nom VARCHAR(50) NOT NULL,
     per_prenom VARCHAR(50) NOT NULL,
     per_adresse VARCHAR(100) NOT NULL,
     per_ville VARCHAR(50) NOT NULL
 );
 
--- Table Appartient
+-- Table Appartient    3
 CREATE TABLE Appartient (
     per_num INT,
     gro_num INT,
@@ -33,8 +33,8 @@ CREATE TABLE Appartient (
     FOREIGN KEY (gro_num) REFERENCES Groupe(gro_num)
 );
 
--- Table Groupe
+-- Table Groupe   2
 CREATE TABLE Groupe (
-    gro_num COUNTER PRIMARY KEY,
+    gro_num INT PRIMARY KEY,
     gro_libelle VARCHAR(50) NOT NULL
 );
