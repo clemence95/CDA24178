@@ -9,8 +9,9 @@ USE exercice2;
 
 -- Création de la table Station
 CREATE TABLE Station (
-    num_station INT AUTO_INCREMENT PRIMARY KEY,
+    num_station INT AUTO_INCREMENT,
     nom_station VARCHAR(50) NOT NULL,
+    PRIMARY KEY(num_station)
 );
 
 -- Création de la table Hotel
