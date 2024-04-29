@@ -7,7 +7,7 @@
 **Hotel**
 -num hotel : INT AUTO_INCREMENT  (clé primaire) PK
 -categorie_hotel : VACHAR(50)
--capacite_hotel : SMALLINT (NOT NULL)
+-capacite_hotel : DECI (NOT NULL)
 -nom_hotel : VARCHAR(50) (NOT NULL)
 -adresse_hotel : VARCHAR(100) (NOT NULL)
 -num station : INT (clé étrangère) FK
@@ -15,7 +15,7 @@
 **Chambre**
 -num chambre : INT AUTO_INCREMENT (clé primaire) PK
 -capacite_chambre : SMALLINT (NOT NULL)
--degre_confort : FLOAT 
+-degre_confort : DECIMAL (5.2)
 -exposition : VARCHAR(100) 
 -type_chambre : VARCHAR(50)
 -num_hotel : INT (clé étrangère) FK
