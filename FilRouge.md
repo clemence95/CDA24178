@@ -179,7 +179,7 @@ CREATE TABLE Produit(
 CREATE TABLE achete(
    Id_Produit INT,
    Id_Commande INT,
-   quantite INT,
+   quantite INT, NOT NULL,
    PRIMARY KEY(Id_Produit, Id_Commande),
    FOREIGN KEY(Id_Produit) REFERENCES Produit(Id_Produit),
    FOREIGN KEY(Id_Commande) REFERENCES Commande(Id_Commande)
@@ -188,7 +188,7 @@ CREATE TABLE achete(
 CREATE TABLE livre(
    Id_Produit INT,
    Id_BonLivraison INT,
-   quantite INT,
+   quantite INT, NOT NULL,
    PRIMARY KEY(Id_Produit, Id_BonLivraison),
    FOREIGN KEY(Id_Produit) REFERENCES Produit(Id_Produit),
    FOREIGN KEY(Id_BonLivraison) REFERENCES BonLivraison(Id_BonLivraison)
