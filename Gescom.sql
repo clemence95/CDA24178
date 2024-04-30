@@ -10,24 +10,24 @@ USE Gescom;
 -- Créer la table Suppliers
 CREATE TABLE Suppliers(
    Id_Suppliers INT AUTO_INCREMENT,
-   sup_name VARCHAR(50) NOT NULL,
-   sup_city VARCHAR(50) NOT NULL,
-   sup_address VARCHAR(150) NOT NULL,
-   sup_mail VARCHAR(75),
-   sup_phone VARCHAR(15),
+   sup_name VARCHAR(50)  NOT NULL,
+   sup_city VARCHAR(50)  NOT NULL,
+   sup_address VARCHAR(150)  NOT NULL,
+   sup_mail VARCHAR(75) ,
+   sup_phone VARCHAR(15) ,
    PRIMARY KEY(Id_Suppliers)
 );
 
 -- Créer la table Customers
 CREATE TABLE Customers(
    Id_Customers INT AUTO_INCREMENT,
-   cus_lastname VARCHAR(50) NOT NULL,
-   cus_firstname VARCHAR(50) NOT NULL,
-   cus_address VARCHAR(150) NOT NULL,
-   cus_zipcode VARCHAR(5),
-   cus_city VARCHAR(50) NOT NULL,
-   cus_mail VARCHAR(75),
-   cus_phone VARCHAR(15),
+   cus_lastname VARCHAR(50)  NOT NULL,
+   cus_firstname VARCHAR(50)  NOT NULL,
+   cus_address VARCHAR(150)  NOT NULL,
+   cus_zipcode VARCHAR(5) ,
+   cus_city VARCHAR(50)  NOT NULL,
+   cus_mail VARCHAR(75) ,
+   cus_phone VARCHAR(15) ,
    PRIMARY KEY(Id_Customers)
 );
 
@@ -38,16 +38,18 @@ CREATE TABLE Orders(
    ord_ship_date DATE,
    ord_bill_date DATE,
    ord_reception_date DATE,
-   ord_status VARCHAR(25) NOT NULL,
+   ord_status VARCHAR(25)  NOT NULL,
+   Id_Products INT NOT NULL,
    Id_Customers INT NOT NULL,
    PRIMARY KEY(Id_Orders),
+   FOREIGN KEY(Id_Products) REFERENCES Products(Id_Products),
    FOREIGN KEY(Id_Customers) REFERENCES Customers(Id_Customers)
 );
 
 -- Créer la table Categories
 CREATE TABLE Categories(
    Id_Categories INT AUTO_INCREMENT,
-   cat_name VARCHAR(200) NOT NULL,
+   cat_name VARCHAR(200)  NOT NULL,
    cat_parent_id INT,
    PRIMARY KEY(Id_Categories)
 );
@@ -55,13 +57,13 @@ CREATE TABLE Categories(
 -- Créer la table Products
 CREATE TABLE Products(
    Id_Products INT AUTO_INCREMENT,
-   pro_ref VARCHAR(10) NOT NULL,
-   pro_name VARCHAR(200) NOT NULL,
+   pro_ref VARCHAR(10)  NOT NULL,
+   pro_name VARCHAR(200)  NOT NULL,
    pro_desc TEXT,
-   pro_price DECIMAL(6,2) NOT NULL,
+   pro_price DECIMAL(6,2)   NOT NULL,
    pro_stock SMALLINT,
-   pro_color VARCHAR(30),
-   pro_picture VARCHAR(40),
+   pro_color VARCHAR(30) ,
+   pro_picture VARCHAR(40) ,
    pro_add_date DATE NOT NULL,
    pro_update_date DATETIME NOT NULL,
    pro_publish TINYINT NOT NULL,
@@ -75,7 +77,7 @@ CREATE TABLE Products(
 -- Créer la table details
 CREATE TABLE details(
    Id_details INT AUTO_INCREMENT,
-   det_price DECIMAL(6,2) NOT NULL,
+   det_price DECIMAL(6,2)   NOT NULL,
    det_quantity INT,
    Id_Products INT NOT NULL,
    Id_Orders INT NOT NULL,
