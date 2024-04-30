@@ -1,71 +1,71 @@
 ## Dictionnaire de données
 
 ### Suppliers
-| Champ         | Description           | Type          | Contraintes                 |
-|---------------|-----------------------|---------------|-----------------------------|
-| Id_Suppliers  | ID du fournisseur     | INT           | PRIMARY KEY, AUTO_INCREMENT |
-| sup_name      | Nom du fournisseur    | VARCHAR(50)   | NOT NULL                    |
-| sup_city      | Ville du fournisseur  | VARCHAR(50)   | NOT NULL                    |
-| sup_address   | Adresse du fournisseur| VARCHAR(150)  | NOT NULL                    |
-| sup_mail      | Mail du fournisseur   | VARCHAR(75)   |                             |
-| sup_phone     | Téléphone fournisseur| VARCHAR(15)    |                             |
+| Colonne       | Type          | Contraintes                 | Description                   |
+|---------------|---------------|-----------------------------|-------------------------------|
+| Id_Suppliers  | INT           | PRIMARY KEY, AUTO_INCREMENT | Identifiant du fournisseur    |
+| sup_name      | VARCHAR(50)   | NOT NULL                    | Nom du fournisseur            |
+| sup_city      | VARCHAR(50)   | NOT NULL                    | Ville du fournisseur          |
+| sup_address   | VARCHAR(150)  | NOT NULL                    | Adresse du fournisseur        |
+| sup_mail      | VARCHAR(75)   |                             | Adresse e-mail du fournisseur |
+| sup_phone     | VARCHAR(15)   |                             | Téléphone du fournisseur      |
 
 ### Customers
-| Champ          | Description          | Type          | Contraintes                 |
-|----------------|----------------------|---------------|-----------------------------|
-| Id_Customers   | ID du client         | INT           | PRIMARY KEY, AUTO_INCREMENT |
-| cus_lastname   | Nom du client        | VARCHAR(50)   | NOT NULL                    |
-| cus_firstname  | Prénom du client     | VARCHAR(50)   | NOT NULL                    |
-| cus_address    | Adresse du client    | VARCHAR(150)  | NOT NULL                    |
-| cus_zipcode    | Code postal client   | VARCHAR(5)    |                             |
-| cus_city       | Ville du client      | VARCHAR(50)   | NOT NULL                    |
-| cus_mail       | Mail du client       | VARCHAR(75)   |                             |
-| cus_phone      | Téléphone du client  | VARCHAR(15)   |                             |
-
-### Categories
-| Champ           | Description            | Type          | Contraintes                 |
-|-----------------|------------------------|---------------|-----------------------------|
-| Id_Categories   | ID de la catégorie     | INT           | PRIMARY KEY, AUTO_INCREMENT |
-| cat_name        | Nom de la catégorie    | VARCHAR(200)  | NOT NULL                    |
-| cat_parent_id   | ID de la catégorie mère| INT           |                             |
-
-### Products
-| Champ             | Description                          | Type          | Contraintes                 |
-|-------------------|--------------------------------------|---------------|-----------------------------|
-| Id_Products       | ID du produit                        | INT           | PRIMARY KEY, AUTO_INCREMENT |
-| pro_ref           | Référence du produit                 | VARCHAR(10)   | NOT NULL                    |
-| pro_name          | Nom du produit                       | VARCHAR(200)  | NOT NULL                    |
-| pro_desc          | Description du produit               | TEXT          |                             |
-| pro_price         | Prix du produit                      | DECIMAL(6,2)  | NOT NULL                    |
-| pro_stock         | Nombre de produit en stock           | SMALLINT      |                             |
-| pro_color         | Couleur de l'article                 | VARCHAR(30)   |                             |
-| pro_picture       | Photo de l'article                   | VARCHAR(40)   |                             |
-| pro_add_date      | Date d'ajout du produit              | DATE          | NOT NULL                    |
-| pro_update_date   | Date de mise à jour de la fiche      | DATETIME      | NOT NULL                    |
-| pro_publish       | État de publication de la fiche      | TINYINT       | NOT NULL                    |
-| Id_Suppliers      | ID du fournisseur associé            | INT           | FOREIGN KEY                 |
-| Id_Categories     | ID de la catégorie associée          | INT           | FOREIGN KEY                 |
+| Colonne       | Type          | Contraintes                 | Description              |
+|---------------|---------------|-----------------------------|--------------------------|
+| Id_Customers  | INT           | PRIMARY KEY, AUTO_INCREMENT | Identifiant du client    |
+| cus_lastname  | VARCHAR(50)   | NOT NULL                    | Nom du client            |
+| cus_firstname | VARCHAR(50)   | NOT NULL                    | Prénom du client         |
+| cus_address   | VARCHAR(150)  | NOT NULL                    | Adresse du client        |
+| cus_zipcode   | VARCHAR(5)    |                             | Code postal du client    |
+| cus_city      | VARCHAR(50)   | NOT NULL                    | Ville du client          |
+| cus_mail      | VARCHAR(75)   |                             | Adresse e-mail du client |
+| cus_phone     | VARCHAR(15)   |                             | Téléphone du client      |
 
 ### Orders
-| Champ               | Description                           | Type          | Contraintes                 |
-|---------------------|---------------------------------------|---------------|-----------------------------|
-| Id_Orders           | ID de la commande                     | INT           | PRIMARY KEY, AUTO_INCREMENT |
-| ord_order_date      | Date de la commande                   | DATE          | NOT NULL                    |
-| ord_ship_date       | Date d'envoi de la commande           | DATE          |                             |
-| ord_bill_date       | Date de facturation                   | DATE          |                             |
-| ord_reception_date  | Date de réception de la commande      | DATE          |                             |
-| ord_status          | Status de la commande                 | VARCHAR(25)   | NOT NULL                    |
-| Id_Products         | ID du produit associé à la commande   | INT           | FOREIGN KEY                 |
-| Id_Customers        | ID du client associé à la commande    | INT           | FOREIGN KEY                 |
+| Colonne           | Type          | Contraintes                       | Description                   |
+|-------------------|---------------|-----------------------------------|-------------------------------|
+| Id_Orders         | INT           | PRIMARY KEY, AUTO_INCREMENT       | Identifiant de la commande    |
+| ord_order_date    | DATE          | NOT NULL                          | Date de commande              |
+| ord_ship_date     | DATE          |                                   | Date d'expédition             |
+| ord_bill_date     | DATE          |                                   | Date de facturation           |
+| ord_reception_date| DATE          |                                   | Date de réception             |
+| ord_status        | VARCHAR(25)   | NOT NULL                          | Statut de la commande         |
+| Id_Customers      | INT           | NOT NULL, FOREIGN KEY (Customers) | Identifiant du client associé |
 
-### details (OrderDetails)
-| Champ             | Description                         | Type          | Contraintes                 |
-|-------------------|-------------------------------------|---------------|-----------------------------|
-| Id_details        | ID de la ligne de commande          | INT           | PRIMARY KEY, AUTO_INCREMENT |
-| det_price         | Prix de vente du produit            | DECIMAL(6,2)  | NOT NULL                    |
-| det_quantity      | Quantité de produits sur la ligne   | INT           |                             |
-| Id_Products       | ID du produit associé               | INT           | FOREIGN KEY                 |
-| Id_Orders         | ID de la commande associée          | INT           | FOREIGN KEY                 |
+### Categories
+| Colonne       | Type          | Contraintes                 | Description                 |
+|---------------|---------------|-----------------------------|-----------------------------|
+| Id_Categories | INT           | PRIMARY KEY, AUTO_INCREMENT | Identifiant de la catégorie |
+| cat_name      | VARCHAR(200)  | NOT NULL                    | Nom de la catégorie         |
+| cat_parent_id | INT           |                             | ID de la catégorie parente  |
+
+### Products
+| Colonne           | Type          | Contraintes                        | Description                          |
+|-------------------|---------------|------------------------------------|--------------------------------------|
+| Id_Products       | INT           | PRIMARY KEY, AUTO_INCREMENT        | Identifiant du produit               |
+| pro_ref           | VARCHAR(10)   | NOT NULL                           | Référence du produit                 |
+| pro_name          | VARCHAR(200)  | NOT NULL                           | Nom du produit                       |
+| pro_desc          | TEXT          |                                    | Description du produit               |
+| pro_price         | DECIMAL(6,2)  | NOT NULL                           | Prix du produit                      |
+| pro_stock         | SMALLINT      |                                    | Stock du produit                     |
+| pro_color         | VARCHAR(30)   |                                    | Couleur du produit                   |
+| pro_picture       | VARCHAR(40)   |                                    | Photo du produit                     |
+| pro_add_date      | DATE          | NOT NULL                           | Date d'ajout du produit              |
+| pro_update_date   | DATETIME      | NOT NULL                           | Date de mise à jour du produit       |
+| pro_publish       | TINYINT       | NOT NULL                           | État de publication du produit       |
+| Id_Suppliers      | INT           | NOT NULL, FOREIGN KEY (Suppliers)  | Identifiant du fournisseur associé   |
+| Id_Categories     | INT           | NOT NULL, FOREIGN KEY (Categories) | Identifiant de la catégorie associée |
+
+### Details
+| Colonne       | Type          | Contraintes                       | Description                         |
+|---------------|---------------|-----------------------------------|-------------------------------------|
+| Id_details    | INT           | PRIMARY KEY, AUTO_INCREMENT       | Identifiant du détail de commande   |
+| det_price     | DECIMAL(6,2)  | NOT NULL                          | Prix du détail de commande          |
+| det_quantity  | INT           |                                   | Quantité du détail de commande      |
+| Id_Products   | INT           | NOT NULL, FOREIGN KEY (Products)  | Identifiant du produit associé      |
+| Id_Orders     | INT           | NOT NULL, FOREIGN KEY (Orders)    | Identifiant de la commande associée |
+
 
 
 
