@@ -84,5 +84,6 @@ CREATE TABLE details(
    FOREIGN KEY(Id_Orders) REFERENCES Orders(Id_Orders)
 );
 
---Créer un index sur la colonne pro_ref de la table Products
+-- Créer un index sur la colonne pro_ref de la table Products
 CREATE INDEX idx_pro_ref ON Products(pro_ref);
+
