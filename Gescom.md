@@ -1,14 +1,14 @@
 ## Dictionnaire de données
 
 ### Fournisseurs
-| Champ        | Description              | Type        | Contraintes    |
-|--------------|--------------------------|-------------|----------------|
-| **sup_id**   | ID du fournisseur        | INT         | NOT NULL       |
-| sup_name     | Nom du fournisseur       | VARCHAR(50) | NOT NULL       |
-| sup_city     | Ville du fournisseur     | VARCHAR(50) | NOT NULL       |
-| sup_address  | Adresse du fournisseur   | VARCHAR(150)| NOT NULL       |
-| sup_mail     | Email du fournisseur     | VARCHAR(75) |                |
-| sup_phone    | Téléphone du fournisseur | INT(10)     |                |
+| Champ        | Description              | Type         | Contraintes    |
+|--------------|--------------------------|--------------|----------------|
+| **sup_id**   | ID du fournisseur        | INT          | NOT NULL       |
+| sup_name     | Nom du fournisseur       | VARCHAR(50)  | NOT NULL       |
+| sup_city     | Ville du fournisseur     | VARCHAR(50)  | NOT NULL       |
+| sup_address  | Adresse du fournisseur   | VARCHAR(150) | NOT NULL       |
+| sup_mail     | Email du fournisseur     | VARCHAR(75)  |                |
+| sup_phone    | Téléphone du fournisseur | VARCHAR(15)  |                |
 
 ### Clients
 | Champ          | Description           | Type        | Contraintes    |
@@ -20,7 +20,7 @@
 | cus_zipcode    | Code postal du client | VARCHAR(5)  |                |
 | cus_city       | Ville du client       | VARCHAR(50) | NOT NULL       |
 | cus_mail       | Email du client       | VARCHAR(75) |                |
-| cus_phone      | Téléphone du client   | INT(10)     |                |
+| cus_phone      | Téléphone du client   | VARCHAR(15) |                |
 
 ### Commandes
 | Champ             | Description                  | Type       | Contraintes    |
