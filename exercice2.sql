@@ -9,9 +9,8 @@ USE exercice2;
 
 -- Création de la table Station
 CREATE TABLE Station (
-    num_station INT AUTO_INCREMENT,
-    nom_station VARCHAR(50) NOT NULL,
-    PRIMARY KEY(num_station)
+    num_station INT AUTO_INCREMENT PRIMARY KEY,
+    nom_station VARCHAR(50) NOT NULL
 );
 
 -- Création de la table Hotel
@@ -31,7 +30,7 @@ CREATE TABLE Chambre (
     capacite_chambre SMALLINT NOT NULL,
     degre_confort DECIMAL(5,2),
     exposition VARCHAR(100),
-    type_chambre VARCHAR(50),
+    type_chambre VARCHAR(50) NOT NULL,
     num_hotel INT NOT NULL,
     FOREIGN KEY (num_hotel) REFERENCES Hotel(num_hotel)
 );
