@@ -1,4 +1,4 @@
-"cus_id","cus_lastname","cus_firstname","cus_address","cus_zipcode","cus_city","cus_mail","cus_phone"
+"Id_Customers","cus_lastname","cus_firstname","cus_address","cus_zipcode","cus_city","cus_mail","cus_phone"
 "1","Riviere","Romain","2301 boulevard Alsace-Lorraine","80000","Amiens","risus.morbi@laposte.net","201583083"
 "2","Bailly","Lilou","Ap #125-483 Fusce Street","80300","Birmingham","sagittis.placerat@Aliquam.co.uk","700966695"
 "3","Muller","Alexandre","P.O. Box 149, 6931 Nulla. Rd.","80100","Abbeville","mauris.Morbi@Lorem.co.uk","167413271"
