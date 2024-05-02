@@ -114,3 +114,63 @@ CREATE TABLE livre(
    FOREIGN KEY(Id_Produit) REFERENCES Produit(Id_Produit),
    FOREIGN KEY(Id_BonLivraison) REFERENCES BonLivraison(Id_BonLivraison)
 );
+
+-- Insertion des données dans la table Fournisseur
+INSERT INTO Fournisseur (Id_Fournisseur, Nom, Contact, telephone)
+VALUES 
+    (1, 'Fournisseur A', 'Jean Dupont', '0123456789'),
+    (2, 'Fournisseur B', 'Pauline Martin', '0987654321');
+
+-- Insertion des données dans la table Client
+INSERT INTO Client (Id_Client, Nom, prenom, telephone, Type, Adresse_livraison, Adresse_facturation, Coefficient, Reduction, Reference, email)
+VALUES 
+    (1, 'Client Entreprise', 'Sophie', '0234567890', 'Entreprise', '1 rue des Entreprises', '1 rue des Factures', 1.5, 0.1, 'CLTENT001', 'sophie@entreprise.com'),
+    (2, 'Client Particulier', 'Pierre', '0678901234', 'Particulier', '12 rue des Particuliers', '12 rue des Factures', 1.0, NULL, 'CLTPART001', 'pierre@gmail.com');
+
+-- Insertion des données dans la table Commercial
+INSERT INTO Commercial (Id_Commercial, Nom, prenom, telephone, email, Id_Client)
+VALUES 
+    (1, 'Commercial A', 'Marc', '0456789012', 'marc@entreprise.com', 1),
+    (2, 'Commercial B', 'Julie', '0890123456', 'julie@gmail.com', 2);
+
+-- Insertion des données dans la table Commande
+INSERT INTO Commande (Id_Commande, Statut, Mode_paiement, Reduction_pro, Total_HT, Total_TTC, Date_heure_commande, Mode_differe, Date_facturation, Id_Client)
+VALUES 
+    (1, 'En cours', 'Carte bancaire', NULL, 150.00, 157.50, '2024-05-01 10:00:00', 'Immédiat', '2024-05-01', 1),
+    (2, 'En cours', 'Virement bancaire', 0.05, 200.00, 210.00, '2024-05-01 11:30:00', 'Différé', '2024-05-02', 2);
+
+-- Insertion des données dans la table BonLivraison en utilisant une chaîne vide pour Suivi_commande
+INSERT INTO BonLivraison (Id_BonLivraison, Date_livraison, Statut, Suivi_commande, Id_Commande)
+VALUES 
+    (1, '2024-05-01', 'Livré', '1234567890', 1),
+    (2, '2024-05-02', 'En attente', '', 2);
+
+-- Insertion des données dans la table Categorie
+INSERT INTO Categorie (Libelle_court, Photo)
+VALUES 
+    ('Electronique', NULL),
+    ('Vêtements', NULL);
+
+-- Insertion des données dans la table Souscategorie
+INSERT INTO Souscategorie (Libelle_court, Photo, Id_Catégorie)
+VALUES 
+    ('Téléphones', NULL, 1),
+    ('Chemises', NULL, 2);
+
+-- Insertion des données dans la table Produit
+INSERT INTO Produit (Id_Produit, Libelle_court, Libelle_long, Prix_achat_HT, Photo, stock, Actif, Id_Souscategorie, Id_Fournisseur)
+VALUES 
+    (1, 'iPhone X', 'Smartphone haut de gamme', 800.00, NULL, 50.00, 'Oui', 1, 1),
+    (2, 'Chemise bleue', 'Chemise en coton pour homme', 40.00, NULL, 100.00, 'Oui', 2, 2);
+
+-- Insertion des données dans la table achete
+INSERT INTO achete (Id_Produit, Id_Commande, quantite)
+VALUES 
+    (1, 1, 2),
+    (2, 2, 3);
+
+-- Insertion des données dans la table livre
+INSERT INTO livre (Id_Produit, Id_BonLivraison, quantite)
+VALUES 
+    (1, 1, 2),
+    (2, 2, 3);
