@@ -26,10 +26,20 @@ CREATE TABLE Customers(
    cus_address VARCHAR(150) NOT NULL,
    cus_zipcode VARCHAR(5),
    cus_city VARCHAR(50) NOT NULL,
+   cus_countries VARCHAR(50),
    cus_mail VARCHAR(75),
    cus_phone VARCHAR(15),
    PRIMARY KEY(Id_Customers)
 );
+
+
+-- Import des données depuis le fichier CSV dans la table Customers
+LOAD DATA LOCAL INFILE '/home/cb/Téléchargements/customers.csv'
+INTO TABLE Customers
+FIELDS TERMINATED BY ',' 
+LINES TERMINATED BY '\n'
+IGNORE 1 LINES
+(cus_lastname, cus_firstname, cus_address, cus_zipcode, cus_city, cus_countries, cus_mail, cus_phone);
 
 -- Créer la table Orders
 CREATE TABLE Orders(
@@ -120,6 +130,8 @@ VALUES
 ('COM001', 'MacBook Pro', 'Ordinateur portable d\'Apple', 1499.99, 50, 'Gris', 'macbookpro.jpg', CURDATE(), NOW(), 1, @supplier_id, @computer_cat_id),
 ('COM002', 'Dell XPS 15', 'PC portable puissant de Dell', 1299.99, 80, 'Noir', 'xps15.jpg', CURDATE(), NOW(), 1, @supplier_id, @computer_cat_id),
 ('COM003', 'Lenovo ThinkPad X1 Carbon', 'PC portable léger et performant de Lenovo', 1399.99, 60, 'Gris', 'thinkpad.jpg', CURDATE(), NOW(), 1, @supplier_id, @computer_cat_id);
+
+
 
 
 
