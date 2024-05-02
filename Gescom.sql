@@ -33,7 +33,7 @@ CREATE TABLE Customers(
 
 
 -- Import des données depuis le fichier CSV dans la table Customers
-LOAD DATA LOCAL INFILE '/home/cb/CDA24178/customers.csv'
+LOAD DATA LOCAL INFILE '/home/cb/Téléchargements/customers.csv'
 INTO TABLE Customers
 FIELDS TERMINATED BY ',' 
 LINES TERMINATED BY '\n'
