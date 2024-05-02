@@ -118,59 +118,60 @@ CREATE TABLE livre(
 -- Insertion des données dans la table Fournisseur
 INSERT INTO Fournisseur (Id_Fournisseur, Nom, Contact, telephone)
 VALUES 
-    (1, 'Fournisseur A', 'Jean Dupont', '0123456789'),
-    (2, 'Fournisseur B', 'Pauline Martin', '0987654321');
+    (3, 'Guitar World', 'Michael Johnson', '0123456789'),
+    (4, 'Piano Universe', 'Sarah Lee', '0987654321');
 
 -- Insertion des données dans la table Client
 INSERT INTO Client (Id_Client, Nom, prenom, telephone, Type, Adresse_livraison, Adresse_facturation, Coefficient, Reduction, Reference, email)
 VALUES 
-    (1, 'Client Entreprise', 'Sophie', '0234567890', 'Entreprise', '1 rue des Entreprises', '1 rue des Factures', 1.5, 0.1, 'CLTENT001', 'sophie@entreprise.com'),
-    (2, 'Client Particulier', 'Pierre', '0678901234', 'Particulier', '12 rue des Particuliers', '12 rue des Factures', 1.0, NULL, 'CLTPART001', 'pierre@gmail.com');
+    (3, 'MusicAddict', 'Thomas', '0234567890', 'Particulier', '25 rue des Mélodies', '25 rue des Factures', 1.0, NULL, 'MA001', 'thomas@musicaddict.com'),
+    (4, 'Symphony Corp.', 'Sophie', '0678901234', 'Entreprise', '10 avenue des Harmonies', '10 avenue des Factures', 1.5, 0.2, 'SC001', 'sophie@symphony.com');
 
 -- Insertion des données dans la table Commercial
 INSERT INTO Commercial (Id_Commercial, Nom, prenom, telephone, email, Id_Client)
 VALUES 
-    (1, 'Commercial A', 'Marc', '0456789012', 'marc@entreprise.com', 1),
-    (2, 'Commercial B', 'Julie', '0890123456', 'julie@gmail.com', 2);
+    (3, 'Alex Parker', 'Alex', '0456789012', 'alex@guitarworld.com', 3),
+    (4, 'Emma White', 'Emma', '0890123456', 'emma@pianouniverse.com', 4);
 
 -- Insertion des données dans la table Commande
 INSERT INTO Commande (Id_Commande, Statut, Mode_paiement, Reduction_pro, Total_HT, Total_TTC, Date_heure_commande, Mode_differe, Date_facturation, Id_Client)
 VALUES 
-    (1, 'En cours', 'Carte bancaire', NULL, 150.00, 157.50, '2024-05-01 10:00:00', 'Immédiat', '2024-05-01', 1),
-    (2, 'En cours', 'Virement bancaire', 0.05, 200.00, 210.00, '2024-05-01 11:30:00', 'Différé', '2024-05-02', 2);
+    (3, 'En cours', 'Chèque', NULL, 1500.00, 1575.00, '2024-05-02 10:00:00', 'Différé', '2024-05-03', 3),
+    (4, 'En cours', 'Virement bancaire', 0.15, 3000.00, 3300.00, '2024-05-02 11:30:00', 'Différé', '2024-05-03', 4);
 
 -- Insertion des données dans la table BonLivraison en utilisant une chaîne vide pour Suivi_commande
 INSERT INTO BonLivraison (Id_BonLivraison, Date_livraison, Statut, Suivi_commande, Id_Commande)
 VALUES 
-    (1, '2024-05-01', 'Livré', '1234567890', 1),
-    (2, '2024-05-02', 'En attente', '', 2);
+    (3, '2024-05-03', 'En cours de préparation', '9876543210', 3),
+    (4, '2024-05-04', 'En cours de préparation', '', 4);
 
 -- Insertion des données dans la table Categorie
 INSERT INTO Categorie (Libelle_court, Photo)
 VALUES 
-    ('Electronique', NULL),
-    ('Vêtements', NULL);
+    ('Batteries', NULL),
+    ('Accessoires', NULL);
 
 -- Insertion des données dans la table Souscategorie
 INSERT INTO Souscategorie (Libelle_court, Photo, Id_Catégorie)
 VALUES 
-    ('Téléphones', NULL, 1),
-    ('Chemises', NULL, 2);
+    ('Batteries électroniques', NULL, 1),
+    ('Accordeurs', NULL, 2);
 
 -- Insertion des données dans la table Produit
 INSERT INTO Produit (Id_Produit, Libelle_court, Libelle_long, Prix_achat_HT, Photo, stock, Actif, Id_Souscategorie, Id_Fournisseur)
 VALUES 
-    (1, 'iPhone X', 'Smartphone haut de gamme', 800.00, NULL, 50.00, 'Oui', 1, 1),
-    (2, 'Chemise bleue', 'Chemise en coton pour homme', 40.00, NULL, 100.00, 'Oui', 2, 2);
+    (3, 'Batterie Roland', 'Batterie électronique avec pads sensibles', 1500.00, '', 15.00, 'Oui', 1, 3),
+    (4, 'Accordeur chromatique Korg', 'Accordeur polyvalent pour tous types d''instruments', 50.00, '', 50.00, 'Oui', 2, 4);
+
 
 -- Insertion des données dans la table achete
 INSERT INTO achete (Id_Produit, Id_Commande, quantite)
 VALUES 
-    (1, 1, 2),
-    (2, 2, 3);
+    (3, 3, 1),
+    (4, 4, 2);
 
 -- Insertion des données dans la table livre
 INSERT INTO livre (Id_Produit, Id_BonLivraison, quantite)
 VALUES 
-    (1, 1, 2),
-    (2, 2, 3);
+    (3, 3, 1),
+    (4, 4, 2);
