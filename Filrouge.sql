@@ -1,3 +1,12 @@
+-- Suppression de la base de données si elle existe déjà
+DROP DATABASE IF EXISTS VillageGreen;
+
+-- Création de la base de données
+CREATE DATABASE VillageGreen;
+
+-- Sélection de la base de données créée
+USE VillageGreen;
+
 CREATE TABLE Fournisseur(
    Id_Fournisseur INT,
    Nom VARCHAR(50)  NOT NULL,
