@@ -26,7 +26,6 @@ CREATE TABLE Customers(
    cus_address VARCHAR(150) NOT NULL,
    cus_zipcode VARCHAR(5),
    cus_city VARCHAR(50) NOT NULL,
-   cus_countries VARCHAR(50),
    cus_mail VARCHAR(75),
    cus_phone VARCHAR(15),
    PRIMARY KEY(Id_Customers)
@@ -39,7 +38,7 @@ INTO TABLE Customers
 FIELDS TERMINATED BY ',' 
 LINES TERMINATED BY '\n'
 IGNORE 1 LINES
-(cus_lastname, cus_firstname, cus_address, cus_zipcode, cus_city, cus_countries, cus_mail, cus_phone);
+(cus_lastname, cus_firstname, cus_address, cus_zipcode, cus_city,cus_mail, cus_phone);
 
 -- Créer la table Orders
 CREATE TABLE Orders(
