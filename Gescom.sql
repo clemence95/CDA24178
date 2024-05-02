@@ -101,16 +101,12 @@ INSERT INTO Categories (cat_name, cat_parent_id) VALUES ('Ordinateurs', @parent_
 SET @phone_cat_id = LAST_INSERT_ID();
 SET @computer_cat_id = LAST_INSERT_ID();
 
--- Ajouter trois produits dans la sous-catégorie Téléphones
-INSERT INTO Products (pro_ref, pro_name, pro_desc, pro_price, pro_stock, pro_color, pro_picture, pro_add_date, pro_update_date, pro_publish, Id_Suppliers, Id_Categories) 
-VALUES 
-('TEL001', 'iPhone 12', 'Nouveau téléphone d\'Apple', 999.99, 100, 'Noir', 'iphone12.jpg', CURDATE(), NOW(), 1, 1, @phone_cat_id),
-('TEL002', 'Samsung Galaxy S21', 'Dernier modèle de Samsung', 899.99, 150, 'Bleu', 'galaxys21.jpg', CURDATE(), NOW(), 1, 2, @phone_cat_id),
-('TEL003', 'Google Pixel 5', 'Smartphone haut de gamme de Google', 799.99, 120, 'Blanc', 'pix5.jpg', CURDATE(), NOW(), 1, 3, @phone_cat_id);
+-- Ajouter un fournisseur
+INSERT INTO Suppliers (sup_name, sup_city, sup_address, sup_mail, sup_phone) VALUES ('Fournisseur A', 'Ville A', 'Adresse A', 'fournisseurA@example.com', '123456789');
 
--- Ajouter trois produits dans la sous-catégorie Ordinateurs
+-- Récupérer l'ID du fournisseur inséré
+SET @supplier_id = LAST_INSERT_ID();
+
+-- Ajouter un produit avec ce fournisseur dans la sous-catégorie Téléphones
 INSERT INTO Products (pro_ref, pro_name, pro_desc, pro_price, pro_stock, pro_color, pro_picture, pro_add_date, pro_update_date, pro_publish, Id_Suppliers, Id_Categories) 
-VALUES 
-('COM001', 'MacBook Pro', 'Ordinateur portable d\'Apple', 1499.99, 50, 'Gris', 'macbookpro.jpg', CURDATE(), NOW(), 1, 1, @computer_cat_id),
-('COM002', 'Dell XPS 15', 'PC portable puissant de Dell', 1299.99, 80, 'Noir', 'xps15.jpg', CURDATE(), NOW(), 1, 2, @computer_cat_id),
-('COM003', 'Lenovo ThinkPad X1 Carbon', 'PC portable léger et performant de Lenovo', 1399.99, 60, 'Gris', 'thinkpad.jpg', CURDATE(), NOW(), 1, 3, @computer_cat_id);
+VALUES ('TEL001', 'iPhone 12', 'Nouveau téléphone d\'Apple', 999.99, 100, 'Noir', 'iphone12.jpg', CURDATE(), NOW(), 1, @supplier_id, 1);
