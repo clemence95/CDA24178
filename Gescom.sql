@@ -120,3 +120,6 @@ VALUES
 ('COM001', 'MacBook Pro', 'Ordinateur portable d\'Apple', 1499.99, 50, 'Gris', 'macbookpro.jpg', CURDATE(), NOW(), 1, @supplier_id, @computer_cat_id),
 ('COM002', 'Dell XPS 15', 'PC portable puissant de Dell', 1299.99, 80, 'Noir', 'xps15.jpg', CURDATE(), NOW(), 1, @supplier_id, @computer_cat_id),
 ('COM003', 'Lenovo ThinkPad X1 Carbon', 'PC portable léger et performant de Lenovo', 1399.99, 60, 'Gris', 'thinkpad.jpg', CURDATE(), NOW(), 1, @supplier_id, @computer_cat_id);
+
+
+
