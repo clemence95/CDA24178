@@ -21,4 +21,7 @@ SELECT e.nom AS nom_employe, e.salaire AS salaire_employe,
 FROM employe e
 JOIN employe s ON e.nosup = s.noemp
 WHERE e.salaire > s.salaire;
-
+-- Rechercher le nom et le titre des employés qui ont le même titre que Amartakaldire.
+SELECT nom, titre
+FROM employe
+WHERE titre = (SELECT titre FROM employe WHERE nom = 'Amartakaldire');
