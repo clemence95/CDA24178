@@ -21,11 +21,11 @@ SELECT e.nom AS nom_employe, e.salaire AS salaire_employe,
 FROM employe e
 JOIN employe s ON e.nosup = s.noemp
 WHERE e.salaire > s.salaire;
--- Rechercher le nom et le titre des employés qui ont le même titre que Amartakaldire.
+-- Recherche le nom et le titre des employés qui ont le même titre que Amartakaldire.
 SELECT nom, titre
 FROM employe
 WHERE titre = (SELECT titre FROM employe WHERE nom = 'Amartakaldire');
--- Rechercher le nom, le salaire et le numéro de département des employés qui gagnent plus qu'un seul employé du département 31,
+-- Recherche le nom, le salaire et le numéro de département des employés qui gagnent plus qu'un seul employé du département 31,
 -- classés par numéro de département et salaire
 SELECT e.nom, e.salaire, e.nodep
 FROM employe e
@@ -42,3 +42,5 @@ WHERE e.salaire > (
     GROUP BY nodep
 )
 ORDER BY e.nodep, e.salaire;
+-- Recherche le nom, le salaire et le numéro de département des employés qui gagnent plus que tous les employés du département 31, 
+-- classés par numéro de département et salaire
