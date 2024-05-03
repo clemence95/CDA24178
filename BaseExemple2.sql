@@ -15,4 +15,10 @@ SELECT e.nom AS nom_employe
 FROM employe e
 JOIN dept d ON e.nodep = d.nodept
 WHERE d.nom = 'distribution';
+-- Recherche le nom et le salaire des employés qui gagnent plus que leur patron, et le nom et le salaire de leur patron
+SELECT e.nom AS nom_employe, e.salaire AS salaire_employe, 
+       s.nom AS nom_patron, s.salaire AS salaire_patron
+FROM employe e
+JOIN employe s ON e.nosup = s.noemp
+WHERE e.salaire > s.salaire;
 
