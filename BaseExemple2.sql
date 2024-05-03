@@ -71,3 +71,7 @@ AND titre NOT IN (
     WHERE nodep = '32'
 );
 -- Recherche le nom, le titre et le salaire des employés qui ont le même titre et le même salaire que Fairant
+SELECT nom, titre, salaire
+FROM employe
+WHERE titre = (SELECT titre FROM employe WHERE nom = 'Fairent')
+AND salaire = (SELECT salaire FROM employe WHERE nom = 'Fairent');
