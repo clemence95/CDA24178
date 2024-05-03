@@ -10,3 +10,9 @@ SELECT d.nodept AS numero_departement, d.nom AS nom_departement, e.nom AS nom_em
 FROM employe e
 JOIN dept d ON e.nodep = d.nodept
 ORDER BY d.nodept;
+-- Recherche le nom des employés du département Distribution.
+SELECT e.nom AS nom_employe
+FROM employe e
+JOIN dept d ON e.nodep = d.nodept
+WHERE d.nom = 'distribution';
+
