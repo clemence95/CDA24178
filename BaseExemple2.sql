@@ -44,3 +44,11 @@ WHERE e.salaire > (
 ORDER BY e.nodep, e.salaire;
 -- Recherche le nom, le salaire et le numéro de département des employés qui gagnent plus que tous les employés du département 31, 
 -- classés par numéro de département et salaire
+SELECT e.nom, e.salaire, e.nodep
+FROM employe e
+WHERE e.salaire > (
+    SELECT MAX(salaire)
+    FROM employe
+    WHERE nodep = '31'
+)
+ORDER BY e.nodep, e.salaire;
