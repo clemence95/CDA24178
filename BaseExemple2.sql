@@ -75,3 +75,14 @@ SELECT nom, titre, salaire
 FROM employe
 WHERE titre = (SELECT titre FROM employe WHERE nom = 'Fairent')
 AND salaire = (SELECT salaire FROM employe WHERE nom = 'Fairent');
+-- Rechercher le numéro de département, le nom du département, le nom des employés, en affichant aussi les départements dans lesquels
+-- il n'y a personne, classés par numéro de département
+SELECT d.nodept AS numero_departement, d.nom AS nom_departement, e.nom AS nom_employe
+FROM dept d
+LEFT JOIN employe e ON d.nodept = e.nodep
+UNION
+SELECT d.nodept AS numero_departement, d.nom AS nom_departement, NULL AS nom_employe
+FROM dept d
+RIGHT JOIN employe e ON d.nodept = e.nodep
+WHERE e.nodep IS NULL
+ORDER BY numero_departement;
