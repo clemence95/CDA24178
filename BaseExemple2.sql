@@ -70,4 +70,4 @@ AND titre NOT IN (
     FROM employe
     WHERE nodep = '32'
 );
-
+-- Recherche le nom, le titre et le salaire des employés qui ont le même titre et le même salaire que Fairant
