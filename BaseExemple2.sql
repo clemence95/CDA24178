@@ -25,3 +25,20 @@ WHERE e.salaire > s.salaire;
 SELECT nom, titre
 FROM employe
 WHERE titre = (SELECT titre FROM employe WHERE nom = 'Amartakaldire');
+-- Rechercher le nom, le salaire et le numéro de département des employés qui gagnent plus qu'un seul employé du département 31,
+-- classés par numéro de département et salaire
+SELECT e.nom, e.salaire, e.nodep
+FROM employe e
+JOIN (
+    SELECT nodep, COUNT(*) AS nb_employes
+    FROM employe
+    WHERE nodep = '31'
+    GROUP BY nodep
+) AS departement_31 ON e.nodep = departement_31.nodep
+WHERE e.salaire > (
+    SELECT MIN(salaire)
+    FROM employe
+    WHERE nodep = '31'
+    GROUP BY nodep
+)
+ORDER BY e.nodep, e.salaire;
