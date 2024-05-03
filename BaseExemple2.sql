@@ -62,4 +62,12 @@ JOIN (
 ) AS titres_dep32 ON e.titre = titres_dep32.titre
 WHERE e.nodep = '31';
 -- Recherche le nom et le titre des employés du service 31 qui ont un titre l'on ne trouve pas dans le département 32
+SELECT nom, titre
+FROM employe
+WHERE nodep = '31'
+AND titre NOT IN (
+    SELECT DISTINCT titre
+    FROM employe
+    WHERE nodep = '32'
+);
 
