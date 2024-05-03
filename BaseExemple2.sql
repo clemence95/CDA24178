@@ -52,3 +52,13 @@ WHERE e.salaire > (
     WHERE nodep = '31'
 )
 ORDER BY e.nodep, e.salaire;
+-- Rechercher le nom et le titre des employés du service 31 qui ont un titre que l'on trouve dans le département 32.
+SELECT e.nom, e.titre
+FROM employe e
+JOIN (
+    SELECT DISTINCT titre
+    FROM employe
+    WHERE nodep = '32'
+) AS titres_dep32 ON e.titre = titres_dep32.titre
+WHERE e.nodep = '31';
+
