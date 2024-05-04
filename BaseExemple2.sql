@@ -92,8 +92,8 @@ FROM employe
 GROUP BY titre;
 --  Calcule la moyenne des salaires et leur somme, par région
 SELECT d.noregion,
-       AVG(e.salaire) AS moyenne_salaire,
-       SUM(e.salaire) AS somme_salaire
+       AVG(e.salaire) AS moyenne_salaire, -- La fonction AVG(e.salaire) calcule la moyenne des salaires pour chaque région
+       SUM(e.salaire) AS somme_salaire -- La fonction SUM(e.salaire) calcule la somme des salaires pour chaque région
 FROM employe e
 JOIN dept d ON e.nodep = d.nodept
-GROUP BY d.noregion;
+GROUP BY d.noregion;  --  les données sont regroupées par "noregion" en utilisant la clause GROUP BY.
