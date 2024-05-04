@@ -118,4 +118,7 @@ FROM employe;
 --  Recherche le nombre de titres différents
 SELECT COUNT(DISTINCT titre) AS nombre_titres_different
 FROM employe;
-
+-- Pour chaque titre, compter le nombre d'employés possédant ce titre
+SELECT titre, COUNT(*) AS nombre_employes
+FROM employe
+GROUP BY titre;
