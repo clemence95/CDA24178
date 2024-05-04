@@ -86,3 +86,7 @@ FROM dept d
 RIGHT JOIN employe e ON d.nodept = e.nodep
 WHERE e.nodep IS NULL
 ORDER BY numero_departement;
+-- Calcule le nombre d'employés de chaque titre
+SELECT titre, COUNT(*) AS nombre_employes
+FROM employe
+GROUP BY titre;
