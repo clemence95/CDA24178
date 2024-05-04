@@ -20,4 +20,7 @@ SELECT cli_nom, cli_ville
 FROM client
 WHERE cli_ville != 'Londre';
 -- Afficher la liste des hôtels situés dans la ville de Bretou et ayant une catégorie supérieure à 3, avec le nom de l'hôtel, la ville et la catégorie :
+SELECT hot_nom, hot_ville, hot_categorie
+FROM hotel
+WHERE hot_ville = 'Bretou' AND hot_categorie > 3;
 
