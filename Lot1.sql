@@ -7,4 +7,8 @@ FROM hotel;
 SELECT cli_nom, cli_prenom, cli_adresse, cli_ville
 FROM client
 WHERE cli_nom = 'White';
+-- Afficher la liste des stations dont l’altitude est inférieure à 1000, avec le nom de la station et son altitude : 
+SELECT sta_nom, sta_altitude
+FROM station
+WHERE sta_altitude < 1000;
 
