@@ -97,3 +97,9 @@ SELECT d.noregion,
 FROM employe e
 JOIN dept d ON e.nodep = d.nodept
 GROUP BY d.noregion;  --  les données sont regroupées par "noregion" en utilisant la clause GROUP BY.
+--  Affiche les numéros des départements ayant au moins 3 employés
+SELECT nodep
+FROM employe
+GROUP BY nodep
+HAVING COUNT(*) >= 3;
+
