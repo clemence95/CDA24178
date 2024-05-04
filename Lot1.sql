@@ -15,6 +15,9 @@ WHERE sta_altitude < 1000;
 SELECT DISTINCT cha_numero, cha_capacite
 FROM chambre
 WHERE cha_capacite > 1;
-
-
+-- Afficher les clients n’habitants pas à Londres, avec le nom du client et sa ville
+SELECT cli_nom, cli_ville
+FROM client
+WHERE cli_ville != 'Londre';
+-- Afficher la liste des hôtels situés dans la ville de Bretou et ayant une catégorie supérieure à 3, avec le nom de l'hôtel, la ville et la catégorie :
 
