@@ -90,3 +90,10 @@ ORDER BY numero_departement;
 SELECT titre, COUNT(*) AS nombre_employes
 FROM employe
 GROUP BY titre;
+--  Calcule la moyenne des salaires et leur somme, par région
+SELECT d.noregion,
+       AVG(e.salaire) AS moyenne_salaire,
+       SUM(e.salaire) AS somme_salaire
+FROM employe e
+JOIN dept d ON e.nodep = d.nodept
+GROUP BY d.noregion;
