@@ -115,4 +115,7 @@ SELECT
     MIN(salaire) AS salaire_min,
     MAX(salaire) - MIN(salaire) AS ecart_salaire
 FROM employe;
+--  Recherche le nombre de titres différents
+SELECT COUNT(DISTINCT titre) AS nombre_titres_different
+FROM employe;
 
