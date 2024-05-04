@@ -110,3 +110,4 @@ GROUP BY SUBSTRING(nom, 1, 1) -- Ensuite, nous regroupons les données par cette
 HAVING COUNT(*) >= 3; --La clause HAVING est utilisée pour filtrer les résultats. Ici,
 -- nous utilisons COUNT(*) >= 3 pour ne sélectionner que les initiales qui sont l'initiale d'au moins trois employés
 
+
