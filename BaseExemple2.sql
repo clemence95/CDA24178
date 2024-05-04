@@ -103,4 +103,10 @@ FROM employe
 GROUP BY nodep -- Nous regroupons les données par "nodep" en utilisant la clause GROUP BY
 HAVING COUNT(*) >= 3;  --La clause HAVING est utilisée pour filtrer les résultats. 
 -- Ici, nous utilisons COUNT(*) >= 3  pour ne sélectionner que les départements ayant au moins trois employés.
+--  Affiche les lettres qui sont l'initiale d'au moins trois employés.
+SELECT SUBSTRING(nom, 1, 1) AS initiale_nom -- Nous utilisons la fonction SUBSTRING(nom, 1, 1) pour extraire la première lettre de chaque nom dans la colonne "nom".
+FROM employe
+GROUP BY SUBSTRING(nom, 1, 1) -- Ensuite, nous regroupons les données par cette initiale de nom en utilisant la clause GROUP BY.
+HAVING COUNT(*) >= 3; --La clause HAVING est utilisée pour filtrer les résultats. Ici,
+-- nous utilisons COUNT(*) >= 3 pour ne sélectionner que les initiales qui sont l'initiale d'au moins trois employés
 
