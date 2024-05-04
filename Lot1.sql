@@ -11,4 +11,9 @@ WHERE cli_nom = 'White';
 SELECT sta_nom, sta_altitude
 FROM station
 WHERE sta_altitude < 1000;
+-- Affiche la liste des chambres ayant une capacité supérieure à 1, avec le numéro de la chambre et sa capacité 
+SELECT cha_numero, cha_capacite
+FROM chambre
+WHERE cha_capacite > 1;
+
 
