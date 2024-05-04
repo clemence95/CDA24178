@@ -109,5 +109,10 @@ FROM employe
 GROUP BY SUBSTRING(nom, 1, 1) -- Ensuite, nous regroupons les données par cette initiale de nom en utilisant la clause GROUP BY.
 HAVING COUNT(*) >= 3; --La clause HAVING est utilisée pour filtrer les résultats. Ici,
 -- nous utilisons COUNT(*) >= 3 pour ne sélectionner que les initiales qui sont l'initiale d'au moins trois employés
-
+-- Rechercher le salaire maximum et le salaire minimum parmi tous les salariés et l'écart entre les deux
+SELECT 
+    MAX(salaire) AS salaire_max,
+    MIN(salaire) AS salaire_min,
+    MAX(salaire) - MIN(salaire) AS ecart_salaire
+FROM employe;
 
