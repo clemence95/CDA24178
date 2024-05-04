@@ -122,3 +122,13 @@ FROM employe;
 SELECT titre, COUNT(*) AS nombre_employes
 FROM employe
 GROUP BY titre;
+-- Pour chaque nom de département, afficher le nom du département et le nombre d'employés
+SELECT d.nom AS nom_departement, COUNT(e.noemp) AS nombre_employes
+FROM employe e
+JOIN dept d ON e.nodep = d.nodept
+GROUP BY d.nom;
+-- Recherche les titres et la moyenne des salaires par titre dont la moyenne est supérieure à la moyenne des salaires des Représentants
+SELECT titre, AVG(salaire) AS moyenne_salaires
+FROM employe
+GROUP BY titre
+HAVING AVG(salaire) > (SELECT AVG(salaire) FROM employe WHERE titre = 'représentant');
