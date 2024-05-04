@@ -132,3 +132,8 @@ SELECT titre, AVG(salaire) AS moyenne_salaires
 FROM employe
 GROUP BY titre
 HAVING AVG(salaire) > (SELECT AVG(salaire) FROM employe WHERE titre = 'représentant');
+--  Recherche le nombre de salaires renseignés et le nombre de taux de commission renseignés.
+SELECT 
+    COUNT(salaire) AS nombre_salaires_renseignes,
+    COUNT(tauxcom) AS nombre_taux_commission_renseignes
+FROM employe;
