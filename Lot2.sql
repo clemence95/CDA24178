@@ -35,3 +35,12 @@ FROM reservation res
 JOIN client c ON res.res_cli_id = c.cli_id
 JOIN chambre cha ON res.res_cha_id = cha.cha_id
 JOIN hotel h ON cha.cha_hot_id = h.hot_id;
+-- Affiche la liste des chambres avec le nom de l’hôtel et le nom de la station.
+--  Le résultat doit faire apparaître le nom de la station, le nom de l’hôtel, le numéro de la chambre et sa capacité)
+SELECT s.sta_nom AS nom_station,
+       h.hot_nom AS nom_hotel,
+       c.cha_numero AS numero_chambre,
+       c.cha_capacite AS capacite
+FROM chambre c
+JOIN hotel h ON c.cha_hot_id = h.hot_id
+JOIN station s ON h.hot_sta_id = s.sta_id;
