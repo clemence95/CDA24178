@@ -78,5 +78,14 @@ SELECT fourn.nomfou AS 'Nom du fournisseur',
 FROM entcom
 JOIN fournis fourn ON entcom.numfou = fourn.numfou
 ORDER BY fourn.nomfou;
+-- Sortir les produits des commandes ayant le mot "urgent' en
+-- observation?
+SELECT ligcom.codart AS 'Code article', 
+       produit.libart AS 'Libellé article', 
+       ligcom.qtecde AS 'Quantité commandée'
+FROM ligcom
+JOIN entcom ON ligcom.numcom = entcom.numcom
+JOIN produit ON ligcom.codart = produit.codart
+WHERE entcom.obscom LIKE '%urgent%';
 
 
