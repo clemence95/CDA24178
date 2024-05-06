@@ -26,3 +26,12 @@ SELECT h.hot_nom AS hotel,
 FROM chambre c
 JOIN hotel h ON c.cha_hot_id = h.hot_id
 WHERE h.hot_ville = 'Bretou' AND c.cha_capacite > 1;
+-- Affiche la liste des réservations avec le nom des clients.
+-- Le résultat doit faire apparaître le nom du client, le nom de l’hôtel, la date de réservation
+SELECT c.cli_nom AS nom_client,
+       h.hot_nom AS nom_hotel,
+       res.res_date AS date_reservation
+FROM reservation res
+JOIN client c ON res.res_cli_id = c.cli_id
+JOIN chambre cha ON res.res_cha_id = cha.cha_id
+JOIN hotel h ON cha.cha_hot_id = h.hot_id;
