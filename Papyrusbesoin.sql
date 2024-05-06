@@ -115,6 +115,25 @@ SELECT fournis.nomfou
 FROM fournis
 JOIN vente ON fournis.numfou = vente.numfou
 GROUP BY fournis.nomfou;
+-- Coder de 2 manières différentes la requête suivante
+-- Lister les commandes (Numéro et date) dont le fournisseur est celui de
+-- la commande 70210 
+-- Approche 1 : Utilisation d'une sous-requête
+SELECT numcom, datcom
+FROM entcom
+WHERE numfou = (
+    SELECT numfou
+    FROM entcom
+    WHERE numcom = 70210
+);
+-- Approche 2 : Utilisation d'une jointure
+SELECT entcom.numcom, entcom.datcom
+FROM entcom
+JOIN (
+    SELECT numfou
+    FROM entcom
+    WHERE numcom = 70210
+) AS fournisseur_70210 ON entcom.numfou = fournisseur_70210.numfou;
 
 
 
