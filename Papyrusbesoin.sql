@@ -173,7 +173,8 @@ JOIN ligcom l ON p.codart = l.codart
 WHERE YEAR(l.derliv) = 2021
 GROUP BY p.codart
 HAVING SUM(l.qtecde) > 0.9 * p.qteann;
-
+-- Calculer le chiffre d'affaire par fournisseur pour l'année 93 sachant
+-- que les prix indiqués sont hors taxes et que le taux de TVA est 20%
 
 
 
