@@ -44,3 +44,13 @@ SELECT s.sta_nom AS nom_station,
 FROM chambre c
 JOIN hotel h ON c.cha_hot_id = h.hot_id
 JOIN station s ON h.hot_sta_id = s.sta_id;
+-- Affiche les réservations avec le nom du client et le nom de l’hôtel.
+-- Le résultat doit faire apparaître le nom du client, le nom de l’hôtel, la date de début du séjour et la durée du séjour
+SELECT cl.cli_nom AS nom_client,
+       ho.hot_nom AS nom_hotel,
+       res.res_date_debut AS date_debut_sejour,
+       DATEDIFF(res.res_date_fin, res.res_date_debut) AS duree_sejour
+FROM reservation res
+JOIN client cl ON res.res_cli_id = cl.cli_id
+JOIN chambre cha ON res.res_cha_id = cha.cha_id
+JOIN hotel ho ON cha.cha_hot_id = ho.hot_id;
