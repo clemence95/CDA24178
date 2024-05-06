@@ -49,6 +49,10 @@ WHERE MONTH(datcom) IN (3, 4);
 SELECT numcom AS 'Numéro de commande', datcom AS 'Date de commande'
 FROM entcom
 WHERE DATE(datcom) = CURDATE() AND obscom <> '';
+----------------------------------------------------------------------------
+SELECT numcom AS 'Numéro de commande', datcom AS 'Date de commande'
+FROM entcom
+WHERE DATE(datcom) = '2021-06-05' AND obscom <> '';
 
 
 
