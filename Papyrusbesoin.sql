@@ -43,6 +43,13 @@ ORDER BY fourn.vilfou DESC, fourn.nomfou;
 SELECT *
 FROM entcom
 WHERE MONTH(datcom) IN (3, 4);
+-- Quelles sont les commandes du jour qui ont des observations
+-- particulières ?
+-- (Affichage numéro de commande, date de commande)
+SELECT numcom AS 'Numéro de commande', datcom AS 'Date de commande'
+FROM entcom
+WHERE DATE(datcom) = CURDATE() AND obscom <> '';
+
 
 
 
