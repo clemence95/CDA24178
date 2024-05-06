@@ -82,32 +82,27 @@ ORDER BY fourn.nomfou;
 -- observation?
 -- (Afficher le numéro de commande, le nom du fournisseur, le libellé du
 -- produit et le sous total = quantité commandée * Prix unitaire)
--- Sélection des produits de chaque commande avec leur sous-total individuel
--- Sélection des produits de chaque commande avec leur sous-total individuel
 SELECT entcom.numcom AS 'Numéro de commande',
        fourn.nomfou AS 'Nom du fournisseur',
        produit.libart AS 'Libellé du produit',
-       ligcom.qteliv AS 'Quantité livrée',
+       ligcom.qteliv AS 'Quantité commandée',
        ligcom.priuni AS 'Prix unitaire',
-       (ligcom.qteliv * ligcom.priuni) AS 'Sous-total'
+       (ligcom.qteliv * ligcom.priuni) AS 'Total du produit',
+       total_commande.total AS 'Total de la commande'
 FROM entcom
 JOIN fournis AS fourn ON entcom.numfou = fourn.numfou
 JOIN ligcom ON entcom.numcom = ligcom.numcom
 JOIN produit ON ligcom.codart = produit.codart
+JOIN (
+    SELECT numcom, SUM(qteliv * priuni) AS total
+    FROM ligcom
+    GROUP BY numcom
+) AS total_commande ON entcom.numcom = total_commande.numcom
 WHERE entcom.obscom LIKE '%urgent%'
+ORDER BY entcom.numcom, fourn.nomfou;
 
-UNION ALL
 
--- Sélection du total de toutes les commandes avec tous les produits
-SELECT 'Total de toutes les commandes' AS 'Numéro de commande',
-       '' AS 'Nom du fournisseur',
-       '' AS 'Libellé du produit',
-       '' AS 'Quantité livrée',
-       '' AS 'Prix unitaire',
-       SUM(ligcom.qteliv * ligcom.priuni) AS 'Sous-total'
-FROM entcom
-JOIN ligcom ON entcom.numcom = ligcom.numcom
-WHERE entcom.obscom LIKE '%urgent%';
+
 
 
 
