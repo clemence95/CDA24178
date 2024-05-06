@@ -170,7 +170,7 @@ ORDER BY total_stock DESC;
 SELECT p.libart AS nom_produit, SUM(l.qtecde) AS quantite_commandee, p.qteann
 FROM produit p
 JOIN ligcom l ON p.codart = l.codart
-WHERE YEAR(l.derliv) = 2018
+WHERE YEAR(l.derliv) = 2021
 GROUP BY p.codart
 HAVING SUM(l.qtecde) > 0.9 * p.qteann;
 
