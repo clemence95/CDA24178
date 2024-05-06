@@ -70,6 +70,7 @@ FROM ligcom
 GROUP BY numcom
 HAVING Total > 10000
 ORDER BY Total DESC;
-
+-- Lister les commandes par nom fournisseur
+-- (Afficher le nom du fournisseur, le numéro de commande et la date)
 
 
