@@ -157,6 +157,15 @@ JOIN vente v ON p.codart = v.codart
 JOIN fournis f ON v.numfou = f.numfou
 WHERE p.stkphy <= 1.5 * p.stkale
 ORDER BY p.codart, f.nomfou;
+-- Avec le même type de sélection que ci-dessus, sortir un total des
+-- stocks par fournisseur trié par total décroissant
+SELECT f.numfou, f.nomfou AS nom_fournisseur, SUM(p.stkphy) AS total_stock
+FROM produit p
+JOIN vente v ON p.codart = v.codart
+JOIN fournis f ON v.numfou = f.numfou
+GROUP BY f.numfou, f.nomfou
+ORDER BY total_stock DESC;
+
 
 
 
