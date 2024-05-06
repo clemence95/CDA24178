@@ -64,6 +64,12 @@ ORDER BY Total DESC;
 -- dans le calcul du total les articles commandés en quantité supérieure
 -- ou égale à 1000.
 -- (Affichage numéro de commande et total)
+SELECT numcom AS 'Numéro de commande', 
+       SUM(CASE WHEN qtecde < 1000 THEN qtecde * priuni ELSE 0 END) AS 'Total'
+FROM ligcom
+GROUP BY numcom
+HAVING Total > 10000
+ORDER BY Total DESC;
 
 
 
