@@ -11,3 +11,10 @@ FROM chambre c
 JOIN hotel h ON c.cha_hot_id = h.hot_id
 JOIN station s ON h.hot_sta_id = s.sta_id
 GROUP BY s.sta_nom;
+-- Compte le nombre de chambre par station ayant une capacité > 1
+SELECT s.sta_nom AS nom_station, COUNT(*) AS nombre_chambres
+FROM chambre c
+JOIN hotel h ON c.cha_hot_id = h.hot_id
+JOIN station s ON h.hot_sta_id = s.sta_id
+WHERE c.cha_capacite > 1
+GROUP BY s.sta_nom;
