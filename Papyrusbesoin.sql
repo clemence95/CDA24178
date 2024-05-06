@@ -165,6 +165,24 @@ JOIN vente v ON p.codart = v.codart
 JOIN fournis f ON v.numfou = f.numfou
 GROUP BY f.numfou, f.nomfou
 ORDER BY total_stock DESC;
+-- En fin d'année, sortir la liste des produits dont la quantité réellement
+-- commandée dépasse 90% de la quantité annuelle prévue
+SELECT p.libart AS nom_produit, SUM(l.qtecde) AS quantite_commandee, p.qteann
+FROM produit p
+JOIN ligcom l ON p.codart = l.codart
+WHERE YEAR(l.derliv) = 2018
+GROUP BY p.codart
+HAVING SUM(l.qtecde) > 0.9 * p.qteann;
+
+
+
+
+
+
+
+
+
+
 
 
 
