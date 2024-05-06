@@ -80,12 +80,38 @@ JOIN fournis fourn ON entcom.numfou = fourn.numfou
 ORDER BY fourn.nomfou;
 -- Sortir les produits des commandes ayant le mot "urgent' en
 -- observation?
-SELECT ligcom.codart AS 'Code article', 
-       produit.libart AS 'Libellé article', 
-       ligcom.qtecde AS 'Quantité commandée'
-FROM ligcom
-JOIN entcom ON ligcom.numcom = entcom.numcom
+-- (Afficher le numéro de commande, le nom du fournisseur, le libellé du
+-- produit et le sous total = quantité commandée * Prix unitaire)
+-- Sélection des produits de chaque commande avec leur sous-total individuel
+-- Sélection des produits de chaque commande avec leur sous-total individuel
+SELECT entcom.numcom AS 'Numéro de commande',
+       fourn.nomfou AS 'Nom du fournisseur',
+       produit.libart AS 'Libellé du produit',
+       ligcom.qteliv AS 'Quantité livrée',
+       ligcom.priuni AS 'Prix unitaire',
+       (ligcom.qteliv * ligcom.priuni) AS 'Sous-total'
+FROM entcom
+JOIN fournis AS fourn ON entcom.numfou = fourn.numfou
+JOIN ligcom ON entcom.numcom = ligcom.numcom
 JOIN produit ON ligcom.codart = produit.codart
+WHERE entcom.obscom LIKE '%urgent%'
+
+UNION ALL
+
+-- Sélection du total de toutes les commandes avec tous les produits
+SELECT 'Total de toutes les commandes' AS 'Numéro de commande',
+       '' AS 'Nom du fournisseur',
+       '' AS 'Libellé du produit',
+       '' AS 'Quantité livrée',
+       '' AS 'Prix unitaire',
+       SUM(ligcom.qteliv * ligcom.priuni) AS 'Sous-total'
+FROM entcom
+JOIN ligcom ON entcom.numcom = ligcom.numcom
 WHERE entcom.obscom LIKE '%urgent%';
+
+
+
+
+
 
 
