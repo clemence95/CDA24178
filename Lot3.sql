@@ -25,4 +25,11 @@ JOIN client cl ON res.res_cli_id = cl.cli_id
 JOIN chambre cha ON res.res_cha_id = cha.cha_id
 JOIN hotel h ON cha.cha_hot_id = h.hot_id
 WHERE cl.cli_nom = 'Squire';
+-- Affiche la durée moyenne des réservations par station
+SELECT s.sta_nom AS nom_station, AVG(DATEDIFF(res.res_date_fin, res.res_date_debut)) AS duree_moyenne
+FROM reservation res
+JOIN chambre cha ON res.res_cha_id = cha.cha_id
+JOIN hotel h ON cha.cha_hot_id = h.hot_id
+JOIN station s ON h.hot_sta_id = s.sta_id
+GROUP BY s.sta_nom;
 
