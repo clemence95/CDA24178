@@ -148,6 +148,21 @@ HAVING MIN(v.prix1) < (
     FROM vente v2
     WHERE LEFT(v2.codart, 1) = 'R'
 );
+-- Editer la liste des fournisseurs susceptibles de livrer les produits
+-- dont le stock est inférieur ou égal à 150 % du stock d'alerte. La liste est
+-- triée par produit puis fournisseur
+SELECT p.libart AS nom_produit, v.numfou, f.nomfou AS nom_fournisseur
+FROM produit p
+JOIN vente v ON p.codart = v.codart
+JOIN fournis f ON v.numfou = f.numfou
+WHERE p.stkphy <= 1.5 * p.stkale
+ORDER BY p.codart, f.nomfou;
+
+
+
+
+
+
 
 
 
