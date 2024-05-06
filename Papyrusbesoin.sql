@@ -141,13 +141,14 @@ JOIN (
 SELECT p.libart, MIN(v.prix1) AS prix_unitaire
 FROM produit p
 JOIN vente v ON p.codart = v.codart
-WHERE LEFT(p.codart, 1) != 'R'
+WHERE LEFT(p.libart, 1) != 'R'
 GROUP BY p.libart
 HAVING MIN(v.prix1) < (
     SELECT MIN(v2.prix1)
     FROM vente v2
     WHERE LEFT(v2.codart, 1) = 'R'
 );
+
 
 
 
