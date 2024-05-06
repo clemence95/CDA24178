@@ -100,6 +100,22 @@ JOIN (
 ) AS total_commande ON entcom.numcom = total_commande.numcom
 WHERE entcom.obscom LIKE '%urgent%'
 ORDER BY entcom.numcom, fourn.nomfou;
+-- Coder de 2 manières différentes la requête suivante :
+-- Lister le nom des fournisseurs susceptibles de livrer au moins un article
+-- Approche 1 : Utilisation d'une sous-requête EXISTS
+SELECT DISTINCT nomfou
+FROM fournis
+WHERE EXISTS (
+    SELECT 1
+    FROM vente
+    WHERE vente.numfou = fournis.numfou
+);
+-- Approche 2 : Utilisation d'une jointure avec GROUP BY
+SELECT fournis.nomfou
+FROM fournis
+JOIN vente ON fournis.numfou = vente.numfou
+GROUP BY fournis.nomfou;
+
 
 
 
