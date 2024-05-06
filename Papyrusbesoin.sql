@@ -173,8 +173,30 @@ JOIN ligcom l ON p.codart = l.codart
 WHERE YEAR(l.derliv) = 2021
 GROUP BY p.codart
 HAVING SUM(l.qtecde) > 0.9 * p.qteann;
--- Calculer le chiffre d'affaire par fournisseur pour l'année 93 sachant
+-- Calculer le chiffre d'affaire par fournisseur pour l'année 93 sachant  WHY 93!
 -- que les prix indiqués sont hors taxes et que le taux de TVA est 20%
+SELECT e.numfou, 
+       SUM(l.qtecde * l.priuni) AS chiffre_affaire_HT,
+       SUM((l.qtecde * l.priuni) + (l.qtecde * l.priuni * 0.2)) AS chiffre_affaire_TTC
+FROM ligcom l
+JOIN produit p ON l.codart = p.codart
+JOIN entcom e ON l.numcom = e.numcom
+WHERE YEAR(e.datcom) = 1993
+GROUP BY e.numfou;
+-- Existe-t-il des lignes de commande non cohérentes avec les produits
+-- vendus par les fournisseurs. ?
+SELECT lc.numcom, lc.numlig, lc.codart AS produit_commande, lc.qtecde AS quantite_commandee, 
+       v.numfou AS fournisseur, v.codart AS produit_fournisseur, 
+       CASE
+           WHEN v.codart IS NULL THEN 'Non trouvé'
+           WHEN lc.qtecde > v.qte1 THEN 'Quantité trop élevée'
+           ELSE 'OK'
+       END AS coherence
+FROM ligcom lc
+LEFT JOIN vente v ON lc.codart = v.codart
+WHERE v.codart IS NULL OR lc.qtecde > v.qte1;
+
+
 
 
 
