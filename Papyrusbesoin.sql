@@ -25,4 +25,19 @@ SELECT
     qteann AS 'Quantité annuelle'
 FROM produit
 WHERE stkphy <= stkale AND qteann < 1000;
+-- Quels sont les fournisseurs situés dans les départements 75 78 92 77 ?
+-- L’affichage (département, nom fournisseur) sera effectué par
+-- département décroissant, puis par ordre alphabétique
+SELECT 
+    fourn.vilfou AS 'Département',
+    fourn.nomfou AS 'Nom fournisseur'
+FROM fournis fourn
+JOIN (
+    SELECT '75' AS 'dept' UNION ALL
+    SELECT '78' UNION ALL
+    SELECT '92' UNION ALL
+    SELECT '77'
+) depts ON fourn.posfou LIKE CONCAT(depts.dept, '%')
+ORDER BY fourn.vilfou DESC, fourn.nomfou;
+
 
