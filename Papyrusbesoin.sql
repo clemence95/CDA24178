@@ -39,5 +39,10 @@ JOIN (
     SELECT '77'
 ) depts ON fourn.posfou LIKE CONCAT(depts.dept, '%')
 ORDER BY fourn.vilfou DESC, fourn.nomfou;
+-- Quelles sont les commandes passées au mois de mars et avril ?
+SELECT *
+FROM entcom
+WHERE MONTH(datcom) IN (3, 4);
+
 
 
