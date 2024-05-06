@@ -72,5 +72,11 @@ HAVING Total > 10000
 ORDER BY Total DESC;
 -- Lister les commandes par nom fournisseur
 -- (Afficher le nom du fournisseur, le numéro de commande et la date)
+SELECT fourn.nomfou AS 'Nom du fournisseur', 
+       entcom.numcom AS 'Numéro de commande', 
+       entcom.datcom AS 'Date'
+FROM entcom
+JOIN fournis fourn ON entcom.numfou = fourn.numfou
+ORDER BY fourn.nomfou;
 
 
