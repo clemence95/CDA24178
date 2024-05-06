@@ -134,6 +134,31 @@ JOIN (
     FROM entcom
     WHERE numcom = 70210
 ) AS fournisseur_70210 ON entcom.numfou = fournisseur_70210.numfou;
+-- Dans les articles susceptibles d’être vendus, lister les articles moins
+-- chers (basés sur Prix1) que le moins cher des rubans (article dont le
+-- premier caractère commence par R). On affichera le libellé de l’article
+-- et prix1
+SELECT p.libart, MIN(v.prix1) AS prix_unitaire
+FROM produit p
+JOIN vente v ON p.codart = v.codart
+WHERE LEFT(p.codart, 1) != 'R'
+GROUP BY p.libart
+HAVING MIN(v.prix1) < (
+    SELECT MIN(v2.prix1)
+    FROM vente v2
+    WHERE LEFT(v2.codart, 1) = 'R'
+);
+
+
+
+
+
+
+
+
+
+
+
 
 
 
