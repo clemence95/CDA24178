@@ -53,6 +53,13 @@ WHERE DATE(datcom) = CURDATE() AND obscom <> '';
 SELECT numcom AS 'Numéro de commande', datcom AS 'Date de commande'
 FROM entcom
 WHERE DATE(datcom) = '2021-06-05' AND obscom <> '';
+-- Lister le total de chaque commande par total décroissant
+-- (Affichage numéro de commande et total)
+SELECT numcom AS 'Numéro de commande', 
+       SUM(qtecde * priuni) AS 'Total'
+FROM ligcom
+GROUP BY numcom
+ORDER BY Total DESC;
 
 
 
