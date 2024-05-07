@@ -30,3 +30,17 @@ FROM reservation r
 INNER JOIN client c ON r.res_cli_id = c.cli_id
 INNER JOIN chambre ch ON r.res_cha_id = ch.cha_id
 INNER JOIN hotel h ON ch.cha_hot_id = h.hot_id;
+-- Afficher la liste des hôtels avec leur station
+SELECT * FROM Vue_Hotels_Station;
+
+-- Afficher la liste des chambres et leur hôtel
+SELECT * FROM Vue_Chambres_Hotel;
+
+-- Afficher la liste des réservations avec le nom des clients
+SELECT * FROM Vue_Reservations_Clients;
+
+-- Afficher la liste des chambres avec le nom de l’hôtel et le nom de la station
+SELECT * FROM Vue_Chambres_Hotel_Station;
+
+-- Afficher les réservations avec le nom du client et le nom de l’hôtel
+SELECT * FROM Vue_Reservations_Client_Hotel;
