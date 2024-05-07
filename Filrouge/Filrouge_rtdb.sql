@@ -86,7 +86,6 @@ ORDER BY
     Nombre_Commandes DESC
 LIMIT 10;
 
-
 -- Top 10 des clients par chiffre d'affaires :
 SELECT 
     c.Nom AS Nom_Client,
