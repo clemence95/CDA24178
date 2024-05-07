@@ -14,3 +14,9 @@ FROM ETUDIANT
 INNER JOIN EVALUER ON ETUDIANT.id = EVALUER.id_Etudiant
 INNER JOIN MATIERE ON EVALUER.id_Matiere = MATIERE.id
 GROUP BY ETUDIANT.id, ETUDIANT.Nom, ETUDIANT.Prenom, MATIERE.Libellé;
+-- Pour calculer les moyennes par matière :
+SELECT MATIERE.Libellé, AVG(EVALUER.Note) AS Moyenne
+FROM MATIERE
+INNER JOIN EVALUER ON MATIERE.id = EVALUER.id_Matiere
+GROUP BY MATIERE.Libellé;
+-- Pour trouver la moyenne générale de chaque étudiant :
