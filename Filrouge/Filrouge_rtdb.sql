@@ -35,6 +35,29 @@ GROUP BY Produit.Id_Produit, Produit.Libelle_court, Fournisseur.Nom
 ORDER BY SUM(achete.quantite) DESC
 LIMIT 10;
 
+-- TOP 10 des produits les plus rémunérateurs pour une année sélectionnée, vous pouvez utiliser la requête suivante :
+SELECT 
+    Produit.Id_Produit AS Reference_Produit,
+    Produit.Libelle_court AS Nom_Produit,
+    SUM(Commande.Total_TTC - Produit.Prix_achat_HT * achete.quantite) AS Marge,
+    Fournisseur.Nom AS Nom_Fournisseur
+FROM 
+    Commande
+INNER JOIN 
+    achete ON Commande.Id_Commande = achete.Id_Commande
+INNER JOIN 
+    Produit ON achete.Id_Produit = Produit.Id_Produit
+INNER JOIN 
+    Fournisseur ON Produit.Id_Fournisseur = Fournisseur.Id_Fournisseur
+WHERE 
+    YEAR(Commande.Date_facturation) = '2024'
+GROUP BY 
+    Produit.Id_Produit, Produit.Libelle_court, Fournisseur.Nom
+ORDER BY 
+    Marge DESC
+LIMIT 10;
+
+
 
 
 
