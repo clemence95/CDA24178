@@ -71,3 +71,34 @@ GROUP BY
     Fournisseur.Nom
 ORDER BY Marge DESC
 LIMIT 10;
+
+-- Top 10 par nombre de commandes :
+SELECT 
+    c.Nom AS Nom_Client,
+    COUNT(cm.Id_Commande) AS Nombre_Commandes
+FROM 
+    Client c
+INNER JOIN 
+    Commande cm ON c.Id_Client = cm.Id_Client
+GROUP BY 
+    c.Id_Client
+ORDER BY 
+    Nombre_Commandes DESC
+LIMIT 10;
+
+
+-- Top 10 des clients par chiffre d'affaires :
+SELECT 
+    c.Nom AS Nom_Client,
+    SUM(cm.Total_TTC) AS Chiffre_affaires
+FROM 
+    Client c
+INNER JOIN 
+    Commande cm ON c.Id_Client = cm.Id_Client
+GROUP BY 
+    c.Id_Client
+ORDER BY 
+    Chiffre_affaires DESC
+LIMIT 10;
+
+

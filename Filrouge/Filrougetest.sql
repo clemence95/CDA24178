@@ -16,16 +16,17 @@ VALUES
 -- Insertion des données dans la table Client
 INSERT INTO Client (Id_Client, Nom, prenom, telephone, Type, Adresse_livraison, Adresse_facturation, Coefficient, Reduction, Reference, email)
 VALUES 
-    (1, 'MusicAddict', 'Thomas', '0234567890', 'Particulier', '25 rue des Mélodies', '25 rue des Factures', 1.0, NULL, 'MA001', 'thomas@musicaddict.com'),
-    (2, 'Symphony Corp.', 'Sophie', '0678901234', 'Entreprise', '10 avenue des Harmonies', '10 avenue des Factures', 1.5, 0.2, 'SC001', 'sophie@symphony.com'),
-    (3, 'MusicEnthusiast', 'Christopher', '0234567890', 'Particulier', '40 rue des Mélodies', '40 rue des Factures', 1.0, NULL, 'ME001', 'christopher@musicenthusiast.com'),
-    (4, 'Harmonics Ltd.', 'Emma', '0678901234', 'Entreprise', '20 avenue des Harmonies', '20 avenue des Factures', 1.5, 0.2, 'HL001', 'emma@harmonicsltd.com'),
-    (5, 'Songbird Inc.', 'Daniel', '0123456789', 'Particulier', '5 rue des Chansons', '5 rue des Factures', 1.0, NULL, 'SB001', 'daniel@songbirdinc.com'),
-    (6, 'MusicAddict', 'Thomas', '0234567890', 'Particulier', '25 rue des Mélodies', '25 rue des Factures', 1.0, NULL, 'MA001', 'thomas@musicaddict.com'),
-    (7, 'Symphony Corp.', 'Sophie', '0678901234', 'Entreprise', '10 avenue des Harmonies', '10 avenue des Factures', 1.5, 0.2, 'SC001', 'sophie@symphony.com'),
-    (8, 'MusicEnthusiast', 'Christopher', '0234567890', 'Particulier', '40 rue des Mélodies', '40 rue des Factures', 1.0, NULL, 'ME001', 'christopher@musicenthusiast.com'),
-    (9, 'Harmonics Ltd.', 'Emma', '0678901234', 'Entreprise', '20 avenue des Harmonies', '20 avenue des Factures', 1.5, 0.2, 'HL001', 'emma@harmonicsltd.com'),
-    (10, 'Songbird Inc.', 'Daniel', '0123456789', 'Particulier', '5 rue des Chansons', '5 rue des Factures', 1.0, NULL, 'SB001', 'daniel@songbirdinc.com');
+    (1, 'Johnson', 'Thomas', '0234567890', 'Particulier', '25 rue des Mélodies', '25 rue des Factures', 1.0, NULL, 'ML001', 'thomas@johnson.com'),
+    (2, 'Lee', 'Sophie', '0678901234', 'Entreprise', '10 avenue des Harmonies', '10 avenue des Factures', 1.5, 0.2, 'SC001', 'sophie@lee.com'),
+    (3, 'Wilson', 'Christopher', '0234567890', 'Particulier', '40 rue des Mélodies', '40 rue des Factures', 1.0, NULL, 'MF001', 'christopher@wilson.com'),
+    (4, 'Brown', 'Emma', '0678901234', 'Entreprise', '20 avenue des Harmonies', '20 avenue des Factures', 1.5, 0.2, 'HL001', 'emma@brown.com'),
+    (5, 'Clark', 'Daniel', '0123456789', 'Particulier', '5 rue des Chansons', '5 rue des Factures', 1.0, NULL, 'SB001', 'daniel@clark.com'),
+    (6, 'Johnson', 'Thomas', '0234567890', 'Particulier', '25 rue des Mélodies', '25 rue des Factures', 1.0, NULL, 'ML001', 'thomas@johnson.com'),
+    (7, 'Lee', 'Sophie', '0678901234', 'Entreprise', '10 avenue des Harmonies', '10 avenue des Factures', 1.5, 0.2, 'SC001', 'sophie@lee.com'),
+    (8, 'Wilson', 'Christopher', '0234567890', 'Particulier', '40 rue des Mélodies', '40 rue des Factures', 1.0, NULL, 'MF001', 'christopher@wilson.com'),
+    (9, 'Brown', 'Emma', '0678901234', 'Entreprise', '20 avenue des Harmonies', '20 avenue des Factures', 1.5, 0.2, 'HL001', 'emma@brown.com'),
+    (10, 'Clark', 'Daniel', '0123456789', 'Particulier', '5 rue des Chansons', '5 rue des Factures', 1.0, NULL, 'SB001', 'daniel@clark.com');
+
 
 -- Insertion des données dans la table Commercial
 INSERT INTO Commercial (Id_Commercial, Nom, prenom, telephone, email, Id_Client)
