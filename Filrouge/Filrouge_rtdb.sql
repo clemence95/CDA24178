@@ -101,4 +101,14 @@ ORDER BY
     Chiffre_affaires DESC
 LIMIT 10;
 
+-- Répartition du chiffre d'affaires par type de client
+SELECT 
+    Type, 
+    SUM(Commande.Total_TTC) AS Chiffre_affaires
+FROM 
+    Commande
+INNER JOIN 
+    Client ON Commande.Id_Client = Client.Id_Client
+GROUP BY 
+    Type;
 
