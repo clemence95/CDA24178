@@ -22,3 +22,11 @@ SELECT c.cha_id, c.cha_numero, c.cha_capacite, c.cha_type, h.hot_nom AS hotel_no
 FROM chambre c
 INNER JOIN hotel h ON c.cha_hot_id = h.hot_id
 INNER JOIN station s ON h.hot_sta_id = s.sta_id;
+-- Afficher les réservations avec le nom du client et le nom de l’hôtel :
+CREATE VIEW Vue_Reservations_Client_Hotel AS
+SELECT r.res_id, r.res_date, r.res_date_debut, r.res_date_fin, r.res_prix, r.res_arrhes,
+       c.cli_nom, c.cli_prenom, h.hot_nom AS hotel_nom
+FROM reservation r
+INNER JOIN client c ON r.res_cli_id = c.cli_id
+INNER JOIN chambre ch ON r.res_cha_id = ch.cha_id
+INNER JOIN hotel h ON ch.cha_hot_id = h.hot_id;
