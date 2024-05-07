@@ -86,14 +86,14 @@ INSERT INTO Produit (Id_Produit, Libelle_court, Libelle_long, Prix_achat_HT, Pho
 VALUES 
     (1, 'Batterie Roland', 'Batterie électronique avec pads sensibles', 1500.00, '', 15.00, 'Oui', 1, 1),
     (2, 'Accordeur chromatique Korg', 'Accordeur polyvalent pour tous types d''instruments', 50.00, '', 50.00, 'Oui', 2, 2),
-    (3, 'Batterie Roland', 'Batterie électronique avec pads sensibles', 1500.00, '', 15.00, 'Oui', 1, 3),
-    (4, 'Accordeur chromatique Korg', 'Accordeur polyvalent pour tous types d''instruments', 50.00, '', 50.00, 'Oui', 2, 4),
-    (5, 'Batterie Roland', 'Batterie électronique avec pads sensibles', 1500.00, '', 15.00, 'Oui', 1, 5),
-    (6, 'Accordeur chromatique Korg', 'Accordeur polyvalent pour tous types d''instruments', 50.00, '', 50.00, 'Oui', 2, 6),
-    (7, 'Batterie Roland', 'Batterie électronique avec pads sensibles', 1500.00, '', 15.00, 'Oui', 1, 7),
-    (8, 'Accordeur chromatique Korg', 'Accordeur polyvalent pour tous types d''instruments', 50.00, '', 50.00, 'Oui', 2, 8),
-    (9, 'Batterie Roland', 'Batterie électronique avec pads sensibles', 1500.00, '', 15.00, 'Oui', 1, 9),
-    (10, 'Accordeur chromatique Korg', 'Accordeur polyvalent pour tous types d''instruments', 50.00, '', 50.00, 'Oui', 2, 10);
+    (3, 'Piano Yamaha', 'Piano numérique avec toucher réaliste', 2000.00, '', 10.00, 'Oui', 1, 3),
+    (4, 'Guitare Fender Stratocaster', 'Guitare électrique emblématique', 1200.00, '', 20.00, 'Oui', 1, 4),
+    (5, 'Microphone Shure SM58', 'Microphone dynamique pour la scène', 100.00, '', 30.00, 'Oui', 2, 5),
+    (6, 'Amplificateur Marshall', 'Ampli à lampes pour une distorsion chaude', 800.00, '', 5.00, 'Oui', 1, 6),
+    (7, 'Synthétiseur Korg Minilogue', 'Synthé analogique avec séquenceur intégré', 600.00, '', 15.00, 'Oui', 1, 7),
+    (8, 'Violoncelle Stradivarius', 'Violoncelle de haute qualité artisanale', 5000.00, '', 2.00, 'Oui', 1, 8),
+    (9, 'Saxophone Yamaha YAS-280', 'Saxophone alto pour débutants et intermédiaires', 1500.00, '', 10.00, 'Oui', 1, 9),
+    (10, 'Flûte traversière Yamaha YFL-222', 'Flûte traversière pour étudiants', 600.00, '', 20.00, 'Oui', 1, 10);
 
 -- Insertion des données dans la table achete
 INSERT INTO achete (Id_Produit, Id_Commande, quantite)
