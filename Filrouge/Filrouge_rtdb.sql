@@ -1,8 +1,7 @@
-USE VillageGreen;
 -- Chiffre d'affaires mois par mois pour une année sélectionnée et pour tous les fournisseurs :
 SELECT MONTH(Date_facturation) AS Mois,
        YEAR(Date_facturation) AS Annee,
-       NULL AS Nom_Fournisseur, -- Ajout d'une colonne vide pour aligner avec la deuxième requête
+       'VillageGreen' AS Nom_Fournisseur, -- Ajout d'une colonne vide pour aligner avec la deuxième requête
        SUM(Total_TTC) AS Chiffre_affaires
 FROM Commande
 WHERE YEAR(Date_facturation) = '2024'
