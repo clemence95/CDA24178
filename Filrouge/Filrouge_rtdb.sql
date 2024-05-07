@@ -112,3 +112,11 @@ INNER JOIN
 GROUP BY 
     Type;
 
+-- Nombre de commandes en cours de livraison.
+SELECT 
+    COUNT(*) AS Nombre_de_commandes_en_cours_de_livraison
+FROM 
+    BonLivraison
+WHERE 
+    Statut = 'En cours de livraison';
+
