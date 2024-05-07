@@ -42,4 +42,10 @@ HAVING AVG(EVALUER.Note) >= (SELECT AVG(Moyenne_Générale) FROM (
     INNER JOIN EVALUER ON ETUDIANT.id = EVALUER.id_Etudiant
     GROUP BY ETUDIANT.id
 ) AS Moyennes_Etudiants);
+-- Pour obtenir la composition de l'équipe Festina (Numéro, nom et pays des coureurs) :
+SELECT COUREUR.id, COUREUR.NomCoureur, PAYS.NomPays
+FROM COUREUR
+JOIN PAYS ON COUREUR.id_Pays = PAYS.id
+JOIN EQUIPE ON COUREUR.id_Equipe = EQUIPE.id
+WHERE EQUIPE.NomEquipe = 'Festina';
 
