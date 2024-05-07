@@ -48,4 +48,19 @@ FROM COUREUR
 JOIN PAYS ON COUREUR.id_Pays = PAYS.id
 JOIN EQUIPE ON COUREUR.id_Equipe = EQUIPE.id
 WHERE EQUIPE.NomEquipe = 'Festina';
+-- Pour trouver le nombre total de kilomètres du Tour de France 97 :
+SELECT SUM(NbKm) AS Total_Kilomètres
+FROM ETAPE;
+-- Pour obtenir le nombre total de kilomètres des étapes de type "Haute Montagne" :
+SELECT SUM(NbKm) AS Total_Kilomètres_Haute_Montagne
+FROM ETAPE
+JOIN TYPE_ETAPE ON ETAPE.id_Type_Etape = TYPE_ETAPE.id
+WHERE TYPE_ETAPE.LibelléType = 'Haute Montagne';
+-- Pour obtenir le classement général des coureurs (nom, code équipe, code pays et temps des coureurs) :
+SELECT COUREUR.NomCoureur, EQUIPE.NomEquipe, PAYS.NomPays, PARTICIPER.TempsRéalisé
+FROM PARTICIPER
+JOIN COUREUR ON PARTICIPER.id_Coureur = COUREUR.id
+JOIN EQUIPE ON COUREUR.id_Equipe = EQUIPE.id
+JOIN PAYS ON COUREUR.id_Pays = PAYS.id
+ORDER BY PARTICIPER.TempsRéalisé ASC;
 
