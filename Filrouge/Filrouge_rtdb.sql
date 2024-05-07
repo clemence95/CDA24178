@@ -113,10 +113,16 @@ GROUP BY
     Type;
 
 -- Nombre de commandes en cours de livraison.
-SELECT 
-    COUNT(*) AS Nombre_de_commandes_en_cours_de_livraison
-FROM 
-    BonLivraison
-WHERE 
-    Statut = 'En cours de livraison';
+SELECT Commande.Id_Commande, Client.Nom AS Nom_Client, Fournisseur.Nom AS Nom_Fournisseur, Produit.Libelle_court AS Nom_Produit, livre.quantite AS Quantite
+FROM Commande
+INNER JOIN Client ON Commande.Id_Client = Client.Id_Client
+INNER JOIN BonLivraison ON Commande.Id_Commande = BonLivraison.Id_Commande
+INNER JOIN livre ON Commande.Id_Commande = livre.Id_BonLivraison
+INNER JOIN Produit ON livre.Id_Produit = Produit.Id_Produit
+INNER JOIN Fournisseur ON Produit.Id_Fournisseur = Fournisseur.Id_Fournisseur
+WHERE BonLivraison.Statut = 'En cours de livraison';
+
+
+
+
 

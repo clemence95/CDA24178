@@ -67,7 +67,7 @@ VALUES
     (6, '2024-05-04', 'En cours de préparation', '', 6),
     (7, '2024-05-03', 'En cours de préparation', '9876543210', 7),
     (8, '2024-05-04', 'En cours de préparation', '', 8),
-    (9, '2024-05-03', 'En cours de préparation', '9876543210', 9),
+    (9, '2024-05-03', 'En cours de livraison', '9876543210', 9),
     (10, '2024-05-04', 'En cours de préparation', '', 10);
 
 -- Insertion des données dans la table Categorie
