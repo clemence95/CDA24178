@@ -24,4 +24,22 @@ SELECT ETUDIANT.id, ETUDIANT.Nom, ETUDIANT.Prenom, AVG(EVALUER.Note) AS Moyenne_
 FROM ETUDIANT
 INNER JOIN EVALUER ON ETUDIANT.id = EVALUER.id_Etudiant
 GROUP BY ETUDIANT.id, ETUDIANT.Nom, ETUDIANT.Prenom;
+-- Pour calculer la moyenne générale de la promotion :
+SELECT AVG(Moyenne_Générale) AS Moyenne_Générale_Promotion FROM (
+    SELECT AVG(EVALUER.Note) AS Moyenne_Générale
+    FROM ETUDIANT
+    INNER JOIN EVALUER ON ETUDIANT.id = EVALUER.id_Etudiant
+    GROUP BY ETUDIANT.id
+) AS Moyennes_Etudiants;
+-- Pour trouver les étudiants qui ont une moyenne générale supérieure ou égale à la moyenne générale de la promotion :
+SELECT ETUDIANT.id, ETUDIANT.Nom, ETUDIANT.Prenom, AVG(EVALUER.Note) AS Moyenne_Générale
+FROM ETUDIANT
+INNER JOIN EVALUER ON ETUDIANT.id = EVALUER.id_Etudiant
+GROUP BY ETUDIANT.id, ETUDIANT.Nom, ETUDIANT.Prenom
+HAVING AVG(EVALUER.Note) >= (SELECT AVG(Moyenne_Générale) FROM (
+    SELECT AVG(EVALUER.Note) AS Moyenne_Générale
+    FROM ETUDIANT
+    INNER JOIN EVALUER ON ETUDIANT.id = EVALUER.id_Etudiant
+    GROUP BY ETUDIANT.id
+) AS Moyennes_Etudiants);
 
