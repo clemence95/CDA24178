@@ -114,4 +114,23 @@ CREATE TABLE livre(
    FOREIGN KEY(Id_Produit) REFERENCES Produit(Id_Produit),
    FOREIGN KEY(Id_BonLivraison) REFERENCES BonLivraison(Id_BonLivraison)
 );
+-- Index sur les clés primaires
+CREATE INDEX idx_id_fournisseur ON Fournisseur (Id_Fournisseur);
+CREATE INDEX idx_id_client ON Client (Id_Client);
+CREATE INDEX idx_id_commercial ON Commercial (Id_Commercial);
+CREATE INDEX idx_id_commande ON Commande (Id_Commande);
+CREATE INDEX idx_id_bonlivraison ON BonLivraison (Id_BonLivraison);
+CREATE INDEX idx_id_categorie ON Categorie (Id_Catégorie);
+CREATE INDEX idx_id_souscategorie ON Souscategorie (Id_Souscategorie);
+CREATE INDEX idx_id_produit ON Produit (Id_Produit);
+
+-- Index sur les clés étrangères
+CREATE INDEX idx_fk_id_client ON Commercial (Id_Client);
+CREATE INDEX idx_fk_id_client_cmd ON Commande (Id_Client);
+CREATE INDEX idx_fk_id_souscategorie ON Produit (Id_Souscategorie);
+CREATE INDEX idx_fk_id_fournisseur ON Produit (Id_Fournisseur);
+CREATE INDEX idx_fk_id_produit_achete ON achete (Id_Produit);
+CREATE INDEX idx_fk_id_commande_achete ON achete (Id_Commande);
+CREATE INDEX idx_fk_id_produit_livre ON livre (Id_Produit);
+CREATE INDEX idx_fk_id_bonlivraison_livre ON livre (Id_BonLivraison);
 
