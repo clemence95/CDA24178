@@ -12,7 +12,7 @@ GROUP BY
     Mois
 
 UNION ALL
--- Chiffre d'affaires par fournisseur mois par mois pour une année sélectionnée :
+
 SELECT
     MONTH(Commande.Date_facturation) AS Mois,
     YEAR(Commande.Date_facturation) AS Annee,
@@ -29,6 +29,7 @@ GROUP BY
     Annee,
     Mois,
     Nom_Fournisseur;
+
 
 -- TOP 10 des produits les plus commandés pour une année sélectionnée (référence et nom du produit, quantité commandée, fournisseur)
 SELECT

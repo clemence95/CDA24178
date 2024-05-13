@@ -45,16 +45,18 @@ VALUES
 -- Insertion des données dans la table Commande
 INSERT INTO Commande (Id_Commande, Statut, Mode_paiement, Reduction_pro, Total_HT, Total_TTC, Date_heure_commande, Mode_differe, Date_facturation, Id_Client)
 VALUES 
-    (1, 'En cours', 'Chèque', NULL, 1500.00, 1575.00, '2024-05-02 10:00:00', NULL, '2024-05-03', 1),
-    (2, 'En cours', 'Virement bancaire', 0.15, 3000.00, 3300.00, '2024-05-02 11:30:00', NULL, '2024-05-03', 2),
-    (3, 'En cours', 'Chèque', NULL, 1500.00, 1575.00, '2024-05-02 10:00:00', NULL, '2024-05-03', 3),
-    (4, 'En cours', 'Virement bancaire', 0.15, 3000.00, 3300.00, '2024-05-02 11:30:00', NULL, '2024-05-03', 4),
-    (5, 'En cours', 'Chèque', NULL, 1500.00, 1575.00, '2024-05-02 10:00:00', NULL, '2024-05-03', 5),
-    (6, 'En cours', 'Virement bancaire', 0.15, 3000.00, 3300.00, '2024-05-02 11:30:00', NULL, '2024-05-03', 6),
-    (7, 'En cours', 'Chèque', NULL, 1500.00, 1575.00, '2024-05-02 10:00:00', NULL, '2024-05-03', 7),
-    (8, 'En cours', 'Virement bancaire', 0.15, 3000.00, 3300.00, '2024-05-02 11:30:00', NULL, '2024-05-03', 8),
-    (9, 'En cours', 'Chèque', NULL, 1500.00, 1575.00, '2024-05-02 10:00:00', NULL, '2024-05-03', 9),
-    (10, 'En cours', 'Virement bancaire', 0.15, 3000.00, 3300.00, '2024-05-02 11:30:00', NULL, '2024-05-03', 10);
+    (11, 'En cours', 'Chèque', NULL, 1500.00, 1575.00, '2024-05-02 10:00:00', NULL, '2024-05-03', 1),
+    (12, 'En cours', 'Virement bancaire', 0.15, 3000.00, 3300.00, '2024-05-02 11:30:00', 'Différé', '2024-05-03', 2),
+    (13, 'En cours', 'Chèque', NULL, 1500.00, 1575.00, '2024-05-02 10:00:00', NULL, '2024-05-03', 3),
+    (14, 'En cours', 'Virement bancaire', 0.15, 3000.00, 3300.00, '2024-05-02 11:30:00', 'Différé', '2024-05-03', 4),
+    (15, 'En cours', 'Chèque', NULL, 1500.00, 1575.00, '2024-05-02 10:00:00', NULL, '2024-05-03', 5),
+    (16, 'En cours', 'Virement bancaire', 0.15, 3000.00, 3300.00, '2024-05-02 11:30:00', 'Différé', '2024-05-03', 6),
+    (17, 'En cours', 'Chèque', NULL, 1500.00, 1575.00, '2024-05-02 10:00:00', NULL, '2024-05-03', 7),
+    (18, 'En cours', 'Virement bancaire', 0.15, 3000.00, 3300.00, '2024-05-02 11:30:00', 'Différé', '2024-05-03', 8),
+    (19, 'En cours', 'Chèque', NULL, 1500.00, 1575.00, '2024-05-02 10:00:00', NULL, '2024-05-03', 9),
+    (20, 'En cours', 'Virement bancaire', 0.15, 3000.00, 3300.00, '2024-05-02 11:30:00', 'Différé', '2024-05-03', 10);
+
+
 
 -- Insertion des données dans la table BonLivraison
 INSERT INTO BonLivraison (Id_BonLivraison, Date_livraison, Statut, Suivi_commande, Id_Commande)
