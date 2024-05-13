@@ -1,0 +1,3 @@
+USE cp;
+
+ALTER TABLE cp ENGINE=InnoDB;

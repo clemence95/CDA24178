@@ -70,3 +70,5 @@ INSERT INTO lignedecommande (id_commande, id_produit, prix, quantite) VALUES (3,
 INSERT INTO lignedecommande (id_commande, id_produit, prix, quantite) VALUES (3, 2, 10, 2);
 INSERT INTO lignedecommande (id_commande, id_produit, prix, quantite) VALUES (3, 2, 10, 2);
 
+
+
