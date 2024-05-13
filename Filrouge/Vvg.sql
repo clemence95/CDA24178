@@ -1,3 +1,4 @@
+USE VillageGreen;
 -- Vue correspondant à la jointure Produits - Fournisseurs :
 CREATE VIEW Vue_Produit_Fournisseur AS
 SELECT p.Id_Produit, p.Libelle_court AS Produit, p.Libelle_long AS Description, p.Prix_achat_HT AS Prix,
