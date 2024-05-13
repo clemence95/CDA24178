@@ -10,3 +10,14 @@ END//
 DELIMITER ;
 
 CALL SelectCommandesEnCoursDeLivraison();
+
+DELIMITER //
+
+CREATE PROCEDURE SelectCommandesEnCours()
+BEGIN
+    SELECT * FROM Commande WHERE Statut = 'En cours';
+END//
+
+DELIMITER ;
+
+CALL SelectCommandesEnCours();
