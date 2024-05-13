@@ -1,3 +1,3 @@
 USE cp;
 
-ALTER TABLE cp ENGINE=InnoDB;
+ALTER TABLE client ENGINE=InnoDB;
