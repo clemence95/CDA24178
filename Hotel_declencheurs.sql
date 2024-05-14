@@ -82,21 +82,25 @@ END; -- : Marque la fin du bloc de code du déclencheur.
 
 DELIMITER ; 
 
-CREATE TRIGGER insert_chambre BEFORE INSERT ON chambre FOR EACH ROW 
-BEGIN 
-    DECLARE total_capacity INT; 
+CREATE TRIGGER insert_chambre BEFORE INSERT ON chambre -- Crée un nouveau déclencheur qui sera declenché avant chaque insertion dans la table chambre
+FOR EACH ROW -- Cela s'applique à chaque ligne qui insérée
+BEGIN
+    DECLARE total_capacity INT;
     
-    -- Calculer le total des capacités des chambres pour l'hôtel concerné 
-    SELECT SUM(cha_capacite) INTO total_capacity 
-    FROM chambre 
-    WHERE cha_hot_id = NEW.cha_hot_id; 
+    -- Calculer le total des capacités des chambres pour l'hôtel concerné
+    SELECT SUM(cha_capacite) INTO total_capacity
+    FROM chambre
+    WHERE cha_hot_id = NEW.cha_hot_id;
     
-    -- Vérifier si le total des capacités dépasse 50 
-    IF (total_capacity + NEW.cha_capacite) > 50 THEN 
-        SIGNAL SQLSTATE '45000' 
-        SET MESSAGE_TEXT = 'La capacité totale de l\'hôtel dépasse 50.'; 
-    END IF; 
+    -- Vérifier si le total des capacités dépasse 50
+    IF (total_capacity IS NULL OR total_capacity + NEW.cha_capacite > 50) THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'La capacité totale de l\'hôtel dépasse 50.';
+    END IF;
 END;
+
+INSERT INTO chambre (cha_hot_id, cha_numero, cha_capacite, cha_type) VALUES 
+(1, 101, 3, 1); -- Cette insertion tente d'ajouter une chambre avec une capacité de 3 pour l'hôtel avec l'ID 1.
 
 
 
