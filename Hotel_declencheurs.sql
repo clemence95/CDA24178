@@ -54,3 +54,5 @@ END//
 
 DELIMITER ;
 
+INSERT INTO reservation (res_cha_id, res_cli_id, res_date, res_date_debut, res_date_fin, res_prix, res_arrhes) 
+VALUES (1, 1, '2024-05-15', '2024-06-01', '2024-06-15', 2000, 500);
