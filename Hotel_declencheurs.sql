@@ -84,8 +84,8 @@ DELIMITER ;
 
 CREATE TRIGGER insert_chambre BEFORE INSERT ON chambre -- Crée un nouveau déclencheur qui sera declenché avant chaque insertion dans la table chambre
 FOR EACH ROW -- Cela s'applique à chaque ligne qui insérée
-BEGIN
-    DECLARE total_capacity INT;
+BEGIN -- début du bloc de code exécuté par le déclencheur.
+    DECLARE total_capacity INT; -- Cette variable sera utilisée pour stocker le total des capacités des chambres pour un hôtel donné. Type entier
     
     -- Calculer le total des capacités des chambres pour l'hôtel concerné
     SELECT SUM(cha_capacite) INTO total_capacity
