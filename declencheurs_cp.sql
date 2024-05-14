@@ -18,7 +18,7 @@ CREATE TRIGGER maj_total AFTER INSERT ON lignedecommande
         SET tot_ajuste = tot * (1 - remise_coef / 100); -- Appliquer le coefficient de remise au total
     UPDATE commande SET total = tot_ajuste WHERE id = id_c;
     END;
-
+|
 DELIMITER ;
 
 
