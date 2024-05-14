@@ -2,19 +2,24 @@ USE cp;
 
 ALTER TABLE client ENGINE=InnoDB;
 
+DROP TRIGGER IF EXISTS maj_total;
 DELIMITER |
 CREATE TRIGGER maj_total AFTER INSERT ON lignedecommande
     FOR EACH ROW
     BEGIN
     DECLARE id_c INT;
     DECLARE tot DOUBLE;
-    SET id_c = NEW.id_commande; -- nous captons le numéro de commande concerné
-    SET tot = (SELECT sum(prix*quantite) FROM lignedecommande WHERE id_commande=id_c); -- on recalcule le total
-        -- SET tot = ??? (prévoir le calcul de la remise) 
-    UPDATE commande SET total=tot WHERE id=id_c; -- on stocke le total dans la table commande
+    DECLARE remise_coef DOUBLE; -- Coefficient de remise
+    SET id_c = NEW.id_commande;
+    SET remise_coef = (SELECT remise FROM commande WHERE id = id_c); -- Récupérer le coefficient de remise de la commande
+    SET tot = (SELECT SUM(prix * quantite) FROM lignedecommande WHERE id_commande = id_c);
+    SET tot = tot * (1 - remise_coef / 100); -- Appliquer la remise au total
+    UPDATE commande SET total = tot WHERE id = id_c;
     END;
 |
 DELIMITER ;
+
+
 
 DELIMITER |
 CREATE TRIGGER maj_total_insert AFTER INSERT ON lignedecommande
@@ -64,3 +69,6 @@ SELECT l.id_commande, p.id AS id_produit, p.designation AS designation_produit, 
 FROM lignedecommande l
 JOIN produit p ON l.id_produit = p.id
 WHERE l.id_commande = 3;
+
+-- supprimer le déclencheur maj_total, vous pouvez utiliser la commande suivante :
+DROP TRIGGER IF EXISTS maj_total;
