@@ -197,6 +197,16 @@ LEFT JOIN vente v ON lc.codart = v.codart
 WHERE v.codart IS NULL OR lc.qtecde > v.qte1;
 
 
+-- Application d'une augmentation de tarif de 4% pour le prix 1 et de 2%
+-- pour le prix2 pour le fournisseur 9180
+UPDATE vente
+SET prix1 = prix1 * 1.04, prix2 = prix2 * 1.02
+WHERE numfou = 9180;
+
+SELECT codart, numfou, prix1, prix2
+FROM vente
+WHERE numfou = 9180;
+
 
 
 
