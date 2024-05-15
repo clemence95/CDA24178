@@ -87,3 +87,13 @@ Quelle est la véritable suite de Fibonacci ?
 A : 0, 1,1, 2, 3, 5, 8, 13, 21, 34, 55,
 89,144...
 Pas d’erreur, il y a bien 2 fois 1 dans la véritable suite de Fibonacci.
+
+Quelles sont les 4 activités de l'intégration
+continue ?
+A : Develop, Build, Test end to
+end, Stage
+
+A quoi sert le Work in Progress (WIP) ?
+A : Déterminer la quantité de
+travail pour chaque état d'un
+workflow
