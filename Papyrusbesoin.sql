@@ -203,6 +203,7 @@ UPDATE vente
 SET prix1 = prix1 * 1.04, prix2 = prix2 * 1.02
 WHERE numfou = 9180;
 
+-- affiche les prix mis à jour pour le fournisseur 9180 dans la table "vente". 
 SELECT codart, numfou, prix1, prix2
 FROM vente
 WHERE numfou = 9180;
