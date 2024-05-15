@@ -1,0 +1,19 @@
+Définition de l'agilité :
+L'agilité est une approche de gestion de projet caractérisée par sa capacité à s'adapter rapidement et efficacement aux changements. Elle favorise la collaboration entre les membres de l'équipe, une planification itérative et une livraison incrémentale des produits ou des fonctionnalités. L'agilité met l'accent sur la satisfaction du client, la flexibilité et la qualité du produit final.
+
+Pourquoi l'Extreme Programming (XP) ? :
+L'Extreme Programming (XP) est une méthodologie de développement logiciel Agile qui met l'accent sur l'amélioration continue, la qualité du code et la satisfaction du client. Elle encourage des pratiques telles que la programmation en binôme, les tests automatisés, la rétroaction rapide et le développement itératif. XP vise à fournir rapidement des fonctionnalités de haute qualité tout en restant flexible face aux changements des exigences du client.
+
+Avantages de SCRUM :
+SCRUM offre plusieurs avantages, notamment :
+
+    Visibilité et transparence : grâce aux rôles clairement définis et aux réunions régulières, les progrès et les obstacles sont facilement visibles pour toute l'équipe.
+    Adaptabilité : la planification itérative des sprints permet à l'équipe de s'adapter rapidement aux changements de priorités ou de besoins du client.
+    Engagement des parties prenantes : les démonstrations régulières et les rétrospectives favorisent la collaboration et la satisfaction du client.
+    Livraison incrémentale : les fonctionnalités sont livrées de manière itérative, ce qui permet une rétroaction rapide et une meilleure adaptation aux besoins changeants.
+
+Sprint et intégration continue :
+Un sprint est une période de temps définie dans le cadre Scrum, généralement de deux à quatre semaines, pendant laquelle une équipe de développement travaille à livrer un ensemble de fonctionnalités définies lors de la planification du sprint. Pendant le sprint, l'équipe se réunit quotidiennement lors de réunions de scrum pour synchroniser le travail, discuter des progrès et identifier les obstacles potentiels. L'intégration continue est une pratique où les modifications de code sont automatiquement testées et intégrées dans le projet principal plusieurs fois par jour, garantissant ainsi une meilleure qualité du code et une livraison plus rapide des fonctionnalités.
+
+TDD (Test Driven Development) :
+Le Test Driven Development est une approche de développement logiciel où les tests automatisés sont écrits avant même que le code de production ne soit écrit. Le processus se déroule généralement en trois étapes : rédaction du test, exécution du test (qui échoue car le code de production n'a pas encore été écrit), puis écriture du code de production pour passer le test avec succès. Cette approche favorise une meilleure conception du code, une meilleure couverture de test et une réduction des erreurs logicielles.
