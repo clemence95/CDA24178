@@ -24,8 +24,8 @@ try {
     // Parcourir les résultats de la requête
     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
         // Afficher ou utiliser les données de chaque ligne
-        echo "ID: " . $row["id"]. " - Nom: " . $row["nom"]. " - Email: " . $row["email"]. "<br>";
-    }
+        echo "ID: " . $row["Id_Produit"] . " - Nom court: " . $row["Libelle_court"] . " - Nom long: " . $row["Libelle_long"] . " - Prix HT: " . $row["Prix_achat_HT"] . "<br>";
+    }    
 } catch (PDOException $e) {
     // En cas d'erreur de connexion à la base de données
     die("Erreur de connexion à la base de données: " . $e->getMessage());
