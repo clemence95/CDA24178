@@ -91,17 +91,18 @@
 @startuml
 actor Abonné
 actor "Personnel de la Bibliothèque" as Bibliothecaire
-actor "Système de Gestion de la Bibliothèque" as Systeme
+participant "Système de Gestion de la Bibliothèque" as Systeme
 
-Abonné -> Bibliothecaire : Présente la carte et les documents
-Bibliothecaire -> Systeme : Vérifie l'abonné
-Systeme --> Bibliothecaire : Renvoie le statut de la cotisation
-Bibliothecaire -> Systeme : Vérifie le nombre d'emprunts en cours
-Systeme --> Bibliothecaire : Renvoie le nombre d'emprunts
-Bibliothecaire -> Systeme : Vérifie la disponibilité des documents
-Systeme --> Bibliothecaire : Renvoie la disponibilité
-Bibliothecaire -> Systeme : Enregistre l'emprunt
-Systeme --> Bibliothecaire : Confirme l'emprunt
-Bibliothecaire --> Abonné : Informe du succès
-Quitte avec les documents
+Abonné -> Bibliothecaire: Présente la carte et les documents
+Bibliothecaire -> Systeme: Vérifie l'abonné
+Systeme --> Bibliothecaire: Renvoie le statut de la cotisation
+Bibliothecaire -> Systeme: Vérifie le nombre d'emprunts en cours
+Systeme --> Bibliothecaire: Renvoie le nombre d'emprunts
+Bibliothecaire -> Systeme: Vérifie la disponibilité des documents
+Systeme --> Bibliothecaire: Renvoie la disponibilité
+Bibliothecaire -> Systeme: Enregistre l'emprunt
+Systeme --> Bibliothecaire: Confirme l'emprunt
+Bibliothecaire --> Abonné: Informe du succès
+Abonné -> Abonné: Quitte avec les documents
 @enduml
+
