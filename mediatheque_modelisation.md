@@ -67,55 +67,34 @@ else
 end
 @enduml
 
-@startuml Bibliotheque
+@startuml EmpruntDocumentClassDiagram
 !theme toy
 
-class Abonne {
-  - numeroAbonne : int
-  - nom : string
-  - adresse : string
-  - cotisationPayee : bool
-  + empruntsEnCours() : int
-  + payerCotisation() : void
+class Abonné {
+    - numéroCarte: int
+    - nom: string
+    - dateCotisation: date
+    - nombreEmpruntsEnCours: int
 }
 
 class Document {
-  - cote : string
-  - titre : string
-  - datePublication : Date
-  + estDisponible() : bool
+    - cote: string
+    - titre: string
+    - disponibilité: bool
+    - dateRetour: date
 }
 
-class Livre extends Document {
-  - auteur : string
-  - genre : string
+class Bibliothèque {
+    - listeAbonnés: list<Abonné>
+    - listeDocuments: list<Document>
+    + vérifierAbonné(numéroCarte: int): bool
+    + vérifierDisponibilité(cote: string): bool
+    + enregistrerEmprunt(numéroCarte: int, cote: string, dateEmprunt: date): bool
 }
 
-class CD extends Document {
-  - artiste : string
-  - genre : string
-}
-
-class DVD extends Document {
-  - realisateur : string
-  - genre : string
-}
-
-class Emprunt {
-  - dateEmprunt : Date
-  + enregistrer() : void
-}
-
-class Bibliothecaire {
-  - nom : string
-  + verifierAbonne(numeroAbonne : int) : Abonne
-  + verifierDisponibilite(document : Document) : bool
-  + enregistrerEmprunt(abonne : Abonne, document : Document) : void
-}
-
-Abonne "1" -- "*" Emprunt : effectue
-Document "1" -- "*" Emprunt : concerne
-Bibliothecaire "1" -- "*" Emprunt : enregistre
+Abonné "1" -- "0..*" Document : emprunte
+Bibliothèque "1" -- "0..*" Abonné : contient
+Bibliothèque "1" -- "0..*" Document : contient
 
 @enduml
 
