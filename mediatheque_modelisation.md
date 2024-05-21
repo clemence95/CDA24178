@@ -119,7 +119,7 @@ Bibliothecaire "1" -- "*" Emprunt : enregistre
 
 @enduml
 
-@startuml
+@startuml Acitvite
 !theme toy
 
 start
