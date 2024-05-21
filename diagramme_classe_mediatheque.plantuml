@@ -1,41 +1,41 @@
-@startuml GestionBibliotheque
+@startuml Bibliothèque
+
+class Bibliothèque {
+    - nom: String
+    - adresse: String
+    - catalogue: List<Document>
+    - membres: List<Abonné>
+
+    + ajouterDocument(doc: Document): void
+    + supprimerDocument(doc: Document): void
+    + rechercherDocument(titre: String): Document
+    + emprunterDocument(doc: Document, abonné: Abonné): void
+    + retournerDocument(doc: Document): void
+    + inscrireAbonné(abonné: Abonné): void
+}
 
 class Document {
-  - cote: string
-  - titre: string
-  - date_publication: date
-  - type_document: string
-  - disponible: bool
-  + __init__(cote, titre, date_publication, type_document)
+    - titre: String
+    - auteur: String
+    - cote: String
+    - disponible: boolean
+
+    + emprunter(): void
+    + retourner(): void
 }
 
-class Abonne {
-  - numero: string
-  - nom: string
-  - adresse: string
-  - cotisation_payee: bool
-  - emprunts: list<Emprunt>
-  + __init__(numero, nom, adresse, cotisation_payee)
-  + peut_emprunter() : bool
+class Abonné {
+    - nom: String
+    - adresse: String
+    - numeroCarte: String
+    - emprunts: List<Document>
+
+    + emprunter(doc: Document): void
+    + retourner(doc: Document): void
 }
 
-class Emprunt {
-  - abonne_numero: string
-  - document_cote: string
-  - date_emprunt: date
-  - date_retour: date
-  + __init__(abonne_numero, document_cote, date_emprunt)
-}
+Bibliothèque -- Document
+Bibliothèque -- Abonné
 
-class Bibliotheque {
-  - documents: dict<string, Document>
-  - abonnes: dict<string, Abonne>
-  - emprunts: list<Emprunt>
-  + ajouter_document(document: Document)
-  + ajouter_abonne(abonne: Abonne)
-  + enregistrer_emprunt(abonne_numero: string, document_cote: string) : bool
-  + relancer_abonne() : list<string>
-  + modifier_adresse_abonne(abonne_numero: string, nouvelle_adresse: string)
-  + consulter_etat_abonne(abonne_numero: string) : dict
-}
 @enduml
+
