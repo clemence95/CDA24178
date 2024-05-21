@@ -30,6 +30,7 @@
 
 ```plantuml
 @startuml EmpruntDocument
+!pragma plantuml.server https://www.plantuml.com/plantuml
 actor Abonné
 actor "Personnel de la Bibliothèque" as Bibliothecaire
 participant "Système de Gestion de la Bibliothèque" as Systeme
