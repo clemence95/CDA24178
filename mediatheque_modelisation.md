@@ -29,7 +29,7 @@
 ### Diagramme de Séquence
 
 
-![ Texte alternatif](/chemin/access/image. jpg "Titre de l'image")
+![ Texte alternatif](/asset/diagramme_sequence.png "diagramme_sequence.png")
 
 
 ```plantuml
