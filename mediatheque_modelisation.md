@@ -52,3 +52,36 @@ else
 end
 @enduml
 
+--! Qu'est-ce qu'un diagramme de séquence UML ? !--
+
+Un diagramme de séquence UML (Unified Modeling Language) est un type de diagramme de comportement qui montre comment les objets interagissent dans un système en suivant une séquence temporelle. Il met en évidence l'ordre des messages échangés entre les objets pour accomplir une fonction spécifique.
+
+Lecture du diagramme de séquence
+
+    Acteurs et Participants :
+        Abonné : C'est l'utilisateur qui souhaite emprunter des documents.
+        Personnel de la Bibliothèque (alias Bibliothecaire) : C'est l'employé qui gère l'emprunt des documents.
+        Système de Gestion de la Bibliothèque (alias Systeme) : C'est le système informatique utilisé pour gérer les emprunts de la bibliothèque.
+
+    Séquence d'Interactions :
+        Abonné -> Bibliothecaire : L'abonné présente sa carte et les documents qu'il souhaite emprunter au bibliothécaire.
+        Bibliothecaire -> Systeme : Le bibliothécaire vérifie les informations de l'abonné dans le système.
+        Systeme --> Bibliothecaire : Le système renvoie le statut de la cotisation de l'abonné au bibliothécaire (par exemple, si la cotisation est à jour).
+        Bibliothecaire -> Systeme : Le bibliothécaire vérifie le nombre d'emprunts en cours de l'abonné.
+        Systeme --> Bibliothecaire : Le système renvoie le nombre d'emprunts actuels de l'abonné.
+        Bibliothecaire -> Systeme : Le bibliothécaire vérifie la disponibilité des documents que l'abonné souhaite emprunter.
+        Systeme --> Bibliothecaire : Le système renvoie les informations sur la disponibilité des documents.
+        Bibliothecaire -> Systeme : Le bibliothécaire enregistre l'emprunt des documents dans le système.
+        Systeme --> Bibliothecaire : Le système confirme l'enregistrement de l'emprunt.
+        Bibliothecaire --> Abonné : Le bibliothécaire informe l'abonné que l'emprunt a été enregistré avec succès.
+        Abonné -> Abonné : L'abonné quitte la bibliothèque avec les documents empruntés.
+
+Points Clés du Diagramme
+
+    Flèches Pleines avec Pointe Simple : Représentent l'envoi de messages ou de requêtes d'une entité à une autre.
+    Flèches en Tirets avec Pointe Simple : Représentent les réponses ou les retours d'information des systèmes ou des participants.
+    Lifelines (lignes de vie) : Les lignes verticales sous chaque acteur ou participant représentent le temps qui passe. Les messages sont envoyés de haut en bas pour montrer la séquence chronologique.
+
+Conclusion
+
+Ce diagramme de séquence montre comment un abonné interagit avec le personnel de la bibliothèque et le système de gestion pour emprunter des documents. Il détaille chaque étape de l'interaction, de la présentation de la carte à l'enregistrement de l'emprunt, en passant par les vérifications nécessaires.
