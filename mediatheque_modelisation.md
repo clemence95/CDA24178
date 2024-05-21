@@ -28,6 +28,10 @@
 
 ### Diagramme de Séquence
 
+
+![ Texte alternatif](/chemin/access/image. jpg "Titre de l'image")
+
+
 ```plantuml
 @startuml EmpruntDocument
 !pragma plantuml.server https://www.plantuml.com/plantuml
