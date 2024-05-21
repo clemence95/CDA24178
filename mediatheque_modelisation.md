@@ -56,9 +56,9 @@ else alt Plus de 5 emprunts
     Bibliothecaire --> Abonné: Refuse l'emprunt (limite d'emprunts atteinte)
 else
     Bibliothecaire -> Systeme: Vérifie la disponibilité des documents
-    Systeme --> Bibliothecaire: Renvoie la disponibilité des documents
+    Systeme --> Bibliothecaire: Renvoie la disponibilité des documents et la date de retour si non disponible
     alt Document non disponible
-        Bibliothecaire --> Abonné: Informe de l'indisponibilité du document
+        Bibliothecaire --> Abonné: Informe de l'indisponibilité du document et de la date de retour
     else
         Bibliothecaire -> Systeme: Enregistre l'emprunt (n° abonné, côte document, date)
         Systeme --> Bibliothecaire: Confirme l'enregistrement
