@@ -1,87 +1,28 @@
 # Modélisation de la Médiathèque
 
-## 1. Identification des Acteurs
+### Identification des Acteurs
 
-**Acteurs Principaux :**
+- **Abonné** : Personne inscrite à la médiathèque qui souhaite emprunter des ressources.
+- **Personnel de la Médiathèque** : Employés ou bénévoles responsables de la gestion des ressources et des emprunts.
 
-- **Abonné**
-    - Rôle : Emprunte des documents, consulte la liste des documents, modifie ses coordonnées.
-- **Personnel de la Bibliothèque**
-    - Rôle : Enregistre les abonnés, enregistre les emprunts, modifie les coordonnées des abonnés, envoie des relances, consulte les états des abonnés.
-- **Bénévole**
-    - Rôle : Enregistre les emprunts (durant une période limitée).
-- **Système de Gestion de la Bibliothèque**
-    - Rôle : Gère les documents, les emprunts, les abonnés et les relances.
+### Cas d'Usage : Emprunt d'une Ressource
 
-## 2. Identification des Cas d'Usage
+**Scénario Principal** :
+1. L'Abonné se rend à la médiathèque pour emprunter une ressource.
+2. L'Abonné présente sa carte d'abonné au Personnel de la Médiathèque.
+3. Le Personnel de la Médiathèque vérifie l'abonné dans le système.
+4. Le Personnel de la Médiathèque enregistre l'emprunt de la ressource pour l'abonné.
+5. L'Abonné reçoit la ressource empruntée et sa carte d'abonné est mise à jour.
 
-### Gestion des Documents
+**Scénarios Alternatifs** :
+- **Cotisation Non Payée** :
+  - Le Personnel de la Médiathèque informe l'Abonné que sa cotisation n'est pas payée et refuse l'emprunt.
+- **Limite d'Emprunts Atteinte** :
+  - Le Personnel de la Médiathèque informe l'Abonné qu'il a atteint sa limite d'emprunts et refuse l'emprunt.
+- **Ressource Indisponible** :
+  - Le Personnel de la Médiathèque informe l'Abonné que la ressource demandée n'est pas disponible.
+  - L'Abonné peut choisir une autre ressource ou attendre que celle-ci soit disponible.
 
-- Ajouter un document
-- Modifier un document
-- Supprimer un document
-- Consulter la liste des documents
-
-### Gestion des Abonnés
-
-- Ajouter un abonné
-- Modifier les coordonnées d'un abonné
-- Consulter l'état d'un abonné
-
-### Gestion des Emprunts
-
-- Enregistrer un emprunt
-- Retourner un emprunt
-- Envoyer des relances pour les emprunts en retard
-
-### Consultation des Documents
-
-- Rechercher des documents par différents critères
-- Vérifier la disponibilité d'un document
-
-## 3. Scénario Principal et Scénarios Alternatifs pour l'Emprunt d'une Ressource
-
-### Scénario Principal : Emprunt d'une Ressource
-
-**Acteurs :** Abonné, Personnel de la Bibliothèque (ou Bénévole), Système de Gestion de la Bibliothèque
-
-**Préconditions :**
-- L'abonné doit avoir une carte valide.
-- L'abonné doit avoir payé sa cotisation.
-- L'abonné doit avoir moins de 5 emprunts en cours.
-- Le document doit être disponible.
-
-**Postconditions :**
-- L'emprunt est enregistré.
-- Le document est marqué comme emprunté.
-
-**Scénario Principal :**
-
-1. L'abonné se présente au guichet avec sa carte et les documents qu'il souhaite emprunter.
-2. Le personnel (ou le bénévole) demande la carte de l'abonné et vérifie son statut dans le Système de Gestion de la Bibliothèque.
-3. Le système vérifie que l'abonné a payé sa cotisation et qu'il a moins de 5 emprunts en cours.
-4. Le personnel scanne les côtes des documents pour vérifier leur disponibilité.
-5. Le système enregistre les emprunts et met à jour le statut des documents comme "empruntés".
-6. Le personnel informe l'abonné de la date de retour des documents.
-7. L'abonné quitte le guichet avec les documents empruntés.
-
-### Scénarios Alternatifs
-
-**Scénario Alternatif A (Cotisation non payée) :**
-- Le personnel informe l'abonné que sa cotisation n'est pas à jour.
-- L'abonné doit payer sa cotisation avant de pouvoir emprunter des documents.
-
-**Scénario Alternatif B (Nombre d'emprunts maximum atteint) :**
-- Le système informe le personnel que l'abonné a déjà 5 emprunts en cours.
-- Le personnel informe l'abonné qu'il ne peut pas emprunter de nouveaux documents jusqu'à ce qu'il en retourne.
-
-**Scénario Alternatif C (Document indisponible) :**
-- Le personnel scanne les côtes des documents et le système indique qu'un ou plusieurs documents ne sont pas disponibles (déjà empruntés ou perdus).
-- Le personnel informe l'abonné de la situation et demande s'il souhaite emprunter d'autres documents à la place.
-
-**Scénario Alternatif D (Emprunt par un bénévole en dehors de la période autorisée) :**
-- Le bénévole tente d'enregistrer un emprunt en dehors de la période autorisée pour les bénévoles.
-- Le système refuse l'emprunt et le bénévole informe l'abonné qu'il doit se rendre au guichet avec un membre du personnel pour enregistrer l'emprunt.
 
 ## 4. Diagrammes UML
 
