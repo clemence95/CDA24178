@@ -30,6 +30,9 @@
 
 
 ![ Texte alternatif](/asset/diagramme_sequence.png "diagramme_sequence.png")
+
+### Diagramme de Classe
+
 ![ Texte alternatif](/asset/diagramme_classe.png "diagramme_classe.png")
 
 ```plantuml
