@@ -119,5 +119,28 @@ Bibliothecaire "1" -- "*" Emprunt : enregistre
 
 @enduml
 
+@startuml
+!theme toy
 
+start
+
+:Présenter la carte et les documents;
+
+:Vérifier l'abonné;
+if (Cotisation payée et moins de 5 emprunts ?) then (oui)
+    :Vérifier la disponibilité des documents;
+    if (Documents disponibles ?) then (oui)
+        :Enregistrer l'emprunt;
+        :Confirmer l'emprunt à l'abonné;
+    else (non)
+        :Informer de l'indisponibilité du document;
+    endif
+else (non)
+    :Refuser l'emprunt;
+endif
+
+:Quitter avec ou sans documents;
+
+stop
+@enduml
 
