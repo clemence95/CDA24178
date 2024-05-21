@@ -63,6 +63,57 @@ else
 end
 @enduml
 
+@startuml Bibliotheque
+!theme toy
+
+class Abonne {
+  - numeroAbonne : int
+  - nom : string
+  - adresse : string
+  - cotisationPayee : bool
+  + empruntsEnCours() : int
+  + payerCotisation() : void
+}
+
+class Document {
+  - cote : string
+  - titre : string
+  - datePublication : Date
+  + estDisponible() : bool
+}
+
+class Livre extends Document {
+  - auteur : string
+  - genre : string
+}
+
+class CD extends Document {
+  - artiste : string
+  - genre : string
+}
+
+class DVD extends Document {
+  - realisateur : string
+  - genre : string
+}
+
+class Emprunt {
+  - dateEmprunt : Date
+  + enregistrer() : void
+}
+
+class Bibliothecaire {
+  - nom : string
+  + verifierAbonne(numeroAbonne : int) : Abonne
+  + verifierDisponibilite(document : Document) : bool
+  + enregistrerEmprunt(abonne : Abonne, document : Document) : void
+}
+
+Abonne "1" -- "*" Emprunt : effectue
+Document "1" -- "*" Emprunt : concerne
+Bibliothecaire "1" -- "*" Emprunt : enregistre
+
+@enduml
 
 
 
