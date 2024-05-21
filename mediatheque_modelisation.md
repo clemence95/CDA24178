@@ -88,21 +88,26 @@
 ### Diagramme de Séquence
 
 ```plantuml
-@startuml
+@startuml EmpruntDocument
 actor Abonné
 actor "Personnel de la Bibliothèque" as Bibliothecaire
 participant "Système de Gestion de la Bibliothèque" as Systeme
 
 Abonné -> Bibliothecaire: Présente la carte et les documents
 Bibliothecaire -> Systeme: Vérifie l'abonné
-Systeme --> Bibliothecaire: Renvoie le statut de la cotisation
-Bibliothecaire -> Systeme: Vérifie le nombre d'emprunts en cours
-Systeme --> Bibliothecaire: Renvoie le nombre d'emprunts
-Bibliothecaire -> Systeme: Vérifie la disponibilité des documents
-Systeme --> Bibliothecaire: Renvoie la disponibilité
-Bibliothecaire -> Systeme: Enregistre l'emprunt
-Systeme --> Bibliothecaire: Confirme l'emprunt
-Bibliothecaire --> Abonné: Informe du succès
-Abonné -> Abonné: Quitte avec les documents
+Systeme --> Bibliothecaire: Renvoie le statut de la cotisation et le nombre d'emprunts en cours
+alt Cotisation non payée ou plus de 5 emprunts
+    Bibliothecaire --> Abonné: Refuse l'emprunt
+else
+    Bibliothecaire -> Systeme: Vérifie la disponibilité des documents
+    Systeme --> Bibliothecaire: Renvoie la disponibilité des documents
+    alt Document non disponible
+        Bibliothecaire --> Abonné: Informe de l'indisponibilité du document
+    else
+        Bibliothecaire -> Systeme: Enregistre l'emprunt (n° abonné, côte document, date)
+        Systeme --> Bibliothecaire: Confirme l'enregistrement
+        Bibliothecaire --> Abonné: Confirme l'emprunt
+    end
+end
 @enduml
 
