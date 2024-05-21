@@ -34,7 +34,7 @@
 
 ```plantuml
 @startuml EmpruntDocument
-!pragma plantuml.server https://www.plantuml.com/plantuml
+!theme toy
 actor Abonné
 actor "Personnel de la Bibliothèque" as Bibliothecaire
 participant "Système de Gestion de la Bibliothèque" as Systeme
@@ -42,8 +42,11 @@ participant "Système de Gestion de la Bibliothèque" as Systeme
 Abonné -> Bibliothecaire: Présente la carte et les documents
 Bibliothecaire -> Systeme: Vérifie l'abonné
 Systeme --> Bibliothecaire: Renvoie le statut de la cotisation et le nombre d'emprunts en cours
-alt Cotisation non payée ou plus de 5 emprunts
-    Bibliothecaire --> Abonné: Refuse l'emprunt
+
+alt Cotisation non payée
+    Bibliothecaire --> Abonné: Refuse l'emprunt (cotisation non payée)
+else alt Plus de 5 emprunts
+    Bibliothecaire --> Abonné: Refuse l'emprunt (limite d'emprunts atteinte)
 else
     Bibliothecaire -> Systeme: Vérifie la disponibilité des documents
     Systeme --> Bibliothecaire: Renvoie la disponibilité des documents
