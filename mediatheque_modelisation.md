@@ -35,6 +35,10 @@
 
 ![ Texte alternatif](/asset/diagramme_classe.png "diagramme_classe.png")
 
+### Diagramme d'activité
+
+![ Texte alternatif](/asset/diagramme_activite.png "diagramme_activite.png")
+
 ```plantuml
 @startuml EmpruntDocument
 !theme toy
