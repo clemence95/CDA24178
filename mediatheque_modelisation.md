@@ -44,43 +44,57 @@
 ![ Texte alternatif](/asset/diagramme_activite.png "diagramme_activite.png")
 
 ```plantuml
-@startuml EmpruntDocument
+@startuml
 !theme toy
 actor Abonné
 actor "Personnel de la Bibliothèque" as Bibliothecaire
+actor "Bénévole" as Benevole
 participant "Système de Gestion de la Bibliothèque" as Systeme
 
+== Inscription d'un nouvel abonné ==
+Abonné -> Bibliothecaire: Demande l'inscription
+Bibliothecaire -> Systeme: Enregistre l'abonné
+
+== Consultation de la liste des documents ==
+Abonné -> Systeme: Recherche de documents (par type, auteur, côte, titre)
+Systeme --> Abonné: Affiche les résultats de la recherche
+
+== Emprunt de documents ==
 Abonné -> Bibliothecaire: Présente la carte et les documents
 Bibliothecaire -> Systeme: Vérifie l'abonné
 Systeme --> Bibliothecaire: Renvoie le statut de la cotisation et le nombre d'emprunts en cours
 
-alt Abonné non inscrit
-    Bibliothecaire --> Abonné: Demande l'inscription
-else
-    alt Cotisation non payée
-        Bibliothecaire --> Abonné: Refuse l'emprunt (cotisation non payée)
-    else alt Plus de 5 emprunts
-        Bibliothecaire --> Abonné: Refuse l'emprunt (limite d'emprunts atteinte)
-    else
-        Bibliothecaire -> Systeme: Vérifie la disponibilité des documents
-        Systeme --> Bibliothecaire: Renvoie la disponibilité des documents
+Bibliothecaire -> Abonné: Demande l'inscription [si abonné non inscrit]
+Bibliothecaire -> Abonné: Refuse l'emprunt [si cotisation non payée]
+Bibliothecaire -> Abonné: Refuse l'emprunt [si plus de 5 emprunts]
 
-        alt Document non disponible
-            Bibliothecaire --> Abonné: Informe de l'indisponibilité du document et de la date de retour
-        else
-            Bibliothecaire -> Systeme: Vérifie si le document est perdu
-            Systeme --> Bibliothecaire: Renvoie le statut du document (perdu ou non)
-            alt Document perdu
-                Bibliothecaire -> Systeme: Signale le document comme perdu
-                Bibliothecaire --> Abonné: Informe que le document est perdu
-            else
-                Bibliothecaire -> Systeme: Enregistre l'emprunt (n° abonné, côte document, date)
-                Systeme --> Bibliothecaire: Confirme l'enregistrement
-                Bibliothecaire --> Abonné: Confirme l'emprunt
-            end
-        end
-    end
-end
+Bibliothecaire -> Systeme: Vérifie la disponibilité des documents
+Systeme --> Bibliothecaire: Renvoie la disponibilité des documents
+Bibliothecaire -> Abonné: Informe de l'indisponibilité du document et de la date de retour [si document non disponible]
+
+Bibliothecaire -> Systeme: Vérifie si le document est perdu
+Systeme --> Bibliothecaire: Renvoie le statut du document (perdu ou non)
+Bibliothecaire -> Systeme: Signale le document comme perdu [si document perdu]
+Bibliothecaire -> Abonné: Informe que le document est perdu [si document perdu]
+
+Bibliothecaire -> Systeme: Enregistre l'emprunt (n° abonné, côte document, date)
+Systeme --> Bibliothecaire: Confirme l'enregistrement
+Bibliothecaire --> Abonné: Confirme l'emprunt
+
+== Relance après 4 semaines ==
+Bibliothecaire -> Systeme: Génère les lettres de relance
+Systeme --> Bibliothecaire: Liste des abonnés à relancer
+Bibliothecaire -> Abonné: Envoie une lettre de relance
+
+== Modification des coordonnées de l'abonné ==
+Abonné -> Bibliothecaire: Demande la modification des coordonnées
+Bibliothecaire -> Systeme: Modifie les coordonnées
+Systeme --> Bibliothecaire: Confirme la modification
+Bibliothecaire --> Abonné: Confirme la modification
+
+== Consultation de l'état des abonnés ==
+Bibliothecaire -> Systeme: Consulte l'état des abonnés
+Systeme --> Bibliothecaire: Affiche l'état des abonnés (nombre d'emprunts, cotisation, etc.)
 @enduml
 
 @startuml
