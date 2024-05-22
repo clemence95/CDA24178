@@ -25,7 +25,7 @@
   - Le Personnel de la Médiathèque informe l'Abonné que la ressource demandée n'est pas disponible.
   - L'Abonné peut choisir une autre ressource ou attendre que celle-ci soit disponible.
 - **Document Perdu** : 
-  - Le personnel de la médiathéque informe l'Abonné que le document est perdu
+  - Le personnel de la médiathéque informe l'Abonné que le document est perdu.
 
 
 ## 4. Diagrammes UML
