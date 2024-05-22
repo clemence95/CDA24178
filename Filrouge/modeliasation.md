@@ -6,6 +6,8 @@
 
 - **Commercial** : Personne chargée de gérer les clients professionnels, de négocier les réductions et de gérer les stocks des produits.
 
+- **Fournisseur** : Entreprise ou entité fournissant des produits à l'entreprise Village Green, responsable de la mise à jour du catalogue et de la gestion des approvisionnements.
+
 ### Scénario Principal :
 
 1. **Consultation et Commande de Produits** :
