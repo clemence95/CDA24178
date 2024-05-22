@@ -87,6 +87,7 @@ abstract class Document {
   +titre: String
   +datePublication: Date
   +estDisponible: bool
+  +estPerdu: bool
 }
 
 class Livre extends Document {
@@ -110,6 +111,7 @@ class Bibliothecaire {
   +verifierAbonne(id: int): Abonne
   +verifierDisponibiliteDocument(cote: String): Document
   +enregistrerEmprunt(abonne: Abonne, document: Document): Emprunt
+  +signalerDocumentPerdu(cote: String)
   +envoyerRelance(abonne: Abonne)
 }
 
@@ -122,14 +124,20 @@ class Systeme {
   +verifierAbonne(id: int): Abonne
   +verifierDisponibiliteDocument(cote: String): Document
   +enregistrerEmprunt(abonne: Abonne, document: Document): Emprunt
+  +signalerDocumentPerdu(cote: String)
   +envoyerRelance(abonne: Abonne)
   +consulterDocuments(criteria: String): List<Document>
 }
 
 Abonne "1" -- "0..*" Emprunt : effectue >
 Document "1" -- "0..*" Emprunt : concerne >
+Emprunt "0..*" -- "1" Abonne : < effectué par
+Emprunt "0..*" -- "1" Document : < concerne
 Bibliothecaire "1" -- "1" Systeme : utilise >
 Benevole "1" -- "1" Systeme : utilise >
+Systeme "1" -- "0..*" Emprunt : gère >
+Systeme "1" -- "0..*" Abonne : vérifie >
+Systeme "1" -- "0..*" Document : vérifie >
 
 @enduml
 
@@ -154,9 +162,14 @@ else (non)
     else (non)
       :Vérifie la disponibilité des documents;
       if (Document disponible?) then (oui)
-        :Enregistre l'emprunt;
-        :Confirme l'emprunt;
-        stop
+        if (Document perdu?) then (oui)
+          :Signale le document comme perdu;
+          stop
+        else (non)
+          :Enregistre l'emprunt;
+          :Confirme l'emprunt;
+          stop
+        endif
       else (non)
         :Informe de l'indisponibilité du document;
         :et de la date de retour;
