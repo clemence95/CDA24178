@@ -69,59 +69,103 @@ else
 end
 @enduml
 
-@startuml EmpruntDocumentClassDiagram
+@startuml
 !theme toy
 
-class Abonné {
-    - numéroCarte: int
-    - nom: string
-    - dateCotisation: date
-    - nombreEmpruntsEnCours: int
+class Abonne {
+  +id: int
+  +nom: String
+  +adresse: String
+  +cotisationPayee: bool
+  +nombreEmprunts: int
+  +modifierCoordonnees(nouvelleAdresse: String)
+  +consulterEtat(): String
 }
 
-class Document {
-    - cote: string
-    - titre: string
-    - disponibilité: bool
-    - dateRetour: date
+abstract class Document {
+  +cote: String
+  +titre: String
+  +datePublication: Date
+  +estDisponible: bool
 }
 
-class Bibliothèque {
-    - listeAbonnés: list<Abonné>
-    - listeDocuments: list<Document>
-    + vérifierAbonné(numéroCarte: int): bool
-    + vérifierDisponibilité(cote: string): bool
-    + enregistrerEmprunt(numéroCarte: int, cote: string, dateEmprunt: date): bool
+class Livre extends Document {
 }
 
-Abonné "1" -- "0..*" Document : emprunte
-Bibliothèque "1" -- "0..*" Abonné : contient
-Bibliothèque "1" -- "0..*" Document : contient
+class Journal extends Document {
+  +consultationSurPlace: bool = true
+}
+
+class Media extends Document {
+  +type: String
+}
+
+class Emprunt {
+  +id: int
+  +dateEmprunt: Date
+  +dateRetour: Date
+}
+
+class Bibliothecaire {
+  +verifierAbonne(id: int): Abonne
+  +verifierDisponibiliteDocument(cote: String): Document
+  +enregistrerEmprunt(abonne: Abonne, document: Document): Emprunt
+  +envoyerRelance(abonne: Abonne)
+}
+
+class Benevole {
+  +periodeActive: Date
+  +enregistrerEmprunt(abonne: Abonne, document: Document): Emprunt
+}
+
+class Systeme {
+  +verifierAbonne(id: int): Abonne
+  +verifierDisponibiliteDocument(cote: String): Document
+  +enregistrerEmprunt(abonne: Abonne, document: Document): Emprunt
+  +envoyerRelance(abonne: Abonne)
+  +consulterDocuments(criteria: String): List<Document>
+}
+
+Abonne "1" -- "0..*" Emprunt : effectue >
+Document "1" -- "0..*" Emprunt : concerne >
+Bibliothecaire "1" -- "1" Systeme : utilise >
+Benevole "1" -- "1" Systeme : utilise >
 
 @enduml
 
-@startuml Acitvite
+@startuml
 !theme toy
 
 start
-
-:Présenter la carte et les documents;
-
-:Vérifier l'abonné;
-if (Cotisation payée et moins de 5 emprunts ?) then (oui)
-    :Vérifier la disponibilité des documents;
-    if (Documents disponibles ?) then (oui)
-        :Enregistrer l'emprunt;
-        :Confirmer l'emprunt à l'abonné;
-    else (non)
-        :Informer de l'indisponibilité du document;
-    endif
+:Présente la carte et les documents;
+:Vérifie l'abonné;
+if (Abonné non inscrit?) then (oui)
+  :Demande l'inscription;
+  stop
 else (non)
-    :Refuser l'emprunt;
+  :Vérifie la cotisation et le nombre d'emprunts;
+  if (Cotisation non payée?) then (oui)
+    :Refuse l'emprunt (cotisation non payée);
+    stop
+  else (non)
+    if (Plus de 5 emprunts?) then (oui)
+      :Refuse l'emprunt (limite d'emprunts atteinte);
+      stop
+    else (non)
+      :Vérifie la disponibilité des documents;
+      if (Document disponible?) then (oui)
+        :Enregistre l'emprunt;
+        :Confirme l'emprunt;
+        stop
+      else (non)
+        :Informe de l'indisponibilité du document;
+        :et de la date de retour;
+        stop
+      endif
+    endif
+  endif
 endif
 
-:Quitter avec ou sans documents;
-
-stop
 @enduml
+
 
