@@ -15,6 +15,8 @@
 5. L'Abonné reçoit la ressource empruntée et sa carte d'abonné est mise à jour.
 
 **Scénarios Alternatifs** :
+- **Abonné non inscrit** : 
+  - Le Personnel de la mediathéque demande à l'abonné de s'inscrire
 - **Cotisation Non Payée** :
   - Le Personnel de la Médiathèque informe l'Abonné que sa cotisation n'est pas payée et refuse l'emprunt.
 - **Limite d'Emprunts Atteinte** :
