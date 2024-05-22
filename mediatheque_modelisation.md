@@ -52,19 +52,31 @@ Abonné -> Bibliothecaire: Présente la carte et les documents
 Bibliothecaire -> Systeme: Vérifie l'abonné
 Systeme --> Bibliothecaire: Renvoie le statut de la cotisation et le nombre d'emprunts en cours
 
-alt Cotisation non payée
-    Bibliothecaire --> Abonné: Refuse l'emprunt (cotisation non payée)
-else alt Plus de 5 emprunts
-    Bibliothecaire --> Abonné: Refuse l'emprunt (limite d'emprunts atteinte)
+alt Abonné non inscrit
+    Bibliothecaire --> Abonné: Demande l'inscription
 else
-    Bibliothecaire -> Systeme: Vérifie la disponibilité des documents
-    Systeme --> Bibliothecaire: Renvoie la disponibilité des documents et la date de retour si non disponible
-    alt Document non disponible
-        Bibliothecaire --> Abonné: Informe de l'indisponibilité du document et de la date de retour
+    alt Cotisation non payée
+        Bibliothecaire --> Abonné: Refuse l'emprunt (cotisation non payée)
+    else alt Plus de 5 emprunts
+        Bibliothecaire --> Abonné: Refuse l'emprunt (limite d'emprunts atteinte)
     else
-        Bibliothecaire -> Systeme: Enregistre l'emprunt (n° abonné, côte document, date)
-        Systeme --> Bibliothecaire: Confirme l'enregistrement
-        Bibliothecaire --> Abonné: Confirme l'emprunt
+        Bibliothecaire -> Systeme: Vérifie la disponibilité des documents
+        Systeme --> Bibliothecaire: Renvoie la disponibilité des documents
+
+        alt Document non disponible
+            Bibliothecaire --> Abonné: Informe de l'indisponibilité du document et de la date de retour
+        else
+            Bibliothecaire -> Systeme: Vérifie si le document est perdu
+            Systeme --> Bibliothecaire: Renvoie le statut du document (perdu ou non)
+            alt Document perdu
+                Bibliothecaire -> Systeme: Signale le document comme perdu
+                Bibliothecaire --> Abonné: Informe que le document est perdu
+            else
+                Bibliothecaire -> Systeme: Enregistre l'emprunt (n° abonné, côte document, date)
+                Systeme --> Bibliothecaire: Confirme l'enregistrement
+                Bibliothecaire --> Abonné: Confirme l'emprunt
+            end
+        end
     end
 end
 @enduml
