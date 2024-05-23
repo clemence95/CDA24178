@@ -1,31 +1,52 @@
-# Modélisation de la Médiathèque
+## Identification des Acteurs
 
-### Identification des Acteurs
+- **Abonné** : Utilisateur qui emprunte des documents.
+- **Bibliothécaire** : Personne qui gère les opérations de la bibliothèque, telles que l'enregistrement des emprunts et la vérification des abonnements.
+- **Système de Gestion de la Bibliothèque (SGB)** : Système qui automatise les processus de gestion des prêts et des retours de documents.
 
-- **Abonné** : Personne inscrite à la médiathèque qui souhaite emprunter des ressources.
-- **Personnel de la Médiathèque** : Employés ou bénévoles responsables de la gestion des ressources et des emprunts.
+## Cas d'Usage Identifiés
 
-### Cas d'Usage : Emprunt d'une Ressource
+1. Inscription d'un nouvel abonné
+2. Paiement de la cotisation
+3. Emprunt de documents
+4. Retour de documents
+5. Vérification de la disponibilité des documents
+6. Envoi de lettres de relance pour les documents non retournés
+7. Gestion des abonnés (par le bibliothécaire)
+8. Gestion des documents (par le bibliothécaire)
 
-**Scénario Principal** :
-1. L'Abonné se rend à la médiathèque pour emprunter une ressource.
-2. L'Abonné présente sa carte d'abonné au Personnel de la Médiathèque.
-3. Le Personnel de la Médiathèque vérifie l'abonné dans le système.
-4. Le Personnel de la Médiathèque enregistre l'emprunt de la ressource pour l'abonné.
-5. L'Abonné reçoit la ressource empruntée et sa carte d'abonné est mise à jour.
+## Cas d'Usage : Emprunt d'une Ressource
 
-**Scénarios Alternatifs** :
-- **Abonné non inscrit** : 
-  - Le Personnel de la mediathéque demande à l'abonné de s'inscrire
-- **Cotisation Non Payée** :
-  - Le Personnel de la Médiathèque informe l'Abonné que sa cotisation n'est pas payée et refuse l'emprunt.
-- **Limite d'Emprunts Atteinte** :
-  - Le Personnel de la Médiathèque informe l'Abonné qu'il a atteint sa limite d'emprunts et refuse l'emprunt.
-- **Ressource Indisponible** :
-  - Le Personnel de la Médiathèque informe l'Abonné que la ressource demandée n'est pas disponible.
-  - L'Abonné peut choisir une autre ressource ou attendre que celle-ci soit disponible.
-- **Document Perdu** : 
-  - Le personnel de la médiathéque informe l'Abonné que le document est perdu.
+### Scénario Principal (Emprunt de document)
+
+- **Acteur** : Abonné
+- **Précondition** : L'abonné doit être inscrit et avoir payé sa cotisation. Il ne doit pas avoir plus de 5 emprunts en cours.
+- **Description** :
+  1. L'abonné sélectionne le document qu'il souhaite emprunter.
+  2. L'abonné demande à emprunter le document.
+  3. Le Système de Gestion de la Bibliothèque (SGB) vérifie que l'abonné a payé sa cotisation et qu'il a moins de 5 emprunts en cours.
+  4. Le SGB vérifie la disponibilité du document.
+  5. Si toutes les conditions sont remplies, le SGB enregistre l'emprunt.
+  6. L'abonné reçoit une confirmation de l'emprunt.
+- **Postcondition** : Le document est marqué comme emprunté et le nombre d'emprunts en cours de l'abonné est mis à jour.
+
+### Scénarios Alternatifs
+
+1. **Condition de cotisation non remplie** :
+   1. Le SGB vérifie que l'abonné a payé sa cotisation.
+   2. Si la cotisation n'est pas payée, le SGB refuse l'emprunt.
+   3. L'abonné reçoit un message indiquant qu'il doit payer sa cotisation pour emprunter des documents.
+
+2. **Nombre maximal d'emprunts atteint** :
+   1. Le SGB vérifie le nombre d'emprunts en cours de l'abonné.
+   2. Si l'abonné a déjà 5 emprunts en cours, le SGB refuse l'emprunt.
+   3. L'abonné reçoit un message indiquant qu'il doit retourner des documents avant de pouvoir en emprunter de nouveaux.
+
+3. **Document non disponible** :
+   1. Le SGB vérifie la disponibilité du document.
+   2. Si le document n'est pas disponible (déjà emprunté par un autre abonné), le SGB refuse l'emprunt.
+   3. L'abonné reçoit un message indiquant que le document n'est pas disponible actuellement.
+
 
 
 ## 4. Diagrammes UML
@@ -49,50 +70,75 @@
 title Sequence Diagram - Gestion des prêts de documents à la bibliothèque
 
 actor Abonné
-actor Bibliothécaire
+actor Employé
+actor Bénévole
 participant "Système de Gestion de la Bibliothèque" as SGB
+participant "Base de données" as DB
 
-Abonné -> Bibliothécaire: Présente la carte et les documents
-Bibliothécaire -> SGB: Vérifie la carte de l'abonné
+Abonné -> Employé: Présente la carte et les documents
+Employé -> SGB: Vérifie la carte de l'abonné
+SGB -> DB: Rechercher abonné par carteID
+DB --> SGB: Détails de l'abonné
+
 alt Carte non valide
-    SGB -> Bibliothécaire: Proposer inscription
-    Bibliothécaire -> Abonné: Proposer inscription
-    Abonné -> Bibliothécaire: Accepte l'inscription
-    Bibliothécaire -> SGB: Inscription de l'abonné
-    SGB -> Bibliothécaire: Confirmation d'inscription
-    Bibliothécaire -> Abonné: Confirmation d'inscription
+    SGB -> Employé: Proposer inscription
+    Employé -> Abonné: Proposer inscription
+    Abonné -> Employé: Accepte l'inscription
+    Employé -> SGB: Inscription de l'abonné
+    SGB -> DB: Enregistrer nouvel abonné
+    DB --> SGB: Confirmation d'inscription
+    SGB -> Employé: Confirmation d'inscription
+    Employé -> Abonné: Confirmation d'inscription
 else Carte valide
-    SGB -> Bibliothécaire: Abonné inscrit
+    SGB -> Employé: Abonné inscrit
 end
 
-Bibliothécaire -> SGB: Vérifie cotisation et nombre d'emprunts
+Employé -> SGB: Vérifie cotisation et nombre d'emprunts
 alt Cotisation non payée ou plus de 5 emprunts
-    SGB -> Bibliothécaire: Proposer paiement de la cotisation
-    Bibliothécaire -> Abonné: Proposer paiement de la cotisation
-    Abonné -> Bibliothécaire: Paye la cotisation
-    Bibliothécaire -> SGB: Enregistre paiement cotisation
-    SGB -> Bibliothécaire: Confirmation de paiement
+    SGB -> Employé: Proposer paiement de la cotisation
+    Employé -> Abonné: Proposer paiement de la cotisation
+    Abonné -> Employé: Paye la cotisation
+    Employé -> SGB: Enregistre paiement cotisation
+    SGB -> DB: Mettre à jour cotisation
+    DB --> SGB: Confirmation de paiement
 else Cotisation payée et moins de 5 emprunts
-    SGB -> Bibliothécaire: Abonné valide
+    SGB -> Employé: Abonné valide
 end
 
-Bibliothécaire -> SGB: Vérifie disponibilité des documents
+Employé -> SGB: Vérifie disponibilité des documents
 alt Documents disponibles
-    SGB -> Bibliothécaire: Documents disponibles
-    Bibliothécaire -> SGB: Enregistre emprunt (n° abonné, côte document, date)
-    SGB -> Bibliothécaire: Confirmation de l'emprunt
-    Bibliothécaire -> Abonné: Confirme l'emprunt
+    SGB -> Employé: Documents disponibles
+    Employé -> SGB: Enregistre emprunt (n° abonné, côte document, date)
+    SGB -> DB: Enregistrer emprunt
+    DB --> SGB: Confirmation d'enregistrement
+    SGB -> Employé: Confirmation de l'emprunt
+    Employé -> Abonné: Confirme l'emprunt
 else Documents non disponibles
-    SGB -> Bibliothécaire: Documents non disponibles
-    Bibliothécaire -> Abonné: Informe de l'indisponibilité des documents
+    SGB -> Employé: Documents non disponibles
+    Employé -> Abonné: Informe de l'indisponibilité des documents
 end
 
-Bibliothécaire -> SGB: Vérifie les documents non rendus après 4 semaines
+Employé -> SGB: Vérifie les documents non rendus après 4 semaines
+SGB -> DB: Rechercher emprunts en retard (date actuelle > date de fin d'emprunt)
+DB --> SGB: Liste des emprunts non rendus
 alt Documents non rendus
-    SGB -> Bibliothécaire: Génère et envoie une lettre de relance
+    SGB -> Employé: Génère et envoie une lettre de relance
+    Employé -> Abonné: Envoie lettre de relance
 else Tous les documents rendus
-    SGB -> Bibliothécaire: Aucun document non rendu
+    SGB -> Employé: Aucun document non rendu
 end
+
+Abonné -> Employé: Demande modification des coordonnées
+Employé -> SGB: Modifie les coordonnées de l'abonné
+SGB -> DB: Mettre à jour les coordonnées
+DB --> SGB: Confirmation de la mise à jour
+SGB -> Employé: Confirmation de la mise à jour
+Employé -> Abonné: Confirmation de la mise à jour
+
+Employé -> SGB: Consulter situation d'un abonné
+SGB -> DB: Obtenir état de l'abonné
+DB --> SGB: État de l'abonné
+SGB -> Employé: État de l'abonné
 
 @enduml
 
