@@ -44,50 +44,56 @@
 ![ Texte alternatif](/asset/diagramme_activite.png "diagramme_activite.png")
 
 ```plantuml
-@startuml sequence
+@startuml
 !theme toy
+title Sequence Diagram - Gestion des prêts de documents à la bibliothèque
+
 actor Abonné
-actor "Personnel de la Bibliothèque" as Bibliothecaire
-participant "Système de Gestion de la Bibliothèque" as Systeme
+actor Bibliothécaire
+participant "Système de Gestion de la Bibliothèque" as SGB
 
+Abonné -> Bibliothécaire: Présente la carte et les documents
+Bibliothécaire -> SGB: Vérifie la carte de l'abonné
+alt Carte non valide
+    SGB -> Bibliothécaire: Proposer inscription
+    Bibliothécaire -> Abonné: Proposer inscription
+    Abonné -> Bibliothécaire: Accepte l'inscription
+    Bibliothécaire -> SGB: Inscription de l'abonné
+    SGB -> Bibliothécaire: Confirmation d'inscription
+    Bibliothécaire -> Abonné: Confirmation d'inscription
+else Carte valide
+    SGB -> Bibliothécaire: Abonné inscrit
+end
 
-== Emprunt de documents ==
-Abonné -> Bibliothecaire: Présente la carte et les documents
-Bibliothecaire -> Systeme: Vérifie l'abonné
-Systeme --> Bibliothecaire: Renvoie le statut de la cotisation et le nombre d'emprunts en cours
+Bibliothécaire -> SGB: Vérifie cotisation et nombre d'emprunts
+alt Cotisation non payée ou plus de 5 emprunts
+    SGB -> Bibliothécaire: Proposer paiement de la cotisation
+    Bibliothécaire -> Abonné: Proposer paiement de la cotisation
+    Abonné -> Bibliothécaire: Paye la cotisation
+    Bibliothécaire -> SGB: Enregistre paiement cotisation
+    SGB -> Bibliothécaire: Confirmation de paiement
+else Cotisation payée et moins de 5 emprunts
+    SGB -> Bibliothécaire: Abonné valide
+end
 
-Bibliothecaire -> Abonné: Demande l'inscription [si abonné non inscrit]
-Bibliothecaire -> Abonné: Refuse l'emprunt [si cotisation non payée]
-Systeme -> Bibliothecaire : Payement cotisation
-Bibliothecaire -> Abonné: Refuse l'emprunt [si plus de 5 emprunts]
+Bibliothécaire -> SGB: Vérifie disponibilité des documents
+alt Documents disponibles
+    SGB -> Bibliothécaire: Documents disponibles
+    Bibliothécaire -> SGB: Enregistre emprunt (n° abonné, côte document, date)
+    SGB -> Bibliothécaire: Confirmation de l'emprunt
+    Bibliothécaire -> Abonné: Confirme l'emprunt
+else Documents non disponibles
+    SGB -> Bibliothécaire: Documents non disponibles
+    Bibliothécaire -> Abonné: Informe de l'indisponibilité des documents
+end
 
-Bibliothecaire -> Systeme: Vérifie la disponibilité des documents
-Systeme --> Bibliothecaire: Renvoie la disponibilité des documents
-Bibliothecaire -> Abonné: Informe de l'indisponibilité du document et de la date de retour [si document non disponible]
+Bibliothécaire -> SGB: Vérifie les documents non rendus après 4 semaines
+alt Documents non rendus
+    SGB -> Bibliothécaire: Génère et envoie une lettre de relance
+else Tous les documents rendus
+    SGB -> Bibliothécaire: Aucun document non rendu
+end
 
-Bibliothecaire -> Systeme: Vérifie si le document est perdu
-Systeme --> Bibliothecaire: Renvoie le statut du document (perdu ou non)
-Bibliothecaire -> Systeme: Signale le document comme perdu [si document perdu]
-Bibliothecaire -> Abonné: Informe que le document est perdu [si document perdu]
-
-Bibliothecaire -> Systeme: Enregistre l'emprunt (n° abonné, côte document, date)
-Systeme --> Bibliothecaire: Confirme l'enregistrement
-Bibliothecaire --> Abonné: Confirme l'emprunt
-
-== Relance après 4 semaines ==
-Bibliothecaire -> Systeme: Génère les lettres de relance
-Systeme --> Bibliothecaire: Liste des abonnés à relancer
-Bibliothecaire -> Abonné: Envoie une lettre de relance
-
-== Modification des coordonnées de l'abonné ==
-Abonné -> Bibliothecaire: Demande la modification des coordonnées
-Bibliothecaire -> Systeme: Modifie les coordonnées
-Systeme --> Bibliothecaire: Confirme la modification
-Bibliothecaire --> Abonné: Confirme la modification
-
-== Consultation de l'état des abonnés ==
-Bibliothecaire -> Systeme: Consulte l'état des abonnés
-Systeme --> Bibliothecaire: Affiche l'état des abonnés (nombre d'emprunts, cotisation, etc.)
 @enduml
 
 @startuml
