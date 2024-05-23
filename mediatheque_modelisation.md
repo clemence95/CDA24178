@@ -202,7 +202,7 @@ start
 
 :Vérifie la carte de l'abonné;
 
-if (Carte?) then (Non)
+if (Carte valide?) then (Non)
     :Proposer inscription par le personnel de la bibliothèque;
     if (Inscription acceptée?) then (Oui)
         :Inscription de l'abonné;
@@ -212,14 +212,21 @@ if (Carte?) then (Non)
     endif
 endif
 
-if (Cotisation payée et moins de 5 emprunts?) then (Non)
+:Vérifie cotisation et nombre d'emprunts;
+
+if (Cotisation payée?) then (Non)
     :Proposer paiement de la cotisation;
     if (Cotisation payée?) then (Oui)
-        :Retourne à la vérification de la disponibilité des documents;
+        :Mettre à jour cotisation;
     else (Non)
         :Abonné ressort sans document;
         stop
     endif
+endif
+
+if (Nombre d'emprunts <= 5?) then (Non)
+    :Abonné ressort sans document;
+    stop
 endif
 
 :Vérifie la disponibilité des documents;
@@ -237,6 +244,10 @@ endif
 if (Documents non rendus?) then (Oui)
     :Génère et envoie une lettre de relance;
 endif
+
+:Modification des coordonnées de l'abonné (si demandé);
+
+:Consulter état de l'abonné par le personnel;
 
 stop
 
