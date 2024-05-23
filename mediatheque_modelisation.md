@@ -44,20 +44,13 @@
 ![ Texte alternatif](/asset/diagramme_activite.png "diagramme_activite.png")
 
 ```plantuml
-@startuml
+@startuml sequence
 !theme toy
 actor Abonné
 actor "Personnel de la Bibliothèque" as Bibliothecaire
 actor "Bénévole" as Benevole
 participant "Système de Gestion de la Bibliothèque" as Systeme
 
-== Inscription d'un nouvel abonné ==
-Abonné -> Bibliothecaire: Demande l'inscription
-Bibliothecaire -> Systeme: Enregistre l'abonné
-
-== Consultation de la liste des documents ==
-Abonné -> Systeme: Recherche de documents (par type, auteur, côte, titre)
-Systeme --> Abonné: Affiche les résultats de la recherche
 
 == Emprunt de documents ==
 Abonné -> Bibliothecaire: Présente la carte et les documents
