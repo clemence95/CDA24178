@@ -165,41 +165,31 @@ Systeme "1" -- "0..*" Document : vérifie >
 !theme toy
 
 start
-:Présente la carte et les documents;
-:Vérifie l'abonné;
-if (Abonné non inscrit?) then (oui)
-  :Demande l'inscription;
-  stop
-else (non)
-  :Vérifie la cotisation et le nombre d'emprunts;
-  if (Cotisation non payée?) then (oui)
-    :Refuse l'emprunt (cotisation non payée);
-    stop
-  else (non)
-    if (Plus de 5 emprunts?) then (oui)
-      :Refuse l'emprunt (limite d'emprunts atteinte);
-      stop
-    else (non)
-      :Vérifie la disponibilité des documents;
-      if (Document disponible?) then (oui)
-        if (Document perdu?) then (oui)
-          :Signale le document comme perdu;
-          stop
-        else (non)
-          :Enregistre l'emprunt;
-          :Confirme l'emprunt;
-          stop
-        endif
-      else (non)
-        :Informe de l'indisponibilité du document;
-        :et de la date de retour;
-        stop
-      endif
-    endif
-  endif
+
+:Emprunt de documents;
+
+if (Carte abonné?) then (Oui)
+else (Non)
+    :Demande l'inscription;
 endif
 
+if (Cotisation payée et moins de 5 emprunts?) then (Oui)
+    if (Vérifie la disponibilité et le statut des documents?) then (Oui)
+        :Enregistre l'emprunt (n° abonné, côte document, date);
+        :Confirme l'emprunt;
+        :Abonné ressort avec document;
+        stop
+    else (Non)
+        :Informe de l'indisponibilité du document ou document non rendu;
+    endif
+else (Non)
+    :Refuse l'emprunt (cotisation non payée ou plus de 5 emprunts);
+endif
+ :Abonné ressort sans document;
+stop
+
 @enduml
+
 
 
 
