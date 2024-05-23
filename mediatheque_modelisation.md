@@ -163,8 +163,9 @@ Systeme "1" -- "0..*" Document : vérifie >
 @enduml
 
 @startuml
+@startuml
 !theme toy
-title Activité Mediatheque
+title Sequence Mediatheque
 
 start
 
@@ -181,8 +182,12 @@ if (Carte?) then (Non)
 endif
 
 if (Cotisation payée et moins de 5 emprunts?) then (Non)
-    :Abonné ressort sans document;
-    stop
+    :Proposer paiement de la cotisation;
+    if (Cotisation payée?) then (Oui)
+    else (Non)
+        :Abonné ressort sans document;
+        stop
+    endif
 endif
 
 :Vérifie la disponibilité des documents;
@@ -198,6 +203,7 @@ else (Oui)
 endif
 
 @enduml
+
 
 
 
