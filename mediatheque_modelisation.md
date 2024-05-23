@@ -98,73 +98,48 @@ end
 
 @startuml
 !theme toy
+title Class Diagram - Gestion des prêts de documents à la bibliothèque
 
-class Abonne {
-  +id: int
-  +nom: String
-  +adresse: String
-  +cotisationPayee: bool
-  +nombreEmprunts: int
-  +modifierCoordonnees(nouvelleAdresse: String)
-  +consulterEtat(): String
+class Abonné {
+    - carteID: String
+    - nom: String
+    - adresse: String
+    - cotisationPayée: Boolean
+    - nbEmpruntsEnCours: Integer
+    + inscrire()
+    + payerCotisation()
+    + emprunterDocument(document: Document)
 }
 
-abstract class Document {
-  +cote: String
-  +titre: String
-  +datePublication: Date
-  +estDisponible: bool
-  +estPerdu: bool
-}
-
-class Livre extends Document {
-}
-
-class Journal extends Document {
-  +consultationSurPlace: bool = true
-}
-
-class Media extends Document {
-  +type: String
+class Document {
+    - cote: String
+    - titre: String
+    - datePublication: Date
+    + estDisponible: Boolean
+    + typeDocument: String
 }
 
 class Emprunt {
-  +id: int
-  +dateEmprunt: Date
-  +dateRetour: Date
+    - dateEmprunt: Date
+    - dateRetour: Date
+    + enregistrerEmprunt(abonne: Abonné, document: Document)
+    + verifierRetour()
 }
 
-class Bibliothecaire {
-  +verifierAbonne(id: int): Abonne
-  +verifierDisponibiliteDocument(cote: String): Document
-  +enregistrerEmprunt(abonne: Abonne, document: Document): Emprunt
-  +signalerDocumentPerdu(cote: String)
-  +envoyerRelance(abonne: Abonne)
+class SystèmeGestionBibliothèque {
+    + verifierCarte(carteID: String): Boolean
+    + verifierCotisationEtEmprunts(abonne: Abonné): Boolean
+    + verifierDisponibilitéDocuments(documents: List<Document>): List<Boolean>
+    + enregistrerEmprunt(abonne: Abonné, document: Document)
+    + verifierDocumentsNonRendus(): List<Emprunt>
+    + envoyerLettreRelance(emprunt: Emprunt)
 }
 
-class Benevole {
-  +periodeActive: Date
-  +enregistrerEmprunt(abonne: Abonne, document: Document): Emprunt
-}
-
-class Systeme {
-  +verifierAbonne(id: int): Abonne
-  +verifierDisponibiliteDocument(cote: String): Document
-  +enregistrerEmprunt(abonne: Abonne, document: Document): Emprunt
-  +signalerDocumentPerdu(cote: String)
-  +envoyerRelance(abonne: Abonne)
-  +consulterDocuments(criteria: String): List<Document>
-}
-
-Abonne "1" -- "0..*" Emprunt : effectue >
-Document "1" -- "0..*" Emprunt : concerne >
-Emprunt "0..*" -- "1" Abonne : < effectué par
-Emprunt "0..*" -- "1" Document : < concerne
-Bibliothecaire "1" -- "1" Systeme : utilise >
-Benevole "1" -- "1" Systeme : utilise >
-Systeme "1" -- "0..*" Emprunt : gère >
-Systeme "1" -- "0..*" Abonne : vérifie >
-Systeme "1" -- "0..*" Document : vérifie >
+Abonné "1" -- "0..*" Emprunt
+Document "1" -- "0..*" Emprunt
+SystèmeGestionBibliothèque "1" -- "0..*" Abonné
+SystèmeGestionBibliothèque "1" -- "0..*" Document
+SystèmeGestionBibliothèque "1" -- "0..*" Emprunt
 
 @enduml
 
