@@ -3,6 +3,8 @@
 - **Abonné** : Utilisateur qui emprunte des documents.
 - **Bibliothécaire** : Personne qui gère les opérations de la bibliothèque, telles que l'enregistrement des emprunts et la vérification des abonnements.
 - **Système de Gestion de la Bibliothèque (SGB)** : Système qui automatise les processus de gestion des prêts et des retours de documents.
+- **Base de Données (BD)** : Système de stockage et de gestion des informations relatives aux abonnés, aux documents et aux emprunts.
+
 
 ## Cas d'Usage Identifiés
 
