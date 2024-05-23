@@ -109,6 +109,7 @@ class Abonné {
     + inscrire()
     + payerCotisation()
     + emprunterDocument(document: Document)
+    + peutEmprunter(): Boolean
 }
 
 class Document {
