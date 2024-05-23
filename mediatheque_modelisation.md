@@ -191,6 +191,10 @@ if (Cotisation payée et moins de 5 emprunts?) then (Non)
 endif
 
 :Vérifie la disponibilité des documents;
+:Vérifie les documents non rendus après 4 semaines;
+if (Documents non rendus?) then (Oui)
+    :Génère et envoie une lettre de relance;
+endif
 
 if (Documents disponibles?) then (Non)
     :Abonné ressort sans document;
@@ -203,6 +207,7 @@ else (Oui)
 endif
 
 @enduml
+
 
 
 
