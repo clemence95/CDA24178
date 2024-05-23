@@ -58,6 +58,7 @@ Systeme --> Bibliothecaire: Renvoie le statut de la cotisation et le nombre d'em
 
 Bibliothecaire -> Abonné: Demande l'inscription [si abonné non inscrit]
 Bibliothecaire -> Abonné: Refuse l'emprunt [si cotisation non payée]
+Systeme -> Bibliothecaire : Payement cotisation
 Bibliothecaire -> Abonné: Refuse l'emprunt [si plus de 5 emprunts]
 
 Bibliothecaire -> Systeme: Vérifie la disponibilité des documents
@@ -163,30 +164,38 @@ Systeme "1" -- "0..*" Document : vérifie >
 
 @startuml
 !theme toy
+title Activité Mediatheque
 
 start
 
-:Emprunt de documents;
+:Vérifie la carte de l'abonné;
 
-if (Carte abonné?) then (Oui)
-else (Non)
-    :Demande l'inscription;
-endif
-
-if (Cotisation payée et moins de 5 emprunts?) then (Oui)
-    if (Vérifie la disponibilité et le statut des documents?) then (Oui)
-        :Enregistre l'emprunt (n° abonné, côte document, date);
-        :Confirme l'emprunt;
-        :Abonné ressort avec document;
-        stop
+if (Carte?) then (Non)
+    :Proposer inscription par le personnel de la bibliothèque;
+    if (Inscription acceptée?) then (Oui)
+        :Inscription de l'abonné;
     else (Non)
-        :Informe de l'indisponibilité du document ou document non rendu;
+        :Abonné ressort sans document;
+        stop
     endif
-else (Non)
-    :Refuse l'emprunt (cotisation non payée ou plus de 5 emprunts);
 endif
- :Abonné ressort sans document;
-stop
+
+if (Cotisation payée et moins de 5 emprunts?) then (Non)
+    :Abonné ressort sans document;
+    stop
+endif
+
+:Vérifie la disponibilité des documents;
+
+if (Documents disponibles?) then (Non)
+    :Abonné ressort sans document;
+    stop
+else (Oui)
+    :Enregistre l'emprunt (n° abonné, côte document, date);
+    :Confirme l'emprunt;
+    :Abonné ressort avec document;
+    stop
+endif
 
 @enduml
 
