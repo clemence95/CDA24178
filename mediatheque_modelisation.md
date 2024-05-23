@@ -150,12 +150,13 @@ class Abonné {
     - carteID: String
     - nom: String
     - adresse: String
-    - cotisationPayée: Boolean
+    - dateCotisation: Date
     - nbEmpruntsEnCours: Integer
     + inscrire()
-    + payerCotisation()
+    + payerCotisation(nouvelleDateCotisation: Date)
     + emprunterDocument(document: Document)
     + peutEmprunter(): Boolean
+    + modifierCoordonnées(nouvelleAdresse: String)
 }
 
 class Document {
@@ -164,13 +165,14 @@ class Document {
     - datePublication: Date
     + estDisponible: Boolean
     + typeDocument: String
+    + consulter()
 }
 
 class Emprunt {
     - dateEmprunt: Date
     - dateRetour: Date
     + enregistrerEmprunt(abonne: Abonné, document: Document)
-    + verifierRetour()
+    + verifierRetour(): Boolean
 }
 
 class SystèmeGestionBibliothèque {
@@ -180,6 +182,8 @@ class SystèmeGestionBibliothèque {
     + enregistrerEmprunt(abonne: Abonné, document: Document)
     + verifierDocumentsNonRendus(): List<Emprunt>
     + envoyerLettreRelance(emprunt: Emprunt)
+    + consulterEtatAbonne(abonne: Abonné): String
+    + modifierCoordonnéesAbonne(abonne: Abonné, nouvelleAdresse: String)
 }
 
 Abonné "1" -- "0..*" Emprunt
