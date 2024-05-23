@@ -48,7 +48,6 @@
 !theme toy
 actor Abonné
 actor "Personnel de la Bibliothèque" as Bibliothecaire
-actor "Bénévole" as Benevole
 participant "Système de Gestion de la Bibliothèque" as Systeme
 
 
