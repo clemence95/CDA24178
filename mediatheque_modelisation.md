@@ -163,9 +163,8 @@ Systeme "1" -- "0..*" Document : vérifie >
 @enduml
 
 @startuml
-@startuml
 !theme toy
-title Sequence Mediatheque
+title Gestion des prêts de documents à la bibliothèque
 
 start
 
@@ -184,6 +183,7 @@ endif
 if (Cotisation payée et moins de 5 emprunts?) then (Non)
     :Proposer paiement de la cotisation;
     if (Cotisation payée?) then (Oui)
+        :Retourne à la vérification de la disponibilité des documents;
     else (Non)
         :Abonné ressort sans document;
         stop
@@ -191,10 +191,6 @@ if (Cotisation payée et moins de 5 emprunts?) then (Non)
 endif
 
 :Vérifie la disponibilité des documents;
-:Vérifie les documents non rendus après 4 semaines;
-if (Documents non rendus?) then (Oui)
-    :Génère et envoie une lettre de relance;
-endif
 
 if (Documents disponibles?) then (Non)
     :Abonné ressort sans document;
@@ -203,8 +199,14 @@ else (Oui)
     :Enregistre l'emprunt (n° abonné, côte document, date);
     :Confirme l'emprunt;
     :Abonné ressort avec document;
-    stop
 endif
+
+:Vérifie les documents non rendus après 4 semaines;
+if (Documents non rendus?) then (Oui)
+    :Génère et envoie une lettre de relance;
+endif
+
+stop
 
 @enduml
 
