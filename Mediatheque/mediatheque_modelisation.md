@@ -1,53 +1,92 @@
 ## Identification des Acteurs
 
-- **Abonné** : Utilisateur qui emprunte des documents.
-- **Employé** : Personne qui gère les opérations de la bibliothèque, telles que l'enregistrement des emprunts et la vérification des abonnements.
-- **Système de Gestion de la Bibliothèque (SGB)** : Système qui automatise les processus de gestion des prêts et des retours de documents.
-- **Base de Données (BD)** : Système de stockage et de gestion des informations relatives aux abonnés, aux documents et aux emprunts.
+1. **Abonné** : Utilisateur de la médiathèque qui emprunte des ressources.
+2. **Employé** : Personnel de la médiathèque qui gère les inscriptions, les emprunts, les retours, et les mises hors service.
+3. **Bénévole** : Personne qui aide à la médiathèque en gérant les emprunts et les retours, mais ne peut pas inscrire des abonnés ou effectuer des paiements.
+4. **Système de Gestion de la Bibliothèque (SGB)** : Système qui gère les opérations liées aux abonnés et aux documents.
+5. **Base de données (DB)** : Stocke les informations sur les abonnés, les documents, les emprunts, et les transactions.
 
+## Identification des Cas d'Usage
 
-## Cas d'Usage Identifiés
+1. **Inscription d'un abonné**
+2. **Vérification de la carte d'abonné**
+3. **Paiement de la cotisation**
+4. **Emprunt de document**
+5. **Retour de document**
+6. **Gestion des documents non rendus**
+7. **Modification des coordonnées de l'abonné**
+8. **Consultation de l'état de l'abonné**
+9. **Mise hors service des documents perdus ou volés**
 
-1. Inscription d'un nouvel abonné
-2. Paiement de la cotisation
-3. Emprunt de documents
-4. Retour de documents
-5. Vérification de la disponibilité des documents
-6. Envoi de lettres de relance pour les documents non retournés
-7. Gestion des abonnés (par le bibliothécaire)
-8. Gestion des documents (par le bibliothécaire)
+## Cas d'Usage : Emprunt d'une ressource
 
-## Cas d'Usage : Emprunt d'une Ressource
+### Scénario Principal
 
-### Scénario Principal (Emprunt de document)
+1. **Acteur principal** : Abonné
+2. **Pré-condition** : L'abonné doit avoir une carte valide, une cotisation à jour et moins de 5 emprunts en cours.
+3. **Post-condition** : L'emprunt est enregistré dans le système et le document est marqué comme emprunté.
 
-- **Acteur** : Abonné
-- **Précondition** : L'abonné doit être inscrit et avoir payé sa cotisation. Il ne doit pas avoir plus de 5 emprunts en cours.
-- **Description** :
-  1. L'abonné sélectionne le document qu'il souhaite emprunter.
-  2. L'abonné demande à emprunter le document.
-  3. Le Système de Gestion de la Bibliothèque (SGB) vérifie que l'abonné a payé sa cotisation et qu'il a moins de 5 emprunts en cours.
-  4. Le SGB vérifie la disponibilité du document.
-  5. Si toutes les conditions sont remplies, le SGB enregistre l'emprunt.
-  6. L'abonné reçoit une confirmation de l'emprunt.
-- **Postcondition** : Le document est marqué comme emprunté et le nombre d'emprunts en cours de l'abonné est mis à jour.
+**Étapes du scénario principal** :
+1. L'abonné présente sa carte et le(s) document(s) à emprunter à l'employé ou au bénévole.
+2. L'employé ou le bénévole vérifie la carte de l'abonné dans le SGB.
+3. Le SGB récupère les détails de l'abonné depuis la base de données.
+4. L'employé ou le bénévole vérifie la cotisation de l'abonné et le nombre d'emprunts en cours.
+5. Le SGB confirme que la cotisation est payée et que le nombre d'emprunts en cours est inférieur à 5.
+6. L'employé ou le bénévole vérifie la disponibilité du document dans le SGB.
+7. Si le document est un CD-ROM, une caution est demandée à l'abonné.
+8. Si le document est un microfilm, le SGB vérifie la disponibilité d'un écran.
+9. L'employé ou le bénévole enregistre l'emprunt (numéro d'abonné, cote du document, date de retour) dans le SGB.
+10. Le SGB met à jour l'état du document dans la base de données pour indiquer qu'il est emprunté.
+11. L'abonné ressort avec le document emprunté.
 
 ### Scénarios Alternatifs
 
-1. **Condition de cotisation non remplie** :
-   1. Le SGB vérifie que l'abonné a payé sa cotisation.
-   2. Si la cotisation n'est pas payée, le SGB refuse l'emprunt.
-   3. L'abonné reçoit un message indiquant qu'il doit payer sa cotisation pour emprunter des documents.
+#### Scénario alternatif 1 : Carte non valide
 
-2. **Nombre maximal d'emprunts atteint** :
-   1. Le SGB vérifie le nombre d'emprunts en cours de l'abonné.
-   2. Si l'abonné a déjà 5 emprunts en cours, le SGB refuse l'emprunt.
-   3. L'abonné reçoit un message indiquant qu'il doit retourner des documents avant de pouvoir en emprunter de nouveaux.
+1. L'abonné présente sa carte et le(s) document(s) à emprunter à l'employé ou au bénévole.
+2. L'employé ou le bénévole vérifie la carte de l'abonné dans le SGB.
+3. Le SGB indique que la carte n'est pas valide.
+4. L'employé ou le bénévole dirige l'abonné vers un employé pour une inscription.
+5. L'abonné accepte l'inscription et fournit les informations nécessaires.
+6. L'employé inscrit l'abonné dans le SGB.
+7. Le SGB enregistre le nouvel abonné dans la base de données.
+8. L'abonné présente de nouveau sa carte valide pour emprunter le(s) document(s).
 
-3. **Document non disponible** :
-   1. Le SGB vérifie la disponibilité du document.
-   2. Si le document n'est pas disponible (déjà emprunté par un autre abonné), le SGB refuse l'emprunt.
-   3. L'abonné reçoit un message indiquant que le document n'est pas disponible actuellement.
+#### Scénario alternatif 2 : Cotisation non payée
+
+1. L'abonné présente sa carte et le(s) document(s) à emprunter à l'employé ou au bénévole.
+2. L'employé ou le bénévole vérifie la carte de l'abonné dans le SGB.
+3. Le SGB récupère les détails de l'abonné depuis la base de données.
+4. L'employé ou le bénévole vérifie la cotisation de l'abonné et le nombre d'emprunts en cours.
+5. Le SGB indique que la cotisation n'est pas payée.
+6. L'employé ou le bénévole dirige l'abonné vers un employé pour le paiement de la cotisation.
+7. L'abonné accepte de payer la cotisation.
+8. L'employé enregistre le paiement de la cotisation dans le SGB.
+9. Le SGB met à jour le statut de la cotisation dans la base de données.
+10. L'abonné présente de nouveau sa carte avec la cotisation à jour pour emprunter le(s) document(s).
+
+#### Scénario alternatif 3 : Nombre d'emprunts supérieur ou égal à 5
+
+1. L'abonné présente sa carte et le(s) document(s) à emprunter à l'employé ou au bénévole.
+2. L'employé ou le bénévole vérifie la carte de l'abonné dans le SGB.
+3. Le SGB récupère les détails de l'abonné depuis la base de données.
+4. L'employé ou le bénévole vérifie la cotisation de l'abonné et le nombre d'emprunts en cours.
+5. Le SGB indique que le nombre d'emprunts en cours est supérieur ou égal à 5.
+6. L'employé ou le bénévole informe l'abonné qu'il ne peut pas emprunter plus de 5 documents à la fois.
+7. L'abonné ressort sans emprunter de nouveaux documents.
+
+#### Scénario alternatif 4 : Document non disponible
+
+1. L'abonné présente sa carte et le(s) document(s) à emprunter à l'employé ou au bénévole.
+2. L'employé ou le bénévole vérifie la carte de l'abonné dans le SGB.
+3. Le SGB récupère les détails de l'abonné depuis la base de données.
+4. L'employé ou le bénévole vérifie la cotisation de l'abonné et le nombre d'emprunts en cours.
+5. Le SGB confirme que la cotisation est payée et que le nombre d'emprunts en cours est inférieur à 5.
+6. L'employé ou le bénévole vérifie la disponibilité du document dans le SGB.
+7. Le SGB indique que le document n'est pas disponible.
+8. L'employé ou le bénévole informe l'abonné que le document n'est pas disponible.
+9. L'abonné ressort sans emprunter le document.
+
 
 
 
