@@ -1,7 +1,7 @@
 ## Identification des Acteurs
 
 - **Abonné** : Utilisateur qui emprunte des documents.
-- **Bibliothécaire** : Personne qui gère les opérations de la bibliothèque, telles que l'enregistrement des emprunts et la vérification des abonnements.
+- **Employé** : Personne qui gère les opérations de la bibliothèque, telles que l'enregistrement des emprunts et la vérification des abonnements.
 - **Système de Gestion de la Bibliothèque (SGB)** : Système qui automatise les processus de gestion des prêts et des retours de documents.
 - **Base de Données (BD)** : Système de stockage et de gestion des informations relatives aux abonnés, aux documents et aux emprunts.
 
@@ -72,75 +72,89 @@
 title Sequence Diagram - Gestion des prêts de documents à la bibliothèque
 
 actor Abonné
+actor "Employé ou Bénévole" as EB
 actor Employé
-actor Bénévole
 participant "Système de Gestion de la Bibliothèque" as SGB
 participant "Base de données" as DB
 
-Abonné -> Employé: Présente la carte et les documents
-Employé -> SGB: Vérifie la carte de l'abonné
+Abonné -> EB: Présente la carte et les documents
+EB -> SGB: Vérifie la carte de l'abonné
 SGB -> DB: Rechercher abonné par carteID
 DB --> SGB: Détails de l'abonné
 
 alt Carte non valide
-    SGB -> Employé: Proposer inscription
-    Employé -> Abonné: Proposer inscription
-    Abonné -> Employé: Accepte l'inscription
+    EB -> Abonné: Diriger vers un employé pour inscription
+    Abonné -> Employé: Demande inscription
     Employé -> SGB: Inscription de l'abonné
     SGB -> DB: Enregistrer nouvel abonné
     DB --> SGB: Confirmation d'inscription
     SGB -> Employé: Confirmation d'inscription
     Employé -> Abonné: Confirmation d'inscription
 else Carte valide
-    SGB -> Employé: Abonné inscrit
+    SGB -> EB: Abonné inscrit
 end
 
-Employé -> SGB: Vérifie cotisation et nombre d'emprunts
+EB -> SGB: Vérifie cotisation et nombre d'emprunts
 alt Cotisation non payée ou plus de 5 emprunts
-    SGB -> Employé: Proposer paiement de la cotisation
-    Employé -> Abonné: Proposer paiement de la cotisation
-    Abonné -> Employé: Paye la cotisation
+    EB -> Abonné: Diriger vers un employé pour paiement de la cotisation
+    Abonné -> Employé: Demande paiement de la cotisation
     Employé -> SGB: Enregistre paiement cotisation
     SGB -> DB: Mettre à jour cotisation
     DB --> SGB: Confirmation de paiement
 else Cotisation payée et moins de 5 emprunts
-    SGB -> Employé: Abonné valide
+    SGB -> EB: Abonné valide
 end
 
-Employé -> SGB: Vérifie disponibilité des documents
+EB -> SGB: Vérifie disponibilité des documents
 alt Documents disponibles
-    SGB -> Employé: Documents disponibles
-    Employé -> SGB: Enregistre emprunt (n° abonné, côte document, date)
+    SGB -> EB: Documents disponibles
+
+    alt Document CD-ROM
+        EB -> Abonné: Diriger vers un employé pour caution
+        Abonné -> Employé: Demande caution
+        Employé -> Abonné: Demande caution
+        Abonné -> Employé: Fournit caution
+        Employé -> SGB: Enregistre caution
+        SGB -> DB: Enregistrer caution
+        DB --> SGB: Confirmation enregistrement caution
+    end
+
+    alt Document Microfilm
+        SGB -> DB: Vérifier disponibilité d'un écran
+        DB --> SGB: Écran disponible
+    end
+
+    EB -> SGB: Enregistre emprunt (n° abonné, côte document, date)
     SGB -> DB: Enregistrer emprunt
     DB --> SGB: Confirmation d'enregistrement
-    SGB -> Employé: Confirmation de l'emprunt
-    Employé -> Abonné: Confirme l'emprunt
+    SGB -> EB: Confirmation de l'emprunt
+    EB -> Abonné: Confirme l'emprunt
 else Documents non disponibles
-    SGB -> Employé: Documents non disponibles
-    Employé -> Abonné: Informe de l'indisponibilité des documents
+    SGB -> EB: Documents non disponibles
+    EB -> Abonné: Informe de l'indisponibilité des documents
 end
 
-Employé -> SGB: Vérifie les documents non rendus après 4 semaines
+EB -> SGB: Vérifie les documents non rendus après 4 semaines
 SGB -> DB: Rechercher emprunts en retard (date actuelle > date de fin d'emprunt)
 DB --> SGB: Liste des emprunts non rendus
 alt Documents non rendus
-    SGB -> Employé: Génère et envoie une lettre de relance
-    Employé -> Abonné: Envoie lettre de relance
+    SGB -> EB: Génère et envoie une lettre de relance
+    EB -> Abonné: Envoie lettre de relance
 else Tous les documents rendus
-    SGB -> Employé: Aucun document non rendu
+    SGB -> EB: Aucun document non rendu
 end
 
-Abonné -> Employé: Demande modification des coordonnées
-Employé -> SGB: Modifie les coordonnées de l'abonné
+Abonné -> EB: Demande modification des coordonnées
+EB -> SGB: Modifie les coordonnées de l'abonné
 SGB -> DB: Mettre à jour les coordonnées
 DB --> SGB: Confirmation de la mise à jour
-SGB -> Employé: Confirmation de la mise à jour
-Employé -> Abonné: Confirmation de la mise à jour
+SGB -> EB: Confirmation de la mise à jour
+EB -> Abonné: Confirmation de la mise à jour
 
-Employé -> SGB: Consulter situation d'un abonné
+EB -> SGB: Consulter situation d'un abonné
 SGB -> DB: Obtenir état de l'abonné
 DB --> SGB: État de l'abonné
-SGB -> Employé: État de l'abonné
+SGB -> EB: État de l'abonné
 
 @enduml
 
