@@ -88,8 +88,6 @@
 9. L'abonné ressort sans emprunter le document.
 
 
-
-
 ## 4. Diagrammes UML
 
 ### Diagramme de Séquence
