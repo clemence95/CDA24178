@@ -144,6 +144,16 @@ else Tous les documents rendus
     SGB -> EB: Aucun document non rendu
 end
 
+EB -> SGB: Vérifie si des documents sont perdus ou volés
+SGB -> DB: Rechercher documents perdus ou volés
+DB --> SGB: Liste des documents perdus ou volés
+alt Documents perdus ou volés
+    SGB -> EB: Génère une mise hors service
+    EB -> SGB: Enregistre la mise hors service
+    SGB -> DB: Mettre à jour le statut du document
+    DB --> SGB: Confirmation de mise hors service
+end
+
 Abonné -> EB: Demande modification des coordonnées
 EB -> SGB: Modifie les coordonnées de l'abonné
 SGB -> DB: Mettre à jour les coordonnées
@@ -194,6 +204,7 @@ class Document {
     + estDisponible: Boolean
     + typeDocument: String
     + consulter()
+    + mettreHorsService()
 }
 
 class SystèmeGestionBibliothèque {
@@ -212,6 +223,7 @@ class SystèmeGestionBibliothèque {
     + enregistrerCaution(abonne: Abonné, document: Document)
     + retourCD(abonne: Abonné, document: Document)
     + validerEmprunt(abonne: Abonné, document: Document): Boolean
+    + mettreHorsServiceDocument(document: Document)
 }
 
 Abonné "1" -- "0..*" Document : emprunte
