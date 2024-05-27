@@ -167,12 +167,24 @@ class Abonné {
     - nom: String
     - adresse: String
     - dateCotisation: Date
-    - nbEmpruntsEnCours: Integer
+    - cautionEnCours: Boolean
+    - document1: Document
+    - dateRetour1: Date
+    - document2: Document
+    - dateRetour2: Date
+    - document3: Document
+    - dateRetour3: Date
+    - document4: Document
+    - dateRetour4: Date
+    - document5: Document
+    - dateRetour5: Date
     + inscrire()
     + payerCotisation(nouvelleDateCotisation: Date)
-    + emprunterDocument(document: Document)
+    + emprunterDocument(document: Document, dateRetour: Date)
     + peutEmprunter(): Boolean
-    + modifierCoordonnées(nouvelleAdresse: String)
+    + retourCD(document: Document)
+    + retournerDocument(document: Document)
+    + nbEmprunts(): Integer
 }
 
 class Document {
@@ -184,29 +196,28 @@ class Document {
     + consulter()
 }
 
-class Emprunt {
-    - dateEmprunt: Date
-    - dateRetour: Date
-    + enregistrerEmprunt(abonne: Abonné, document: Document)
-    + verifierRetour(): Boolean
-}
-
 class SystèmeGestionBibliothèque {
+    - nomEmployeOuBenevole: String
+    - periodeAcces: Date
     + verifierCarte(carteID: String): Boolean
     + verifierCotisationEtEmprunts(abonne: Abonné): Boolean
     + verifierDisponibilitéDocuments(documents: List<Document>): List<Boolean>
-    + enregistrerEmprunt(abonne: Abonné, document: Document)
-    + verifierDocumentsNonRendus(): List<Emprunt>
-    + envoyerLettreRelance(emprunt: Emprunt)
+    + enregistrerEmprunt(abonne: Abonné, document: Document, dateRetour: Date)
+    + verifierDocumentsNonRendus(): List<Abonné>
+    + envoyerLettreRelance(abonne: Abonné, document: Document)
     + consulterEtatAbonne(abonne: Abonné): String
     + modifierCoordonnéesAbonne(abonne: Abonné, nouvelleAdresse: String)
+    + inscrireAbonne(abonne: Abonné)
+    + enregistrerPaiementCotisation(abonne: Abonné)
+    + enregistrerCaution(abonne: Abonné, document: Document)
+    + retourCD(abonne: Abonné, document: Document)
+    + validerEmprunt(abonne: Abonné, document: Document): Boolean
 }
 
-Abonné "1" -- "0..*" Emprunt
-Document "1" -- "0..*" Emprunt
-SystèmeGestionBibliothèque "1" -- "0..*" Abonné
-SystèmeGestionBibliothèque "1" -- "0..*" Document
-SystèmeGestionBibliothèque "1" -- "0..*" Emprunt
+Abonné "1" -- "0..*" Document : emprunte
+Document "1" -- "0..*" Abonné : est emprunté par
+SystèmeGestionBibliothèque "1" -- "0..*" Abonné : gère
+SystèmeGestionBibliothèque "1" -- "0..*" Document : gère
 
 @enduml
 
@@ -222,6 +233,7 @@ if (Carte valide?) then (Non)
     :Proposer inscription par le personnel de la bibliothèque;
     if (Inscription acceptée?) then (Oui)
         :Inscription de l'abonné;
+        :Enregistrer Abonné;
     else (Non)
         :Abonné ressort sans document;
         stop
@@ -240,7 +252,7 @@ if (Cotisation payée?) then (Non)
     endif
 endif
 
-if (Nombre d'emprunts <= 5?) then (Non)
+if (Nombre d'emprunts < 5?) then (Non)
     :Abonné ressort sans document;
     stop
 endif
@@ -256,13 +268,20 @@ else (Oui)
     :Abonné ressort avec document;
 endif
 
+:Retour Document;
+if (Document est un CD-ROM?) then (Oui)
+    :Enregistrer retour;
+    :Restituer caution;
+else (Non)
+    :Enregistrer retour;
+endif
+
 :Vérifie les documents non rendus après 4 semaines;
 if (Documents non rendus?) then (Oui)
     :Génère et envoie une lettre de relance;
 endif
 
 :Modification des coordonnées de l'abonné (si demandé);
-
 :Consulter état de l'abonné par le personnel;
 
 stop
