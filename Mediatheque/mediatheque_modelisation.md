@@ -281,12 +281,18 @@ if (Documents non rendus?) then (Oui)
     :Génère et envoie une lettre de relance;
 endif
 
+:Vérifie si des documents sont perdus ou volés;
+if (Documents perdus ou volés?) then (Oui)
+    :Mettre hors service le document;
+endif
+
 :Modification des coordonnées de l'abonné (si demandé);
 :Consulter état de l'abonné par le personnel;
 
 stop
 
 @enduml
+
 
 
 
