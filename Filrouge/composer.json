@@ -1,0 +1,16 @@
+{
+    "name": "cb/filrouge",
+    "description": "Projet Filrouge",
+    "type": "projet",
+    "require": {
+        "vlucas/phpdotenv": "^5.4"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "clemence95",
+            "email": "boitelleclemence@outlook.fr"
+        }
+    ],
+    "minimum-stability": "dev"
+}
