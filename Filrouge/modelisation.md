@@ -90,6 +90,10 @@ Voici les principaux cas d'usage pour le système VillageGreen :
    5. Le scénario principal reprend à l'étape 4.
 
 ### Diagramme Séquence
+
+![ Texte alternatif](diagramme_sequence.png "diagramme_sequence.png")
+
+
 ```plantuml 
 @startuml
 !theme toy
@@ -129,4 +133,4 @@ else Paiement échoué
     end
 end
 @enduml
-@enduml
+
