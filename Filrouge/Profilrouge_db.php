@@ -16,7 +16,7 @@ try {
     $db_password = $_ENV['DB_PASSWORD'];
 
     // Connexion à la base de données avec PDO en utilisant les informations d'environnement
-    $db = new PDO("mysql:host=$db_host;dbname=$db_name", $db_username, $db_password);
+    $db = new PDO("mysql:host=$db_host", $db_username, $db_password);
     $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     // Supprimer la base de données si elle existe déjà
@@ -31,7 +31,7 @@ try {
     // Instructions SQL pour la création des tables
     $sql = "
     CREATE TABLE Fournisseur(
-        Id_Fournisseur INT,
+        Id_Fournisseur INT AUTO_INCREMENT,
         Nom VARCHAR(50)  NOT NULL,
         Contact VARCHAR(50)  NOT NULL,
         telephone VARCHAR(50)  NOT NULL,
@@ -39,7 +39,7 @@ try {
      );
      
      CREATE TABLE Client(
-        Id_Client INT,
+        Id_Client INT AUTO_INCREMENT,
         Nom VARCHAR(50)  NOT NULL,
         prenom VARCHAR(50)  NOT NULL,
         telephone VARCHAR(50)  NOT NULL,
@@ -47,14 +47,14 @@ try {
         Adresse_livraison VARCHAR(255)  NOT NULL,
         Adresse_facturation VARCHAR(255)  NOT NULL,
         Coefficient DECIMAL(15,2)   NOT NULL,
-        Reduction DECIMAL(15,2)  ,
+        Reduction DECIMAL(15,2),
         Reference VARCHAR(50)  NOT NULL,
         email VARCHAR(50)  NOT NULL,
         PRIMARY KEY(Id_Client)
      );
      
      CREATE TABLE Commercial(
-        Id_Commercial INT,
+        Id_Commercial INT AUTO_INCREMENT,
         Nom VARCHAR(50)  NOT NULL,
         prenom VARCHAR(50)  NOT NULL,
         telephone VARCHAR(50)  NOT NULL,
@@ -65,7 +65,7 @@ try {
      );
      
      CREATE TABLE Commande(
-        Id_Commande INT,
+        Id_Commande INT AUTO_INCREMENT,
         Statut VARCHAR(50)  NOT NULL,
         Mode_paiement VARCHAR(50)  NOT NULL,
         Reduction_pro DECIMAL(15,2),
@@ -80,7 +80,7 @@ try {
      );
      
      CREATE TABLE BonLivraison(
-        Id_BonLivraison INT,
+        Id_BonLivraison INT AUTO_INCREMENT,
         Date_livraison DATE NOT NULL,
         Statut VARCHAR(50)  NOT NULL,
         Suivi_commande VARCHAR(50)  NOT NULL,
@@ -106,12 +106,12 @@ try {
      );
      
      CREATE TABLE Produit(
-        Id_Produit INT,
+        Id_Produit INT AUTO_INCREMENT,
         Libelle_court VARCHAR(100)  NOT NULL,
         Libelle_long TEXT NOT NULL,
         Prix_achat_HT DECIMAL(15,2)   NOT NULL,
         Photo BLOB,
-        stock DECIMAL(15,2)  ,
+        stock DECIMAL(15,2),
         Actif VARCHAR(50)  NOT NULL,
         Id_Souscategorie INT NOT NULL,
         Id_Fournisseur INT NOT NULL,
@@ -137,6 +137,7 @@ try {
         FOREIGN KEY(Id_Produit) REFERENCES Produit(Id_Produit),
         FOREIGN KEY(Id_BonLivraison) REFERENCES BonLivraison(Id_BonLivraison)
      );
+     
      -- Index sur les clés primaires
      CREATE INDEX idx_id_fournisseur ON Fournisseur (Id_Fournisseur);
      CREATE INDEX idx_id_client ON Client (Id_Client);
@@ -156,7 +157,6 @@ try {
      CREATE INDEX idx_fk_id_commande_achete ON achete (Id_Commande);
      CREATE INDEX idx_fk_id_produit_livre ON livre (Id_Produit);
      CREATE INDEX idx_fk_id_bonlivraison_livre ON livre (Id_BonLivraison);
-      
     ";
 
     // Séparation des instructions SQL en un tableau
@@ -178,4 +178,3 @@ $fin = hrtime(true);
 $temps_execution = ($fin - $debut) / 1e+9; // Convertir en secondes
 echo "Temps d'exécution : $temps_execution secondes\n";
 ?>
-
