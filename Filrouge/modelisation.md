@@ -88,3 +88,45 @@ Voici les principaux cas d'usage pour le système VillageGreen :
    3. Le système informe le client de l'erreur d'adresse.
    4. Le client corrige l'adresse de livraison.
    5. Le scénario principal reprend à l'étape 4.
+
+### Diagramme Séquence
+```plantuml 
+@startuml
+!theme toy
+actor Client
+participant "Site Web E-commerce" as SW
+participant "Base de Données" as BD
+participant "Système de Paiement" as SP
+participant "Email de Confirmation" as EC
+
+Client -> SW: Consulter le catalogue
+Client -> SW: Ajouter produit au panier (avec quantités)
+Client -> SW: Valider panier
+Client -> SW: Confirmer les adresses de livraison et de facturation
+SW -> Client: Adresses confirmées
+Client -> SW: Choisir le mode de paiement
+SW -> SP: Demande de paiement
+alt Paiement réussi
+    SP --> SW: Paiement confirmé
+    SW -> BD: Enregistrer commande
+    SW -> BD: Mettre à jour les stocks
+    SW -> EC: Envoyer confirmation par email
+    EC --> Client: Confirmation de commande reçue
+else Paiement échoué
+    SP --> SW: Paiement refusé
+    SW -> Client: Informer échec du paiement et proposer de réessayer ou annuler
+    alt Réessayer le paiement
+        Client -> SW: Réessayer le paiement
+        SW -> SP: Nouvelle demande de paiement
+        SP --> SW: Paiement confirmé
+        SW -> BD: Enregistrer commande
+        SW -> BD: Mettre à jour les stocks
+        SW -> EC: Envoyer confirmation par email
+        EC --> Client: Confirmation de commande reçue
+    else Annuler la commande
+        Client -> SW: Annuler la commande
+        SW -> Client: Confirmer annulation
+    end
+end
+@enduml
+@enduml
