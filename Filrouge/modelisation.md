@@ -158,5 +158,34 @@ end
 
 @enduml
 
+@startuml
+actor Client
+actor Particulier as P
+actor Professionnel as Pro
+actor Commercial
+actor GestionnaireDeProduits as GDP
+
+Client <|-- P
+Client <|-- Pro
+
+usecase "Consulter le Catalogue" as UC1
+usecase "Ajouter/Supprimer des Produits dans le Panier" as UC2
+usecase "Inscription d'un Nouvel Utilisateur" as UC3
+usecase "Connexion/Déconnexion" as UC4
+usecase "Valider le Panier et Créer une Commande" as UC5
+usecase "Visualiser les Anciennes Commandes" as UC6
+usecase "Gérer les Produits" as UC7
+usecase "Gérer les Commandes" as UC8
+usecase "Afficher le Tableau de Bord" as UC9
+
+Client --> UC1
+Client --> UC2
+P --> UC3
+Client --> UC4
+Client --> UC5
+Client --> UC6
+GDP --> UC7
+Commercial --> UC8
+Commercial --> UC9
 @enduml
 
