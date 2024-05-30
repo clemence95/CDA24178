@@ -78,8 +78,11 @@ Voici les principaux cas d'usage pour le système VillageGreen :
 
 ### Diagramme Séquence
 
-![ Texte alternatif](diagramme_sequence.png "diagramme_sequence.png")
+![ Texte alternatif](/asset/diagramme_sequence.png "diagramme_sequence.png")
 
+### Diagramme Utilisation
+
+![ Texte alternatif](asset/diagramme_utilisation.png "diagramme_utilisation.png")
 
 ```plantuml 
 @startuml
