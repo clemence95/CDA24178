@@ -1,5 +1,5 @@
 # Cahier des Charges - VillageGreen
-# Identification des Acteurs
+### Identification des Acteurs
 
 Pour le système VillageGreen, les acteurs principaux sont :
 
@@ -9,71 +9,102 @@ Pour le système VillageGreen, les acteurs principaux sont :
 2. **Commercial**
 3. **Gestionnaire de Produits**
 
-# Identification des Cas d'Usage
+### Identification des Cas d'Usage
 
 Voici les principaux cas d'usage pour le système VillageGreen :
 
-1. **Consultation du Catalogue**
+1. **Consulter le Catalogue**
    - Acteur principal : Client
-2. **Ajout de Produit au Panier**
+2. **Ajouter des Produits au Panier**
    - Acteur principal : Client
-3. **Validation du Panier et Passage de Commande**
+3. **Valider le Panier et Créer une Commande**
    - Acteur principal : Client
 4. **Connexion/Déconnexion d'un Utilisateur**
    - Acteur principal : Client
 5. **Inscription d'un Nouvel Utilisateur**
    - Acteur principal : Particulier
-6. **Visualisation des Anciennes Commandes**
+6. **Visualiser les Anciennes Commandes**
    - Acteur principal : Client
-7. **Gestion des Produits**
+7. **Gérer les Produits**
    - Acteur principal : Gestionnaire de Produits
-8. **Gestion des Commandes**
+8. **Gérer les Commandes**
    - Acteur principal : Commercial
 
-# Scénario Détaillé - Création d'une Commande
+### Scénario Principal Détaillé - Création d'une Commande
 
-## Flux Principal
+#### Flux Principal
 
-1. Le client consulte le catalogue.
-2. Le client ajoute des produits au panier en saisissant les quantités désirées.
-3. Le client se connecte (si pas encore connecté).
-4. Le client valide le panier.
-5. Le client vérifie et confirme les adresses de livraison et de facturation.
-6. Le client choisit le mode de paiement et procède au paiement.
-7. Le système de paiement confirme la transaction.
-8. Le système enregistre la commande dans la base de données.
-9. Le système met à jour les stocks.
-10. Le système envoie une confirmation de commande par email au client.
-11. **Postcondition :** La commande est enregistrée et confirmée, les stocks sont mis à jour.
+1. **Consulter le Catalogue**
+   - Le client consulte le catalogue pour sélectionner les produits désirés.
+   
+2. **Ajouter des Produits au Panier**
+   - Le client ajoute les produits sélectionnés au panier en indiquant les quantités souhaitées.
 
-## Flux Alternatifs
+3. **Connexion du Client**
+   - Si le client n'est pas encore connecté, il doit se connecter à son compte. S'il n'a pas de compte, il peut en créer un.
 
-### 1. Produit Indisponible au Moment de la Validation du Panier
+4. **Validation du Panier**
+   - Le client valide son panier pour procéder à l'achat.
 
-- Si un produit devient indisponible lors de la validation, le système informe le client et propose des alternatives ou la suppression du produit indisponible.
-- Le client peut choisir de modifier la commande ou de l'annuler.
-- Le flux principal reprend après la modification de la commande.
+5. **Vérification des Adresses**
+   - Le client vérifie et confirme ses adresses de livraison et de facturation.
 
-### 2. Connexion Impossible
+6. **Choix du Mode de Paiement**
+   - Le client choisit un mode de paiement parmi les options proposées (carte bancaire, PayPal, etc.).
 
-- Si le client rencontre des problèmes de connexion, le système propose des options de récupération de mot de passe ou affiche un message d'erreur avec des instructions pour résoudre le problème.
-- Le client peut essayer de se reconnecter ou récupérer son mot de passe.
-- Le flux principal reprend après une connexion réussie.
+7. **Confirmation de la Transaction**
+   - Le système de paiement traite la transaction et confirme son succès ou échec.
 
-### 3. Problème lors de la Création du Compte
+8. **Enregistrement de la Commande**
+   - Le système enregistre la commande dans la base de données.
 
-- Si le client rencontre un problème technique ou un conflit avec un compte existant lors de la création du compte, le système affiche un message d'erreur explicatif et propose des solutions pour résoudre le problème, comme contacter le support technique.
+9. **Mise à Jour des Stocks**
+   - Le système met à jour les stocks en fonction des produits commandés.
 
-### 4. Paiement Échoué
+10. **Envoi de la Confirmation**
+    - Le système envoie une confirmation de commande par email au client.
 
-- Si le paiement échoue, le système informe le client et propose de réessayer ou d'annuler la commande.
-- Le client peut choisir de réessayer le paiement ou d'annuler la commande.
-- Le flux principal reprend après la confirmation du paiement.
+11. **Postcondition**
+    - La commande est enregistrée et confirmée, et les stocks sont mis à jour.
 
-### 5. Adresse de Livraison Non Valide
+#### Flux Alternatifs
 
-- Si l'adresse de livraison est non valide, le système informe le client et demande de corriger l'adresse.
-- Le client corrige l'adresse et le flux principal reprend.
+1. **Produit Indisponible au Moment de la Validation du Panier**
+   - **Situation** : Un produit devient indisponible lors de la validation du panier.
+   - **Actions** :
+     - Le système informe le client de l'indisponibilité.
+     - Le système propose des alternatives ou la suppression du produit indisponible.
+     - Le client peut modifier ou annuler la commande.
+   - **Reprise** : Le flux principal reprend après modification ou annulation.
+
+2. **Connexion Impossible**
+   - **Situation** : Le client rencontre des problèmes de connexion.
+   - **Actions** :
+     - Le système propose des options de récupération de mot de passe.
+     - Le système affiche un message d'erreur avec des instructions pour résoudre le problème.
+   - **Reprise** : Le flux principal reprend après une connexion réussie.
+
+3. **Problème lors de la Création du Compte**
+   - **Situation** : Le client rencontre un problème technique ou un conflit avec un compte existant lors de la création du compte.
+   - **Actions** :
+     - Le système affiche un message d'erreur explicatif.
+     - Le système propose des solutions pour résoudre le problème (contact du support technique, etc.).
+   - **Reprise** : Le flux principal reprend après résolution du problème.
+
+4. **Paiement Échoué**
+   - **Situation** : Le paiement échoue.
+   - **Actions** :
+     - Le système informe le client de l'échec.
+     - Le système propose de réessayer le paiement ou d'annuler la commande.
+   - **Reprise** : Le flux principal reprend après confirmation du paiement ou annulation de la commande.
+
+5. **Adresse de Livraison Non Valide**
+   - **Situation** : L'adresse de livraison fournie par le client est non valide.
+   - **Actions** :
+     - Le système informe le client de l'erreur.
+     - Le client corrige l'adresse.
+   - **Reprise** : Le flux principal reprend après correction de l'adresse.
+
 
 
 ### Diagramme Séquence
