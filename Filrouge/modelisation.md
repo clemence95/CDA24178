@@ -93,6 +93,7 @@ participant "Email de Confirmation" as EC
 Client -> SW: Consulter le catalogue
 Client -> SW: Ajouter produit au panier (avec quantités)
 Client -> SW: Valider son panier
+
 alt Client non connecté
     Client -> SW: Se connecter
     alt Connexion impossible
@@ -109,6 +110,7 @@ alt Client non connecté
         SW -> Client: Compte créé, demander connexion
     end
 end
+
 Client -> SW: Valider panier
 SW -> BD: Vérifier disponibilité des produits
 alt Produits indisponibles
@@ -118,12 +120,14 @@ alt Produits indisponibles
     SW -> BD: Vérifier disponibilité des produits modifiés
     BD --> SW: Disponibilité confirmée
 end
+
 Client -> SW: Confirmer les adresses de livraison et de facturation
 SW -> Client: Adresses confirmées
 alt Adresse de livraison non valide
     SW -> Client: Informer erreur adresse
     Client -> SW: Corriger l'adresse
 end
+
 Client -> SW: Choisir le mode de paiement
 SW -> SP: Demande de paiement
 alt Paiement réussi
@@ -148,5 +152,8 @@ else Paiement échoué
         SW -> Client: Confirmer annulation
     end
 end
+
+@enduml
+
 @enduml
 
