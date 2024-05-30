@@ -78,7 +78,7 @@ Voici les principaux cas d'usage pour le système VillageGreen :
 
 ### Diagramme Séquence
 
-![ Texte alternatif](/asset/diagramme_sequence.png "diagramme_sequence.png")
+![ Texte alternatif](asset/diagramme_sequence.png "diagramme_sequence.png")
 
 ### Diagramme Utilisation
 
