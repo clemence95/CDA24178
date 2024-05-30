@@ -92,13 +92,14 @@ participant "Site Web E-commerce" as SW
 participant "Base de Données" as BD
 participant "Système de Paiement" as SP
 participant "Email de Confirmation" as EC
+participant "Gestionnaire de Stocks" as GS
 
 Client -> SW: Consulter le catalogue
 Client -> SW: Ajouter produit au panier (avec quantités)
 Client -> SW: Valider son panier
 
 alt Client non connecté
-    SW -> Client: Se connecter ou s'inscrire
+    SW -> Client: Se connecter
     Client -> SW: Se connecte ou s'inscrit
     alt Connexion impossible
         SW -> Client: Proposer récupération de mot de passe ou afficher un message d'erreur
@@ -121,46 +122,71 @@ else Client connecté
 end
 
 Client -> SW: Valider panier
-SW -> BD: Vérifier disponibilité des produits
-alt Produits indisponibles
-    BD --> SW: Produits indisponibles
-    SW -> Client: Informer de l'indisponibilité et proposer des alternatives
-    Client -> SW: Modifier ou annuler la commande
-    SW -> BD: Vérifier disponibilité des produits modifiés
-    BD --> SW: Disponibilité confirmée
-else Produits disponibles
-    BD --> SW: Disponibilité confirmée
-end
 
-Client -> SW: Confirmer les adresses de livraison et de facturation
-SW -> Client: Adresses confirmées
-alt Adresse de livraison non valide
-    SW -> Client: Informer erreur adresse
-    Client -> SW: Corriger l'adresse
-end
+alt Confirmation de commande
+    SW -> BD: Vérifier disponibilité des produits
+    alt Produits indisponibles
+        BD --> SW: Produits indisponibles
+        SW -> Client: Informer de l'indisponibilité et proposer des alternatives
+        Client -> SW: Modifier ou annuler la commande
+        SW -> GS: Alerter gestionnaire des stocks
+        GS -> BD: Désactiver produit indisponible
+        SW -> BD: Vérifier disponibilité des produits modifiés
+        BD --> SW: Disponibilité confirmée
+    else Produits disponibles
+        BD --> SW: Disponibilité confirmée
+    end
 
-Client -> SW: Choisir le mode de paiement
-SW -> SP: Demande de paiement
-alt Paiement réussi
-    SP --> SW: Paiement confirmé
-    SW -> BD: Enregistrer commande
-    SW -> BD: Mettre à jour les stocks
-    SW -> EC: Envoyer confirmation par email
-    EC --> Client: Confirmation de commande reçue
-else Paiement échoué
-    SP --> SW: Paiement refusé
-    SW -> Client: Informer échec du paiement et proposer de réessayer ou annuler
-    alt Réessayer le paiement
-        Client -> SW: Réessayer le paiement
-        SW -> SP: Nouvelle demande de paiement
+    Client -> SW: Confirmer les adresses de livraison et de facturation
+    SW -> Client: Demander adresse de livraison
+    Client -> SW: Fournir adresse de livraison
+    SW -> BD: Vérifier adresse de livraison
+    alt Adresse de livraison valide
+        BD --> SW: Adresse valide
+    else Adresse de livraison invalide
+        BD --> SW: Adresse invalide
+        SW -> Client: Informer erreur adresse de livraison
+        Client -> SW: Corriger adresse de livraison
+        SW -> BD: Vérifier adresse de livraison corrigée
+        BD --> SW: Adresse valide
+    end
+
+    SW -> Client: Demander adresse de facturation
+    Client -> SW: Fournir adresse de facturation
+    SW -> BD: Vérifier adresse de facturation
+    alt Adresse de facturation valide
+        BD --> SW: Adresse valide
+    else Adresse de facturation invalide
+        BD --> SW: Adresse invalide
+        SW -> Client: Informer erreur adresse de facturation
+        Client -> SW: Corriger adresse de facturation
+        SW -> BD: Vérifier adresse de facturation corrigée
+        BD --> SW: Adresse valide
+    end
+
+    Client -> SW: Choisir le mode de paiement
+    SW -> SP: Demande de paiement
+    alt Paiement réussi
         SP --> SW: Paiement confirmé
         SW -> BD: Enregistrer commande
         SW -> BD: Mettre à jour les stocks
         SW -> EC: Envoyer confirmation par email
         EC --> Client: Confirmation de commande reçue
-    else Annuler la commande
-        Client -> SW: Annuler la commande
-        SW -> Client: Confirmer annulation
+    else Paiement échoué
+        SP --> SW: Paiement refusé
+        SW -> Client: Informer échec du paiement et proposer de réessayer ou annuler
+        alt Réessayer le paiement
+            Client -> SW: Réessayer le paiement
+            SW -> SP: Nouvelle demande de paiement
+            SP --> SW: Paiement confirmé
+            SW -> BD: Enregistrer commande
+            SW -> BD: Mettre à jour les stocks
+            SW -> EC: Envoyer confirmation par email
+            EC --> Client: Confirmation de commande reçue
+        else Annuler la commande
+            Client -> SW: Annuler la commande
+            SW -> Client: Confirmer annulation
+        end
     end
 end
 
