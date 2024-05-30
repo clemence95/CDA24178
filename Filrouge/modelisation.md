@@ -98,13 +98,18 @@ Client -> SW: Ajouter produit au panier (avec quantités)
 Client -> SW: Valider son panier
 
 alt Client non connecté
-    Client -> SW: Se connecter
+    SW -> Client: Se connecter ou s'inscrire
+    Client -> SW: Se connecte ou s'inscrit
     alt Connexion impossible
         SW -> Client: Proposer récupération de mot de passe ou afficher un message d'erreur
         Client -> SW: Réessayer de se connecter ou récupérer mot de passe
         SW -> BD: Vérifier les identifiants
         BD --> SW: Identifiants valides
-    else Inscription nécessaire
+    else Connexion réussie
+        SW -> Client: Connexion réussie
+    end
+
+    alt Inscription nécessaire
         Client -> SW: Demander l'inscription
         SW -> Client: Afficher formulaire d'inscription
         Client -> SW: Remplir et soumettre le formulaire d'inscription
@@ -112,6 +117,7 @@ alt Client non connecté
         BD --> SW: Compte créé
         SW -> Client: Compte créé, demander connexion
     end
+else Client connecté
 end
 
 Client -> SW: Valider panier
@@ -121,6 +127,8 @@ alt Produits indisponibles
     SW -> Client: Informer de l'indisponibilité et proposer des alternatives
     Client -> SW: Modifier ou annuler la commande
     SW -> BD: Vérifier disponibilité des produits modifiés
+    BD --> SW: Disponibilité confirmée
+else Produits disponibles
     BD --> SW: Disponibilité confirmée
 end
 
