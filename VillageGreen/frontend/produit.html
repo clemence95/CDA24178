@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Village Green - Accueil</title>
-    <link rel="stylesheet" href="/VillageGreen/frontend/asset/css/style.css">
+    <title>Produit - Village Green</title>
+    <link rel="stylesheet" href="asset/css/styles.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 
@@ -32,8 +32,8 @@
                         <a class="nav-link" href="connexion.html">Connexion</a>
                     </li>
                 </ul>
-                <form class="form-inline my-2 my-lg-0" id="searchForm">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Recherche" aria-label="Recherche" id="searchInput">
+                <form class="form-inline my-2 my-lg-0" action="produit.html" method="GET">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Recherche" aria-label="Recherche" name="q">
                     <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Recherche</button>
                 </form>
             </div>
@@ -42,21 +42,17 @@
 
     <main class="container mt-5 flex-grow-1">
         <div class="text-center">
-            <h2>Bienvenue chez Village Green</h2>
-            <p>Votre source de matériel musical.</p>
-            <a href="categories.html">
-                <h3>Catégories</h3>
-            </a>
-            <div class="row" id="productList">
-                <!-- Les produits seront injectés ici par JavaScript -->
-            </div>
+            <h2 id="productTitle">Titre du produit</h2>
+            <img id="productImage" src="#" alt="Image du produit" class="img-fluid mb-3">
+            <p id="productDescription">Description du produit</p>
         </div>
     </main>
+
     <footer class="bg-success text-white text-center p-3 mt-auto">
         <p>&copy; 2024 Village Green</p>
     </footer>
-    <script src="/VillageGreen/frontend/asset/javascript/search.js"></script>
+
+    <script src="asset/javascript/produit.js"></script>
 </body>
 
 </html>
-
