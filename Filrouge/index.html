@@ -7,12 +7,15 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body class="d-flex flex-column min-vh-100">
     <header class="bg-success text-white text-center p-3">
         <h1>Village Green</h1>
         <nav class="navbar navbar-expand-lg navbar-dark bg-success">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
+                <ul class="navbar-nav mx-auto">
                     <li class="nav-item">
                         <a class="nav-link" href="categories.html">Catégories</a>
                     </li>
@@ -26,12 +29,57 @@
             </div>
         </nav>
     </header>
-    <main class="container mt-5">
-        <h2>Bienvenue chez Village Green</h2>
-        <p>Votre source de matériel musical.</p>
+    <main class="container mt-5 flex-grow-1">
+        <div class="text-center">
+            <h2>Bienvenue chez Village Green</h2>
+            <p>Votre source de matériel musical.</p>
+            <h3>Catégories</h3>
+            <div class="row">
+                <div class="col-md-4">
+                    <ul class="list-group text-center">
+                        <li class="list-group-item">
+                            <img src="images/guitares.jpg" class="category-image">
+                            <a href="sous-categories.html">Guitares</a>
+                        </li>
+                        <li class="list-group-item">
+                            <img src="images/pianos.jpg" class="category-image">
+                            <a href="sous-categories.html">Pianos</a>
+                        </li>
+                        <li class="list-group-item">
+                            <img src="images/batteries.jpg" class="category-image">
+                            <a href="sous-categories.html">Batteries</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <ul class="list-group text-center">
+                        <li class="list-group-item">
+                            <img src="images/claviers.jpg" class="category-image">
+                            <a href="sous-categories.html">Claviers</a>
+                        </li>
+                        <li class="list-group-item">
+                            <img src="images/instruments-a-vent.jpg" class="category-image">
+                            <a href="sous-categories.html">Instruments à vent</a>
+                        </li>
+                        <li class="list-group-item">
+                            <img src="images/accessoires.jpg" class="category-image">
+                            <a href="sous-categories.html">Accessoires</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
     </main>
-    <footer class="bg-success text-white text-center p-3">
+    <footer class="bg-success text-white text-center p-3 mt-auto">
         <p>&copy; 2024 Village Green</p>
     </footer>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
+
+
+
+
+
