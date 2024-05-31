@@ -115,6 +115,10 @@ Voici les principaux cas d'usage pour le système VillageGreen :
 
 ![ Texte alternatif](asset/diagramme_utilisation.png "diagramme_utilisation.png")
 
+### Diagramme d'activité 
+
+![Texte alternatif](asset/diagramme_activite.png "diagramme_activite.png")
+
 ```plantuml 
 @startuml
 !theme toy
@@ -255,6 +259,7 @@ Commercial --> UC9
 @enduml
 
 @startuml
+@startuml
 !theme toy
 start
 :Client consulte le catalogue;
@@ -262,8 +267,12 @@ start
 :Client valide son panier;
 
 if (Client non connecté?) then (oui)
-    :Système demande connexion;
-    :Client se connecte;
+    :Système demande connexion ou inscription;
+    :Client se connecte ou s'inscrit;
+    if (Inscription?) then (oui)
+        :Client remplit et soumet le formulaire d'inscription;
+        :Système enregistre les détails du compte;
+    endif
     if (Connexion réussie?) then (oui)
         :Système informe le client de la connexion réussie;
     else (non)
@@ -272,24 +281,13 @@ if (Client non connecté?) then (oui)
         if (Connexion réussie?) then (oui)
             :Système informe le client de la connexion réussie;
         else (non)
-            :Système affiche formulaire d'inscription;
-            :Client demande inscription;
-            :Client remplit et soumet le formulaire d'inscription;
-            :Système enregistre les détails du compte;
-            :Système demande au client de se connecter;
-            :Client se connecte;
-            if (Connexion réussie?) then (oui)
-                :Système informe le client de la connexion réussie;
-            else (non)
-                :Système affiche un message d'erreur;
-                stop
-            endif
+            :Système affiche un message d'erreur;
+            stop
         endif
     endif
-else (non)
-    :Client connecté;
 endif
 
+:Client connecté;
 :Client valide panier;
 :Vérification des produits;
 :Vérifier disponibilité des produits;
@@ -299,13 +297,11 @@ else (non)
     :Client modifie ou annule la commande;
     :Système alerte le gestionnaire des stocks;
     :Gestionnaire désactive le produit indisponible;
-    :Vérification des produits modifiés;
     :Vérifier disponibilité des produits modifiés;
     if (Produits disponibles?) then (oui)
     else (non)
         :Système informe le client de l'indisponibilité;
         :Client modifie ou annule la commande;
-        :Vérification des produits modifiés;
         stop
     endif
 endif
