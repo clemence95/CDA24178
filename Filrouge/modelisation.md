@@ -119,6 +119,9 @@ Voici les principaux cas d'usage pour le système VillageGreen :
 
 ![Texte alternatif](asset/diagramme_activite.png "diagramme_activite.png")
 
+### Diagramme de classe 
+![Texte alternatif](asset/diagramme_classe.png "diagramme_classe.png")
+
 ```plantuml 
 @startuml
 !theme toy
@@ -355,3 +358,99 @@ else (non)
 endif
 stop
 @enduml
+
+@startuml
+!theme toy
+
+class Client {
+    - id: int
+    - nom: String
+    - email: String
+    - motDePasse: String
+    - typeClient: String
+    - rue: String
+    - ville: String
+    - codePostal: String
+    - pays: String
+    - panier: List<Produit>
+    + ajouterProduitAuPanier(produit: Produit, quantite: int): void
+    + supprimerProduit(produit: Produit): void
+    + validerPanier(): void
+    + consulterCatalogue(): void
+    + seConnecter(email: String, motDePasse: String): boolean
+    + sInscrire(nom: String, email: String, motDePasse: String, typeClient: String): void
+    + visualiserCommandes(): List<Commande>
+}
+
+class Particulier {
+}
+
+class Professionnel {
+    - entreprise: String
+    - siret: String
+}
+
+class Produit {
+    - id: int
+    - libelleCourt: String
+    - libelleLong: String
+    - referenceFournisseur: String
+    - prixAchat: double
+    - prixVente: double
+    - stock: int
+    - photo: String
+}
+
+class Rubrique {
+    - id: int
+    - nom: String
+    - sousRubriques: List<Rubrique>
+    + ajouterSousRubrique(sousRubrique: Rubrique): void
+    + ajouterProduit(produit: Produit): void
+}
+
+class Fournisseur {
+    - id: int
+    - nom: String
+}
+
+class Commande {
+    - id: int
+    - date: Date
+    - total: double
+    - statut: String
+    - produits: List<Produit>
+    - adresseLivraison: String
+    - adresseFacturation: String
+}
+
+class Commercial {
+    - id: int
+    - nom: String
+    - email: String
+    + gererCommandes(): void
+    + assisterClient(client: Client): void
+}
+
+class GestionnaireDeProduits {
+    - id: int
+    - nom: String
+    - email: String
+    + gererProduits(): void
+    + ajouterProduit(produit: Produit): void
+    + supprimerProduit(produit: Produit): void
+    + mettreAJourProduit(produit: Produit): void
+}
+
+Client "1" o-- "1..*" Commande
+Client <|-- Particulier
+Client <|-- Professionnel
+Commande "1" *-- "0..*" Produit
+Produit "0..*" -- "1" Fournisseur
+Produit "0..*" -- "1" Rubrique
+Rubrique "0..*" -- "0..*" Rubrique
+Produit "0..*" -- "1" GestionnaireDeProduits
+Commercial "0..*" -- "0..*" Commande
+
+@enduml
+
