@@ -1,2 +1,3 @@
 .env.local
 .coveralls.yml
+.env
