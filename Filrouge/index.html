@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,11 +8,16 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="styles.css">
 </head>
+
 <body class="d-flex flex-column min-vh-100">
-    <header class="bg-success text-white text-center p-3">
-        <h1>Village Green</h1>
+    <header class="bg-success text-white p-3">
         <nav class="navbar navbar-expand-lg navbar-dark bg-success">
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <a class="navbar-brand" href="#">
+                <img src="/Filrouge/asset/images/Logo.jpg" alt="Logo" style="height: 40px;">
+                Village Green
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
@@ -29,43 +35,63 @@
             </div>
         </nav>
     </header>
+
     <main class="container mt-5 flex-grow-1">
         <div class="text-center">
             <h2>Bienvenue chez Village Green</h2>
             <p>Votre source de matériel musical.</p>
-            <h3>Catégories</h3>
+            <a href="categories.html">
+                <h3>Catégories</h3>
+            </a>
             <div class="row">
                 <div class="col-md-4">
-                    <ul class="list-group text-center">
-                        <li class="list-group-item">
-                            <img src="images/guitares.jpg" class="category-image">
-                            <a href="sous-categories.html">Guitares</a>
-                        </li>
-                        <li class="list-group-item">
-                            <img src="images/pianos.jpg" class="category-image">
-                            <a href="sous-categories.html">Pianos</a>
-                        </li>
-                        <li class="list-group-item">
-                            <img src="images/batteries.jpg" class="category-image">
-                            <a href="sous-categories.html">Batteries</a>
-                        </li>
-                    </ul>
+                    <div class="card mb-4 shadow-sm">
+                        <img src="images/guitares.jpg" class="card-img-top category-image" alt="Guitares">
+                        <div class="card-body">
+                            <h5 class="card-title"><a href="sous-categories.html">Guitares</a></h5>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-md-4">
-                    <ul class="list-group text-center">
-                        <li class="list-group-item">
-                            <img src="images/claviers.jpg" class="category-image">
-                            <a href="sous-categories.html">Claviers</a>
-                        </li>
-                        <li class="list-group-item">
-                            <img src="images/instruments-a-vent.jpg" class="category-image">
-                            <a href="sous-categories.html">Instruments à vent</a>
-                        </li>
-                        <li class="list-group-item">
-                            <img src="images/accessoires.jpg" class="category-image">
-                            <a href="sous-categories.html">Accessoires</a>
-                        </li>
-                    </ul>
+                    <div class="card mb-4 shadow-sm">
+                        <img src="images/pianos.jpg" class="card-img-top category-image" alt="Pianos">
+                        <div class="card-body">
+                            <h5 class="card-title"><a href="sous-categories.html">Pianos</a></h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card mb-4 shadow-sm">
+                        <img src="images/batteries.jpg" class="card-img-top category-image" alt="Batteries">
+                        <div class="card-body">
+                            <h5 class="card-title"><a href="sous-categories.html">Batteries</a></h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card mb-4 shadow-sm">
+                        <img src="images/claviers.jpg" class="card-img-top category-image" alt="Claviers">
+                        <div class="card-body">
+                            <h5 class="card-title"><a href="sous-categories.html">Claviers</a></h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card mb-4 shadow-sm">
+                        <img src="images/instruments-a-vent.jpg" class="card-img-top category-image"
+                            alt="Instruments à vent">
+                        <div class="card-body">
+                            <h5 class="card-title"><a href="sous-categories.html">Instruments à vent</a></h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card mb-4 shadow-sm">
+                        <img src="images/accessoires.jpg" class="card-img-top category-image" alt="Accessoires">
+                        <div class="card-body">
+                            <h5 class="card-title"><a href="sous-categories.html">Accessoires</a></h5>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -77,9 +103,5 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
+
 </html>
-
-
-
-
-

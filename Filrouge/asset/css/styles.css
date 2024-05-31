@@ -26,27 +26,19 @@ footer {
 }
 
 .category-image {
-    width: 100px;
-    height: 100px;
+    height: 200px;
     object-fit: cover;
-    margin-bottom: 10px;
 }
 
-.list-group-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.list-group-item a {
+.card-title a {
     text-decoration: none;
     color: #4CAF50;
-    margin-top: 10px;
 }
 
-.list-group-item a:hover {
+.card-title a:hover {
     text-decoration: underline;
 }
+
 
 
 
