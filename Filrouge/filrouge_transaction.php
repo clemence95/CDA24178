@@ -104,33 +104,47 @@ VALUES
 $db->exec("
 INSERT INTO Categorie (Id_Catégorie, Libelle_court, Photo)
 VALUES 
-    (1, 'Batteries', NULL),
-    (2, 'Accessoires', NULL)
+    (1, 'Percussions', 'images/percussions.jpg'),
+    (2, 'Accessoires', 'images/accessoires.jpg'),
+    (3, 'Cordes', 'images/cordes.jpg'),
+    (4, 'Claviers', 'images/claviers.jpg'),
+    (5, 'Vent', 'images/vent.jpg')
 ");
 
 // Insertion dans la table Souscategorie
 $db->exec("
 INSERT INTO Souscategorie (Id_Souscategorie, Libelle_court, Photo, Id_Catégorie)
 VALUES 
-    (1, 'Batteries électroniques', NULL, 1),
-    (2, 'Accordeurs', NULL, 2)
+    (1, 'Batteries électroniques', 'images/batteries_electroniques.jpg', 1),
+    (2, 'Accordeurs', 'images/accordeurs.jpg', 2),
+    (3, 'Guitares acoustiques', 'images/guitares_acoustiques.jpg', 3),
+    (4, 'Guitares électriques', 'images/guitares_electriques.jpg', 3),
+    (5, 'Pianos numériques', 'images/pianos_numeriques.jpg', 4),
+    (6, 'Synthétiseurs', 'images/synthetiseurs.jpg', 4),
+    (7, 'Saxophones', 'images/saxophones.jpg', 5),
+    (8, 'Flûtes', 'images/flutes.jpg', 5)
 ");
 
 // Insertion dans la table Produit
 $db->exec("
 INSERT INTO Produit (Id_Produit, Libelle_court, Libelle_long, Prix_achat_HT, Photo, stock, Actif, Id_Souscategorie, Id_Fournisseur)
 VALUES 
-    (1, 'Batterie Roland', 'Batterie électronique avec pads sensibles', 1500.00, '', 15.00, 'Oui', 1, 1),
-    (2, 'Accordeur chromatique Korg', 'Accordeur polyvalent pour tous types d''instruments', 50.00, '', 50.00, 'Oui', 2, 2),
-    (3, 'Piano Yamaha', 'Piano numérique avec toucher réaliste', 2000.00, '', 10.00, 'Oui', 1, 3),
-    (4, 'Guitare Fender Stratocaster', 'Guitare électrique emblématique', 1200.00, '', 20.00, 'Oui', 1, 4),
-    (5, 'Microphone Shure SM58', 'Microphone dynamique pour la scène', 100.00, '', 30.00, 'Oui', 2, 5),
-    (6, 'Amplificateur Marshall', 'Ampli à lampes pour une distorsion chaude', 800.00, '', 5.00, 'Oui', 1, 6),
-    (7, 'Synthétiseur Korg Minilogue', 'Synthé analogique avec séquenceur intégré', 600.00, '', 15.00, 'Oui', 1, 7),
-    (8, 'Violoncelle Stradivarius', 'Violoncelle de haute qualité artisanale', 5000.00, '', 2.00, 'Oui', 1, 8),
-    (9, 'Saxophone Yamaha YAS-280', 'Saxophone alto pour débutants et intermédiaires', 1500.00, '', 10.00, 'Oui', 1, 9),
-    (10, 'Flûte traversière Yamaha YFL-222', 'Flûte traversière pour étudiants', 600.00, '', 20.00, 'Oui', 1, 10)
+    (1, 'Batterie Roland', 'Batterie électronique avec pads sensibles', 1500.00, 'images/batterie_roland.jpg', 15.00, 'Oui', 1, 1),
+    (2, 'Accordeur chromatique Korg', 'Accordeur polyvalent pour tous types d''instruments', 50.00, 'images/accordeur_korg.jpg', 50.00, 'Oui', 2, 2),
+    (3, 'Piano Yamaha', 'Piano numérique avec toucher réaliste', 2000.00, 'images/piano_yamaha.jpg', 10.00, 'Oui', 5, 3),
+    (4, 'Guitare Fender Stratocaster', 'Guitare électrique emblématique', 1200.00, 'images/guitare_fender.jpg', 20.00, 'Oui', 4, 4),
+    (5, 'Microphone Shure SM58', 'Microphone dynamique pour la scène', 100.00, 'images/microphone_shure.jpg', 30.00, 'Oui', 2, 5),
+    (6, 'Amplificateur Marshall', 'Ampli à lampes pour une distorsion chaude', 800.00, 'images/ampli_marshall.jpg', 5.00, 'Oui', 1, 6),
+    (7, 'Synthétiseur Korg Minilogue', 'Synthé analogique avec séquenceur intégré', 600.00, 'images/synthetiseur_korg.jpg', 15.00, 'Oui', 6, 7),
+    (8, 'Violoncelle Stradivarius', 'Violoncelle de haute qualité artisanale', 5000.00, 'images/violoncelle_stradivarius.jpg', 2.00, 'Oui', 3, 8),
+    (9, 'Saxophone Yamaha YAS-280', 'Saxophone alto pour débutants et intermédiaires', 1500.00, 'images/saxophone_yamaha.jpg', 10.00, 'Oui', 7, 9),
+    (10, 'Flûte traversière Yamaha YFL-222', 'Flûte traversière pour étudiants', 600.00, 'images/flute_yamaha.jpg', 20.00, 'Oui', 8, 10),
+    (11, 'Guitare acoustique Yamaha', 'Guitare acoustique de haute qualité', 500.00, 'images/guitare_acoustique_yamaha.jpg', 25.00, 'Oui', 3, 11),
+    (12, 'Guitare électrique Gibson', 'Guitare électrique de légende', 2500.00, 'images/guitare_electrique_gibson.jpg', 5.00, 'Oui', 4, 12),
+    (13, 'Piano numérique Casio', 'Piano numérique avec fonctionnalités avancées', 1200.00, 'images/piano_casio.jpg', 10.00, 'Oui', 5, 13),
+    (14, 'Synthétiseur Roland', 'Synthétiseur polyvalent avec sons riches', 800.00, 'images/synthetiseur_roland.jpg', 15.00, 'Oui', 6, 14)
 ");
+
 
 // Insertion dans la table achete
 $db->exec("
