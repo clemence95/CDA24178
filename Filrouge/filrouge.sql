@@ -67,7 +67,7 @@ CREATE TABLE BonLivraison(
 );
 
 CREATE TABLE Categorie(
-   Id_Catégorie INT AUTO_INCREMENT,
+   Id_Categorie INT AUTO_INCREMENT,
    Libelle_court VARCHAR(50)  NOT NULL,
    Photo BLOB,
    PRIMARY KEY(Id_Catégorie)
