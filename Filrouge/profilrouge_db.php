@@ -5,7 +5,7 @@ echo "Création de la base de données et des tables...\n";
 
 try {
     // Charger les variables d'environnement depuis le fichier .env.local
-    require __DIR__ . '/vendor/autoload.php';
+    require __DIR__ . '/../vendor/autoload.php';
     $dotenv = Dotenv\Dotenv::createImmutable(__DIR__, '.env.local');
     $dotenv->load();
 
