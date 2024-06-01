@@ -122,7 +122,9 @@ VALUES
     (5, 'Pianos numériques', 'images/pianos_numeriques.jpg', 4),
     (6, 'Synthétiseurs', 'images/synthetiseurs.jpg', 4),
     (7, 'Saxophones', 'images/saxophones.jpg', 5),
-    (8, 'Flûtes', 'images/flutes.jpg', 5)
+    (8, 'Flûtes', 'images/flutes.jpg', 5),
+    (9, 'Violoncelle',images/violoncelle.jpg, 3),
+    (10, 'Amplificateur',images/amplificateur.jpg, 2)
 ");
 
 // Insertion dans la table Produit
@@ -134,15 +136,15 @@ VALUES
     (3, 'Piano Yamaha', 'Piano numérique avec toucher réaliste', 2000.00, 'images/piano_yamaha.jpg', 10.00, 'Oui', 5, 3),
     (4, 'Guitare Fender Stratocaster', 'Guitare électrique emblématique', 1200.00, 'images/guitare_fender.jpg', 20.00, 'Oui', 4, 4),
     (5, 'Microphone Shure SM58', 'Microphone dynamique pour la scène', 100.00, 'images/microphone_shure.jpg', 30.00, 'Oui', 2, 5),
-    (6, 'Amplificateur Marshall', 'Ampli à lampes pour une distorsion chaude', 800.00, 'images/ampli_marshall.jpg', 5.00, 'Oui', 1, 6),
+    (6, 'Amplificateur Marshall', 'Ampli à lampes pour une distorsion chaude', 800.00, 'images/ampli_marshall.jpg', 5.00, 'Oui', 2, 6),
     (7, 'Synthétiseur Korg Minilogue', 'Synthé analogique avec séquenceur intégré', 600.00, 'images/synthetiseur_korg.jpg', 15.00, 'Oui', 6, 7),
-    (8, 'Violoncelle Stradivarius', 'Violoncelle de haute qualité artisanale', 5000.00, 'images/violoncelle_stradivarius.jpg', 2.00, 'Oui', 3, 8),
+    (8, 'Violoncelle Stradivarius', 'Violoncelle de haute qualité artisanale', 5000.00, 'images/violoncelle_stradivarius.jpg', 2.00, 'Oui', 9, 8),
     (9, 'Saxophone Yamaha YAS-280', 'Saxophone alto pour débutants et intermédiaires', 1500.00, 'images/saxophone_yamaha.jpg', 10.00, 'Oui', 7, 9),
     (10, 'Flûte traversière Yamaha YFL-222', 'Flûte traversière pour étudiants', 600.00, 'images/flute_yamaha.jpg', 20.00, 'Oui', 8, 10),
     (11, 'Guitare acoustique Yamaha', 'Guitare acoustique de haute qualité', 500.00, 'images/guitare_acoustique_yamaha.jpg', 25.00, 'Oui', 3, 11),
-    (12, 'Guitare électrique Gibson', 'Guitare électrique de légende', 2500.00, 'images/guitare_electrique_gibson.jpg', 5.00, 'Oui', 3, 12),
-    (13, 'Piano numérique Casio', 'Piano numérique avec fonctionnalités avancées', 1200.00, 'images/piano_casio.jpg', 10.00, 'Oui', 4, 13),
-    (14, 'Synthétiseur Roland', 'Synthétiseur polyvalent avec sons riches', 800.00, 'images/synthetiseur_roland.jpg', 15.00, 'Oui', 4, 14)
+    (12, 'Guitare électrique Gibson', 'Guitare électrique de légende', 2500.00, 'images/guitare_electrique_gibson.jpg', 5.00, 'Oui', 4, 12),
+    (13, 'Piano numérique Casio', 'Piano numérique avec fonctionnalités avancées', 1200.00, 'images/piano_casio.jpg', 10.00, 'Oui', 5, 13),
+    (14, 'Synthétiseur Roland', 'Synthétiseur polyvalent avec sons riches', 800.00, 'images/synthetiseur_roland.jpg', 15.00, 'Oui', 6, 14)
 ");
 
 
