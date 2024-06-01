@@ -140,7 +140,7 @@ VALUES
     (9, 'Saxophone Yamaha YAS-280', 'Saxophone alto pour débutants et intermédiaires', 1500.00, 'images/saxophone_yamaha.jpg', 10.00, 'Oui', 7, 9),
     (10, 'Flûte traversière Yamaha YFL-222', 'Flûte traversière pour étudiants', 600.00, 'images/flute_yamaha.jpg', 20.00, 'Oui', 8, 10),
     (11, 'Guitare acoustique Yamaha', 'Guitare acoustique de haute qualité', 500.00, 'images/guitare_acoustique_yamaha.jpg', 25.00, 'Oui', 3, 11),
-    (12, 'Guitare électrique Gibson', 'Guitare électrique de légende', 2500.00, 'images/guitare_electrique_gibson.jpg', 5.00, 'Oui', 4, 12),
+    (12, 'Guitare électrique Gibson', 'Guitare électrique de légende', 2500.00, 'images/guitare_electrique_gibson.jpg', 5.00, 'Oui', 3, 12),
     (13, 'Piano numérique Casio', 'Piano numérique avec fonctionnalités avancées', 1200.00, 'images/piano_casio.jpg', 10.00, 'Oui', 5, 13),
     (14, 'Synthétiseur Roland', 'Synthétiseur polyvalent avec sons riches', 800.00, 'images/synthetiseur_roland.jpg', 15.00, 'Oui', 6, 14)
 ");
