@@ -262,7 +262,6 @@ Commercial --> UC9
 @enduml
 
 @startuml
-@startuml
 !theme toy
 start
 :Client consulte le catalogue;
@@ -284,14 +283,13 @@ if (Client non connecté?) then (oui)
         if (Connexion réussie?) then (oui)
             :Système informe le client de la connexion réussie;
         else (non)
-            :Système affiche un message d'erreur;
+            :Système affiche un message d'erreur, proposer de contacter le support ou une nouvelle inscription;
             stop
         endif
     endif
 endif
 
 :Client connecté;
-:Client valide panier;
 :Vérification des produits;
 :Vérifier disponibilité des produits;
 if (Produits disponibles?) then (oui)
@@ -300,62 +298,51 @@ else (non)
     :Client modifie ou annule la commande;
     :Système alerte le gestionnaire des stocks;
     :Gestionnaire désactive le produit indisponible;
-    :Vérifier disponibilité des produits modifiés;
-    if (Produits disponibles?) then (oui)
-    else (non)
-        :Système informe le client de l'indisponibilité;
-        :Client modifie ou annule la commande;
-        stop
-    endif
+    repeat
+        :Vérifier disponibilité des produits modifiés;
+        if (Produits disponibles?) then (oui)
+        else (non)
+            :Système informe le client de l'indisponibilité;
+            :Client modifie ou annule la commande;
+        endif
+    repeat while (Produits non disponibles)
 endif
 
 :Client confirme les adresses de livraison et de facturation;
 :Vérification des adresses;
-:Vérifier adresse de livraison;
-if (Adresse de livraison valide?) then (oui)
-else (non)
-    :Système informe le client de l'erreur d'adresse;
-    :Client corrige l'adresse de livraison;
-    :Vérifier adresse de livraison corrigée;
+
+repeat
+    :Vérifier adresse de livraison;
     if (Adresse de livraison valide?) then (oui)
     else (non)
         :Système informe le client de l'erreur d'adresse;
-        stop
+        :Client corrige l'adresse de livraison;
     endif
-endif
+repeat while (Adresse de livraison non valide)
 
-:Vérifier adresse de facturation;
-if (Adresse de facturation valide?) then (oui)
-else (non)
-    :Système informe le client de l'erreur d'adresse;
-    :Client corrige l'adresse de facturation;
-    :Vérifier adresse de facturation corrigée;
+repeat
+    :Vérifier adresse de facturation;
     if (Adresse de facturation valide?) then (oui)
     else (non)
         :Système informe le client de l'erreur d'adresse;
-        stop
+        :Client corrige l'adresse de facturation;
     endif
-endif
+repeat while (Adresse de facturation non valide)
 
 :Client choisit le mode de paiement;
 :Traitement du paiement;
-if (Paiement réussi?) then (oui)
-    :Système enregistre la commande;
-    :Système met à jour les stocks;
-    :Système envoie la confirmation par email;
-    :Commande complétée;
-else (non)
-    :Système informe le client de l'échec du paiement;
-    :Client réessaye le paiement;
+repeat
     if (Paiement réussi?) then (oui)
         :Système enregistre la commande;
         :Système met à jour les stocks;
         :Système envoie la confirmation par email;
         :Commande complétée;
     else (non)
-        :Client annule la commande;
+        :Système informe le client de l'échec du paiement;
+        :Client réessaye le paiement;
     endif
-endif
+repeat while (Paiement non réussi)
+
 stop
 @enduml
 
